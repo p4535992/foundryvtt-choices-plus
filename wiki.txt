@@ -22,3 +22,11 @@ Options
 
 scene - a scene name or id, when the choice is resolved this scene will be viewed
 macro - a macro name or id, when the choice is resolved this macro will be executed, if you have the advanced macros module you can provide a comma separated list of args to be passed to the macro (eg [macro=myMacro,arg0,arg1])
+
+
+/choice [img=https://i.pinimg.com/originals/f4/30/56/f43056ea6e34f2071621a736b6d6da36.jpg][time=60] This is a test
+[scene=Scene name]Go to this place
+[scene=Scene name 2]Go to this other place
+[scene=Scene name 2]Go to this other place
+[scene=Scene name 2]Go to this other place
+

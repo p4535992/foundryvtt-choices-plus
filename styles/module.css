@@ -41,6 +41,7 @@
     padding: calc(5% - 0.5em) 0;
     z-index: 1;
     text-transform: uppercase;
+    background-color: rgba(0, 0, 0, 0.247);
 }
 #choices-dialog .choices-container .choices-bg{
     width: 100%;
@@ -134,11 +135,19 @@
 }
 
 #choices-dialog .timer{
-    position: absolute;
-    left:auto;
-    right:auto;
+    left: auto;
+    right: auto;
     top: 20px;
-    background-color: greenyellow;
+    margin:20px;
+    background-color: var(--choices-button-color);
     border-radius: 50%;
     font-size: xx-large;
+    width: 2em;
+    height: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    align-self: center;
+    opacity: 0.8;
 }

@@ -75,19 +75,23 @@ class VisualNovelDialog {
     return result;
   }
 
-  startTimer() {
-    let timerElement = $(`<div class="timer"></div>`);
-    this.element.append(timerElement);
+  async startTimer() {
+    let timerElement = $(`<div class="timer"><div class="time"></div></div>`);
+    timerElement.css("font-size", game.settings.get("choices", "timerSize") + "em")
+    this.contenainer.prepend(timerElement);
     let seconds = parseInt(this.time);
     while (seconds > 0) {
-      if(tick) continue;
-      this.element.find(".timer").text(seconds);
+      console.log("tick", seconds);
+      this.element.find(".time").text(seconds);
       seconds--;
-      tick = true;
-      setTimeout(() => {tick=false}, 1000);
+      await this.sleep(1000);
+      if(!$("#choices-dialog").length) return;
     }
-    this.element.find(".timer").text("0");
+    if($("#choices-dialog").length) this.resolveVote();
+  }
 
+  sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   updateChoices(userId, choicesIndexes) {
@@ -121,9 +125,6 @@ class VisualNovelDialog {
     let choices = $(`<div id="choices"></div>`);
     //setup timer
     if (this.time) {
-      let timer = $(`<div id="timer">${this.time}</div>`);
-      this.timer = timer;
-      this.contenainer.append(timer);
       this.startTimer();
     }
     if (this.img) {

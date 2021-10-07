@@ -7,6 +7,20 @@ Hooks.once("init", function () {
     type: Boolean,
     default: true,
   });
+
+  game.settings.register("choices", "timerSize", {
+    name: game.i18n.localize("choices.settings.alwaysontop.name"),
+    hint: game.i18n.localize("choices.settings.alwaysontop.hint"),
+    scope: "world",
+    config: true,
+    type: Number,
+    range: {
+      min: 1,
+      max: 10,
+      step: 0.5,
+    },
+    default: 2,
+  });
 });
 
 Hooks.once("ready", function () {
