@@ -79,13 +79,17 @@
     display: flex;
     justify-content: center;
     max-height: 50%;
+    height: 50%;
+    width: 100%;
     gap: 5%;
 }
 
 #choices-dialog .choice-chosen img{
     border-radius: 50%;
-    max-width: 20%;
+    height: 100%;
     object-fit: cover;
+    padding-top: 100;
+    aspect-ratio: 1 / 1;
 }
 
 #choices-dialog .choice-text{

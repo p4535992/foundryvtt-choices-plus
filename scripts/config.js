@@ -91,8 +91,8 @@ Hooks.once("socketlib.ready", () => {
 
 class ChoicesSocketFunctions {
   static showChoices(data) {
-    ui.sidebar.collapse();
-    ui.nav.collapse();
+    //ui.sidebar.collapse();
+    //ui.nav.collapse();
     new VisualNovelDialog(data).render();
   }
 
