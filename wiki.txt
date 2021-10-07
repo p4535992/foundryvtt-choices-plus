@@ -1,0 +1,24 @@
+To create a choices prompt you will need to use the /choice chat command
+You can provide additional parameters to both the choice and the option with this syntax [param=value]
+The first line of the chat message (the one with /choice) is the question, every new line will be one option
+Example:
+/choice [img=path/to/my/image.jpg][player=Jhon,Mary] What path will you chose?
+[scene=path1] The Woods
+[scene=rockymountains] The Mountains
+
+Accepted parameters (all in the format [param=value])
+
+Choice (the first line of the message)
+
+multi - true or false, determines if multiple choices can be selected (default false)
+img - the path to the image to be displayed as the background
+player - a comma separated list of player names, if not provided all players will get to chose
+democracy - true or false, determine if the choice with the highest votes will be picked (if true) or resolve the choice per player (if false) (default true)
+default - the default choice if no choice is made (default 0)
+displayResult - true or false, determine if the result will be output to chat after the choice is made (default true)
+resolveGM - true or false, determine if the resolution of the choice should run on the gm side as well (default false)
+
+Options
+
+scene - a scene name or id, when the choice is resolved this scene will be viewed
+macro - a macro name or id, when the choice is resolved this macro will be executed, if you have the advanced macros module you can provide a comma separated list of args to be passed to the macro (eg [macro=myMacro,arg0,arg1])

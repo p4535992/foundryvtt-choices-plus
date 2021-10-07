@@ -36,6 +36,12 @@
   "socket":true,
   "dependencies": [
     {
+        "name": "socketlib"
+    },
+    {
+        "name": "colorsettings"
+    },
+    {
         "name": "lib-wrapper"
     }
   ]

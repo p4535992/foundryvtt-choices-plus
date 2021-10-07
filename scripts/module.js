@@ -1,6 +1,7 @@
 class VisualNovelDialog {
   constructor(content) {
     this.content = content;
+    this.initColors();
     this.getDefaults();
     this.parseData();
     const choicesContainer = $(`<div class="choices-container"></div>`);
@@ -13,8 +14,8 @@ class VisualNovelDialog {
 
     addGMButtons() {
         const gmButtons = $(`<div class="gm-buttons"></div>`);
-        const resolveButton = $(`<button class="gm-button">Resolve</button>`);
-        const closeButton = $(`<button class="gm-button">Close</button>`);
+        const resolveButton = $(`<button class="gm-button"><i class="fas fa-check"></i></button>`);
+        const closeButton = $(`<button class="gm-button"><i class="fas fa-times"></i></button>`);
         gmButtons.append(resolveButton);
         gmButtons.append(closeButton);
         this.element.append(gmButtons);
@@ -74,7 +75,20 @@ class VisualNovelDialog {
     return result;
   }
 
-  startTimer() {}
+  startTimer() {
+    let timerElement = $(`<div class="timer"></div>`);
+    this.element.append(timerElement);
+    let seconds = parseInt(this.time);
+    while (seconds > 0) {
+      if(tick) continue;
+      this.element.find(".timer").text(seconds);
+      seconds--;
+      tick = true;
+      setTimeout(() => {tick=false}, 1000);
+    }
+    this.element.find(".timer").text("0");
+
+  }
 
   updateChoices(userId, choicesIndexes) {
     const user = game.users.get(userId);
@@ -98,7 +112,9 @@ class VisualNovelDialog {
   }
 
   render() {
+    if(this.player && !this.isPlayer()) return this.close();
     const _this = this;
+    if(game.settings.get("choices", "alwaysontop")) this.element.css("z-index", "9999");
     //create the title element
     let title = $(`<h1>${this.content}</h1>`);
     //create the choices element
@@ -157,6 +173,11 @@ class VisualNovelDialog {
     });
   }
 
+  isPlayer(){
+    const name = game.user.name;
+    return this.player.includes(name);
+  }
+
   getDefaults() {
     this.multi = false;
     this.time = null;
@@ -166,6 +187,23 @@ class VisualNovelDialog {
     this.democracy = true;
     this.default = 0;
     this.displayResult = true;
+    this.resolveGM = false;
+  }
+
+  initColors() {
+    const colors = {
+      text: game.settings.get("choices", "textcolor"),
+      background: game.settings.get("choices", "backgroundcolor"),
+      button: game.settings.get("choices", "buttoncolor"),
+      buttonHover: game.settings.get("choices", "buttonhovercolor"),
+      buttonActive: game.settings.get("choices", "buttonactivecolor"),
+    }
+    let root = document.documentElement;
+    root.style.setProperty('--choices-font-color', colors.text);
+    root.style.setProperty('--choices-background-color', colors.background);
+    root.style.setProperty('--choices-button-color', colors.button);
+    root.style.setProperty('--choices-button-hover-color', colors.buttonHover);
+    root.style.setProperty('--choices-button-active-color', colors.buttonActive);
   }
 
   resolveVote() {
@@ -194,12 +232,64 @@ class VisualNovelDialog {
     }else{
         this.resolveNull();
     }
+    this.democracy ? this.outputResultDemo() : this.outputResultSingle();
     this.close();
   }
 
-  resolve(choice) {}
+  resolve(choice) {
+    if(game.user.isGM && !this.resolveGM) return;
+    if(choice.scene){
+        const scene = game.scenes.getName(choice.scene) ?? game.scenes.get(choice.scene);
+        scene?.view();
+    }
+    if(choice.macro){
+        const args = choice.macro.split(",");
+        const macro = game.macros.getName(args[0]) ?? game.macros.get(args[0]);
+        macro?.execute(args.slice(1));
+    }
+  }
 
   resolveNull() {}
+
+  outputResultDemo(){
+    if(!this.displayResult || !game.user.isGM) return;
+    let results = [];
+    this.choices.forEach((choice) => {
+        results.push({
+            content: choice.content,
+            votes: choice.element.find("img").length
+        });
+    })
+    //sort the results by votes
+    results.sort((a, b) => b.votes - a.votes);
+    //create chat message string
+    let message = "<hr>";
+    results.forEach((result) => {
+        message += `${result.content}: ${result.votes}<hr>`;
+    })
+    ChatMessage.create({content: message});
+  }
+
+  outputResultSingle(){
+    if(!this.displayResult || !game.user.isGM) return;
+    let results = [];
+    this.choices.forEach((choice) => {
+      //get user ids
+      const userIds = choice.element.find("img").map((index, img) => {
+        return $(img).data("userid");
+      });
+        results.push({
+            content: choice.content,
+            users: userIds
+        });
+    })
+    //create chat message string
+    let message = "<hr>";
+    results.forEach((result) => {
+        message += `${result.content}: ${result.users.map(u => game.users.get(u).name).join(", ")}<hr>`;
+    })
+    ChatMessage.create({content: message});
+  }
 
   close() {
     game.VisualNovelDialog = null;

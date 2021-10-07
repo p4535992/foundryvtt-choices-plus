@@ -1,3 +1,15 @@
 {
-    "MODULE.hello": "hello"
+    "choices.settings.alwaysontop.name": "Always on top",
+    "choices.settings.alwaysontop.hint": "If enabled, the choice will be on top of all other UI elements",
+    "choices.settings.pickcolor.label": "Pick color",
+    "choices.settings.textcolor.name": "Text color",
+    "choices.settings.textcolor.hint": "The color of the text",
+    "choices.settings.backgroundcolor.name": "Background color",
+    "choices.settings.backgroundcolor.hint": "The color of the background",
+    "choices.settings.buttoncolor.name": "Button color",
+    "choices.settings.buttoncolor.hint": "The color of the buttons",
+    "choices.settings.buttonhovercolor.name": "Button hover color",
+    "choices.settings.buttonhovercolor.hint": "The color of the buttons when hovered",
+    "choices.settings.buttonactivecolor.name": "Button active color",
+    "choices.settings.buttonactivecolor.hint": "The color of the buttons when selected"
 }
