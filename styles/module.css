@@ -1,0 +1,130 @@
+:root{
+    --choices-button-color: #fff;
+    --choices-button-active-color: rgb(28, 124, 235);
+    --choices-button-hover-color: rgb(132, 208, 252);
+    --choices-background-color: #fff;
+    --choices-container-color: teal;
+    --choices-font-color: #000;
+}
+
+#choices-dialog{
+    color: var(--choices-font-color);
+    background-color: var(--choices-background-color);
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#choices-dialog .choices-container{
+    background-color: var(--choices-container-color);
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+#choices-dialog #choices{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex: 1;
+    flex-wrap: wrap;
+    z-index: 1;
+}
+
+#choices-dialog .choices-container h1{
+    text-align: center;
+    font-size: xxx-large;
+    border: none;
+    padding: calc(5% - 0.5em) 0;
+    z-index: 1;
+    text-transform: uppercase;
+}
+#choices-dialog .choices-container .choices-bg{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+#choices-dialog .choice{
+    background-color: var(--choices-button-color);
+    width: 30%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: x-large;
+}
+
+#choices-dialog .choice.choice-active, #choices-dialog .choice.choice-active:hover{
+    background-color: var(--choices-button-active-color);
+}
+
+#choices-dialog .choice:hover{
+    background-color: var(--choices-button-hover-color);
+}
+
+#choices-dialog .choice-chosen{
+    display: flex;
+    justify-content: center;
+    max-height: 50%;
+    gap: 5%;
+}
+
+#choices-dialog .choice-chosen img{
+    border-radius: 50%;
+    max-width: 20%;
+}
+
+#choices-dialog .choice-text{
+    z-index: 1;
+    text-transform: uppercase;
+}
+
+#choices-dialog .gm-buttons{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 1;
+    width: 100%;
+    height: 5%;
+}
+
+#choices-dialog .gm-buttons button{
+    border: none;
+    height: 100%;
+    max-width: 10%;
+    font-size: xx-large;
+}
+
+#choices-dialog .gm-buttons button:hover{
+    border: none;
+    filter: brightness(130%);
+    box-shadow: none;
+}
+
+#choices-dialog .gm-buttons button:focus{
+    box-shadow: none;
+    border: none;
+}
+
+#choices-dialog .gm-buttons button:first-child{
+    background-color: greenyellow;
+}
+
+#choices-dialog .gm-buttons button:last-child{
+    background-color: rgb(255, 81, 81);
+}
