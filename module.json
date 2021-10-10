@@ -2,7 +2,7 @@
   "name": "choices",
   "title": "Visual Novel Choices",
   "description": "desc",
-  "version": "0.2",
+  "version": "0.3",
   "author": "theripper93",
   "authors": [
       {
@@ -16,7 +16,12 @@
           "lang": "en",
           "name": "English",
           "path": "languages/en.json"
-      }
+      },
+      {
+        "lang": "ja",
+        "name": "日本語 (Japanese)",
+        "path": "languages/ja.json"
+    }
   ],
   "scripts": [
       "./scripts/main.js",

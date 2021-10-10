@@ -50,7 +50,9 @@ class VisualNovelDialog {
     let matches = line.match(/\[(.*?)\]/g);
     //if there are no matches, return the line
     if (matches === null) {
-      return line;
+      return {
+        content: line.trim(),
+      };
     }
     //store all non matching text as the content
     let content = line.replace(/\[(.*?)\]/g, "");

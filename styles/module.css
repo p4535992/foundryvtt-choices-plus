@@ -62,9 +62,10 @@
     align-items: center;
     justify-content: space-evenly;
     border-radius: 10px;
-    margin: 10px;
+    margin: 2%;
     cursor: pointer;
     font-size: x-large;
+    position: relative;
 }
 
 #choices-dialog .choice.choice-active, #choices-dialog .choice.choice-active:hover{
@@ -81,7 +82,9 @@
     max-height: 50%;
     height: 50%;
     width: 100%;
+    position: absolute;
     gap: 5%;
+    transform: translateY(-100%);
 }
 
 #choices-dialog .choice-chosen img{

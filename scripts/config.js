@@ -29,7 +29,7 @@ Hooks.once("ready", function () {
     hint: game.i18n.localize("choices.settings.textcolor.hint"),
     label: game.i18n.localize("choices.settings.pickcolor.label"),
     restricted: true,
-    defaultColor: "#a51414d8",
+    defaultColor: "#000000eb",
     scope: "world",
   });
 
@@ -38,7 +38,7 @@ Hooks.once("ready", function () {
     hint: game.i18n.localize("choices.settings.backgroundcolor.hint"),
     label: game.i18n.localize("choices.settings.pickcolor.label"),
     restricted: true,
-    defaultColor: "#a51414d8",
+    defaultColor: "#000000ff",
     scope: "world",
   });
 
@@ -47,7 +47,7 @@ Hooks.once("ready", function () {
     hint: game.i18n.localize("choices.settings.buttoncolor.hint"),
     label: game.i18n.localize("choices.settings.pickcolor.label"),
     restricted: true,
-    defaultColor: "#a51414d8",
+    defaultColor: "#ffffffd8",
     scope: "world",
   });
 
@@ -56,7 +56,7 @@ Hooks.once("ready", function () {
     hint: game.i18n.localize("choices.settings.buttonhovercolor.hint"),
     label: game.i18n.localize("choices.settings.pickcolor.label"),
     restricted: true,
-    defaultColor: "#a51414d8",
+    defaultColor: "#c8c8c8d8",
     scope: "world",
   });
 
@@ -65,7 +65,7 @@ Hooks.once("ready", function () {
     hint: game.i18n.localize("choices.settings.buttonactivecolor.hint"),
     label: game.i18n.localize("choices.settings.pickcolor.label"),
     restricted: true,
-    defaultColor: "#a51414d8",
+    defaultColor: "#838383d8",
     scope: "world",
   });
 });

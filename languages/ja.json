@@ -1,0 +1,15 @@
+{
+    "choices.settings.alwaysontop.name": "常に上に表示",
+    "choices.settings.alwaysontop.hint": "選択肢画面が常に他のUIより上に表示されるようになります。",
+    "choices.settings.pickcolor.label": "色選択",
+    "choices.settings.textcolor.name": "テキスト色",
+    "choices.settings.textcolor.hint": "テキストを設定します。",
+    "choices.settings.backgroundcolor.name": "背景色",
+    "choices.settings.backgroundcolor.hint": "背景の色を設定します。",
+    "choices.settings.buttoncolor.name": "ボタン色",
+    "choices.settings.buttoncolor.hint": "選択肢のボタンの色を設定します。",
+    "choices.settings.buttonhovercolor.name": "ボタンホバー色",
+    "choices.settings.buttonhovercolor.hint": "選択肢のボタンにマウスをホバーしたときの色を設定します。",
+    "choices.settings.buttonactivecolor.name": "ボタン選択色",
+    "choices.settings.buttonactivecolor.hint": "選択した後のボタンの色を設定します。"
+}
