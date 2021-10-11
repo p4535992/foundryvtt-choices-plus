@@ -41,3 +41,9 @@ macro - a macro name or id, when the choice is resolved this macro will be execu
 [scene=Scene name 2]Go to this other place
 [scene=Scene name 2]Go to this other place
 [scene=Scene name 2]Go to this other place
+
+/choice [img=https://i.pinimg.com/564x/49/92/5e/49925e1c7ff5dae26836ec636b134a1e.jpg][democracy=false][portraits=Arngrim Brakenbrik,Blue Dragon Wyrmling] This is a test
+[scene=Scene name]Go to this place
+[scene=Scene name 2]Go to this other place
+[scene=Scene name 2]Go to this other place
+[scene=Scene name 2]Go to this other place

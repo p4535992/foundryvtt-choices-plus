@@ -96,6 +96,11 @@ class VisualNovelDialog {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
+  async playSound(){
+    if(!game.user.isGM) return;
+    this.choiceSound = await AudioHelper.play({src: this.sound, volume: 0.5, loop:true}, true);
+  }
+
   updateChoices(userId, choicesIndexes) {
     const user = game.users.get(userId);
     const img = user.character.data.img;
@@ -120,7 +125,10 @@ class VisualNovelDialog {
   render() {
     if(this.player && !this.isPlayer()) return this.close();
     const _this = this;
-    if(game.settings.get("choices", "alwaysontop")) this.element.css("z-index", "9999");
+    if(game.settings.get("choices", "alwaysontop")) {this.element.css("z-index", "9999");}
+    else{
+      this.element.css("width", "calc(100vw - 300px)");
+    }
     //create the title element
     let title = $(`<h1>${this.content}</h1>`);
     //create the choices element
@@ -128,6 +136,9 @@ class VisualNovelDialog {
     //setup timer
     if (this.time) {
       this.startTimer();
+    }
+    if(this.sound){
+      this.playSound();
     }
     if (this.img) {
       let img = $(`<img class="choices-bg" src="${this.img}">`);
@@ -147,6 +158,10 @@ class VisualNovelDialog {
     //add the title and choices element to the dialog element
     this.contenainer.append(title);
     this.contenainer.append(choices);
+    //process portraits
+    if(this.portraits){
+      this.renderPortraits();
+    }
     //add the dialog element to the body
     $("body").append(this.element);
     //setup the click event for the choices
@@ -174,6 +189,21 @@ class VisualNovelDialog {
         );
       });
     });
+  }
+
+  renderPortraits(){
+    let portraits = $(`<div class="portraits-container"></div>`);
+    let images = [];
+    for(let portrait of this.portraits.split(",")){
+      const actor = game.actors.get(portrait) ?? game.actors.getName(portrait);
+      const img = actor?.data?.img ?? portrait;
+      images.push(img);
+    } 
+    for(let img of images){
+      let portrait = $(`<img class="portrait-image" src="${img}">`);
+      portraits.append(portrait);
+    }
+    this.contenainer.append(portraits);
   }
 
   isPlayer(){
@@ -250,6 +280,9 @@ class VisualNovelDialog {
         const macro = game.macros.getName(args[0]) ?? game.macros.get(args[0]);
         macro?.execute(args.slice(1));
     }
+    if(choice.sound){
+      AudioHelper.play({src: choice.sound, volume: 0.5, loop:false}, false);
+    }
   }
 
   resolveNull() {}
@@ -296,6 +329,7 @@ class VisualNovelDialog {
 
   close() {
     game.VisualNovelDialog = null;
+    this.choiceSound?.stop();
     this.element.remove();
   }
 
