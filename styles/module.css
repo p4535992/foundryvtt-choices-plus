@@ -167,6 +167,7 @@
     width: 100%;
     align-items: flex-end;
     justify-content: space-evenly;
+    overflow: hidden;
 }
 
 #choices-dialog .portrait-image{
@@ -174,14 +175,16 @@
     border: none;
     object-fit: contain;
     object-position: bottom;
-    animation: fadeIn 1s ease-in-out;
+    animation: choicesFadeIn 0.7s ease-in-out;
 }
 
-@keyframes fadeIn {
+@keyframes choicesFadeIn {
     from {
         opacity: 0;
+        transform: translateY(50%);
     }
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }

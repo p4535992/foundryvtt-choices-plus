@@ -12,6 +12,8 @@ Choice (the first line of the message)
 
 multi - true or false, determines if multiple choices can be selected (default false)
 img - the path to the image to be displayed as the background
+sound - the sound to be played when the choice is displayed (the sound will loop and stop when the choice ends)
+portraits - a comma separaded list of actor names, actor ids or image paths (you can mix an match) - these images will be displayed in the choice (theatre inserts style, if the actor has a theatre insert specific image, that will be used instead)
 player - a comma separated list of player names, if not provided all players will get to chose
 democracy - true or false, determine if the choice with the highest votes will be picked (if true) or resolve the choice per player (if false) (default true)
 default - the default choice if no choice is made (default 0)
@@ -22,7 +24,11 @@ Options
 
 scene - a scene name or id, when the choice is resolved this scene will be viewed
 macro - a macro name or id, when the choice is resolved this macro will be executed, if you have the advanced macros module you can provide a comma separated list of args to be passed to the macro (eg [macro=myMacro,arg0,arg1])
+sound - a sound file path, when the choice is resolved this sound will be played once
 
+For your consideration
+
+You can use some neat trick to get more use out of this module, for example you can create a choice with no choices to just display portraits on a background :)
 
 /choice [img=https://i.pinimg.com/originals/f4/30/56/f43056ea6e34f2071621a736b6d6da36.jpg][time=60] This is a test
 [scene=Scene name]Go to this place
@@ -42,7 +48,7 @@ macro - a macro name or id, when the choice is resolved this macro will be execu
 [scene=Scene name 2]Go to this other place
 [scene=Scene name 2]Go to this other place
 
-/choice [img=https://i.pinimg.com/564x/49/92/5e/49925e1c7ff5dae26836ec636b134a1e.jpg][democracy=false][portraits=Arngrim Brakenbrik,Blue Dragon Wyrmling] This is a test
+/choice [img=https://i.pinimg.com/564x/49/92/5e/49925e1c7ff5dae26836ec636b134a1e.jpg][democracy=false][portraits=Arngrim Brakenbrik,Blue Dragon Wyrmling,Acolyte] This is a test
 [scene=Scene name]Go to this place
 [scene=Scene name 2]Go to this other place
 [scene=Scene name 2]Go to this other place

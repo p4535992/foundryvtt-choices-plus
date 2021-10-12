@@ -103,7 +103,7 @@ class VisualNovelDialog {
 
   updateChoices(userId, choicesIndexes) {
     const user = game.users.get(userId);
-    const img = user.character.data.img;
+    const img = user.character?.data?.img ?? user.avatar;
     this.choices.forEach((choice, index) => {
       choice.element
         .find(".choice-chosen")
@@ -196,7 +196,11 @@ class VisualNovelDialog {
     let images = [];
     for(let portrait of this.portraits.split(",")){
       const actor = game.actors.get(portrait) ?? game.actors.getName(portrait);
-      const img = actor?.data?.img ?? portrait;
+      let img = actor?.data?.img ?? portrait;
+      if(actor){
+        const theatrePortrait = actor.getFlag("theatre", "baseinsert")
+        img = theatrePortrait ?? img;
+      }
       images.push(img);
     } 
     for(let img of images){
