@@ -25,10 +25,14 @@ Options
 scene - a scene name or id, when the choice is resolved this scene will be viewed
 macro - a macro name or id, when the choice is resolved this macro will be executed, if you have the advanced macros module you can provide a comma separated list of args to be passed to the macro (eg [macro=myMacro,arg0,arg1])
 sound - a sound file path, when the choice is resolved this sound will be played once
+chain - set to true if this options triggers a macro with a choice
 
 For your consideration
 
 You can use some neat trick to get more use out of this module, for example you can create a choice with no choices to just display portraits on a background :)
+
+Note on chaining - 
+If you want to chain choices, the choice needs to have democracy=true and resolveGM=true , any option that calls another choice needs to have chain=true
 
 /choice [img=https://i.pinimg.com/originals/f4/30/56/f43056ea6e34f2071621a736b6d6da36.jpg][time=60] This is a test
 [scene=Scene name]Go to this place
@@ -50,6 +54,17 @@ You can use some neat trick to get more use out of this module, for example you 
 
 /choice [img=https://i.pinimg.com/564x/49/92/5e/49925e1c7ff5dae26836ec636b134a1e.jpg][democracy=false][portraits=Arngrim Brakenbrik,Blue Dragon Wyrmling,Acolyte] This is a test
 [scene=Scene name]Go to this place
-[scene=Scene name 2]Go to this other place
-[scene=Scene name 2]Go to this other place
-[scene=Scene name 2]Go to this other place
+[scene=Scene name 2][sound=music/Bloodborne/02.%20Ryan%20Amon%20-%20The%20Night%20Unfurls.mp3]Go to this other place
+[scene=Scene name 2][sound=music/Bloodborne/02.%20Ryan%20Amon%20-%20The%20Night%20Unfurls.mp3]Go to this other place
+[scene=Scene name 2][sound=music/Bloodborne/02.%20Ryan%20Amon%20-%20The%20Night%20Unfurls.mp3]Go to this other place
+
+//chains
+
+/choice [img=https://i.pinimg.com/564x/49/92/5e/49925e1c7ff5dae26836ec636b134a1e.jpg][democracy=true][resolveGM=true] This is a test
+[macro=scene2][chain=true]Scene 2
+
+/choice [img=https://i.pinimg.com/564x/49/92/5e/49925e1c7ff5dae26836ec636b134a1e.jpg][democracy=true][resolveGM=true] This is a test
+[macro=scene3][chain=true]Sceme 3
+
+/choice [img=https://i.pinimg.com/564x/49/92/5e/49925e1c7ff5dae26836ec636b134a1e.jpg][democracy=true][resolveGM=true] This is a test
+[macro=scene4][chain=true]Sceme 4

@@ -83,7 +83,6 @@ class VisualNovelDialog {
     this.contenainer.prepend(timerElement);
     let seconds = parseInt(this.time);
     while (seconds > 0) {
-      console.log("tick", seconds);
       this.element.find(".time").text(seconds);
       seconds--;
       await this.sleep(1000);
@@ -224,7 +223,7 @@ class VisualNovelDialog {
     this.democracy = true;
     this.default = 0;
     this.displayResult = true;
-    this.resolveGM = false;
+    this.resolvegm = false;
   }
 
   initColors() {
@@ -274,18 +273,19 @@ class VisualNovelDialog {
   }
 
   resolve(choice) {
-    if(game.user.isGM && !this.resolveGM) return;
+    if(game.user.isGM && !this.resolvegm) return;
     if(choice.scene){
         const scene = game.scenes.getName(choice.scene) ?? game.scenes.get(choice.scene);
         scene?.view();
     }
+    if(choice.sound){
+      AudioHelper.play({src: choice.sound, volume: 0.5, loop:false}, false);
+    }
+    if(choice.chain && !game.user.isGM) return;
     if(choice.macro){
         const args = choice.macro.split(",");
         const macro = game.macros.getName(args[0]) ?? game.macros.get(args[0]);
         macro?.execute(args.slice(1));
-    }
-    if(choice.sound){
-      AudioHelper.play({src: choice.sound, volume: 0.5, loop:false}, false);
     }
   }
 
@@ -332,7 +332,6 @@ class VisualNovelDialog {
   }
 
   close() {
-    game.VisualNovelDialog = null;
     this.choiceSound?.stop();
     this.element.remove();
   }
