@@ -27,8 +27,12 @@ resolveGM - tureまたはfalseを指定可能。trueの場合、選択肢の解�
 scene - シーン名またはidを指定可能。選択肢が解決した後、指定されたシーンに飛ばされます。
 macro - マクロ名またはidを指定可能。選択肢が解決した後、指定されたマクロが起動します。これで他の選択肢を連続して発生させたりできます。advanced macroを使用している場合、カンマで引数を指定可能です。(例： [macro=myMacro,arg0,arg1])
 sound - 選択肢が行われた後にプレイする音声ファイルのパスを指定できます。
+chain - この選択肢によって、選択肢を含むマクロを呼び出すときにのみtrueと設定してください。
 
 組み合わせれば色々とできます。例えば空の選択肢にportraitsを指定して、立ち絵として出現させることも可能です。
+
+連続した選択肢について（chain）：
+一つの選択肢から次なる選択肢のマクロへつなげたい場合は必ずdemocracy=trueとresolveGM=trueを設定してください。その後新たな選択肢へと導く選択肢のパラメータにchain=trueを指定してください。
 
 例：
 
@@ -55,3 +59,14 @@ sound - 選択肢が行われた後にプレイする音声ファイルのパス
 [scene=シーン名2]あそこに行く
 [scene=シーン名3]あっちに行く
 [scene=シーン名4]こっちに行く
+
+//連続した選択肢：
+
+/choice [img=https://i.pinimg.com/564x/49/92/5e/49925e1c7ff5dae26836ec636b134a1e.jpg][democracy=true][resolveGM=true] テスト選択肢
+[macro=scene2][chain=true]ここに行く
+
+/choice [img=https://i.pinimg.com/564x/49/92/5e/49925e1c7ff5dae26836ec636b134a1e.jpg][democracy=true][resolveGM=true] テスト選択肢
+[macro=scene3][chain=true]あそこに行く
+
+/choice [img=https://i.pinimg.com/564x/49/92/5e/49925e1c7ff5dae26836ec636b134a1e.jpg][democracy=true][resolveGM=true] テスト選択肢
+[macro=scene4][chain=true]こっちに行く
