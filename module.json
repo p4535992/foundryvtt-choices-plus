@@ -1,53 +1,57 @@
 {
-  "name": "choices",
   "title": "Visual Novel Choices",
-  "description": "desc",
-  "version": "0.6",
-  "author": "theripper93",
+  "description": "Display multiple choices for the player to choose from in a Visual Novel Style.",
+  "version": "0.7",
   "authors": [
-      {
-          "name": "theripper93",
-          "email": "tsplab@gmail.com",
-          "url": "https://www.patreon.com/theripper93"
-      }
+    {
+      "name": "theripper93",
+      "email": "tsplab@gmail.com",
+      "url": "https://www.patreon.com/theripper93"
+    }
   ],
   "languages": [
-      {
-          "lang": "en",
-          "name": "English",
-          "path": "languages/en.json"
-      },
-      {
-        "lang": "ja",
-        "name": "日本語 (Japanese)",
-        "path": "languages/ja.json"
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    },
+    {
+      "lang": "ja",
+      "name": "日本語 (Japanese)",
+      "path": "languages/ja.json"
     }
   ],
   "scripts": [
-      "./scripts/main.js",
-      "./scripts/config.js",
-      "./scripts/module.js"
+    "scripts/main.js",
+    "scripts/config.js",
+    "scripts/module.js"
   ],
   "styles": [
-      "./styles/module.css"
+    "styles/module.css"
   ],
-  "packs": [
-  ],
-  "minimumCoreVersion": "0.8.6",
-  "compatibleCoreVersion": "9",
-  "url": "",
-  "manifest": "",
-  "download": "",
-  "socket":true,
-  "dependencies": [
-    {
-        "name": "socketlib"
-    },
-    {
-        "name": "colorsettings"
-    },
-    {
-        "name": "lib-wrapper"
-    }
-  ]
+  "socket": true,
+  "id": "choices",
+  "relationships": {
+    "requires": [
+      {
+        "id": "socketlib",
+        "type": "module",
+        "compatibility": {}
+      },
+      {
+        "id": "colorsettings",
+        "type": "module",
+        "compatibility": {}
+      },
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "compatibility": {}
+      }
+    ]
+  },
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10"
+  }
 }
