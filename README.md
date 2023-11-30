@@ -14,12 +14,16 @@
 
 [![Translation status](https://weblate.foundryvtt-hub.com/widgets/choices-plus/-/287x66-black.png)](https://weblate.foundryvtt-hub.com/engage/choices-plus/)
 
-Module for creating small scenes with multiple choices novel game style
+Module for creating small scenes with multiple choices novel game style, with a powerful [api](./wiki/api.md) you can create a chain of choice for your players.
 
 **Note: This is module is inspired from the  wonderful work done by [theRipper93](https://theripper93.com/) with its [automated-evocations](https://github.com/theripper93/choices) module.
 If you want to support more modules of this kind, I invite you to go and support his patreon**
 
 [![alt-text](https://img.shields.io/badge/-Patreon-%23ff424d?style=for-the-badge)](https://www.patreon.com/theripper93) [![alt-text](https://img.shields.io/badge/-Discord-%235662f6?style=for-the-badge)](https://discord.gg/F53gBjR97G)
+
+![](./wiki/videos/video_example_1.gif)
+
+![](./wiki/videos/video_example_2.gif)
 
 ## Installation
 
@@ -43,16 +47,16 @@ This module uses the [socketLib](https://github.com/manuelVo/foundryvtt-socketli
 
 ### Color Settings
 
-This module uses the [socketLib](https://github.com/ardittristan/VTTColorSettings) library for add a color picker. It is a hard dependency and it is recommended for the best experience and compatibility with other modules.
+This module uses the [colorsettings](https://github.com/ardittristan/VTTColorSettings) library for add a color picker. It is a hard dependency and it is recommended for the best experience and compatibility with other modules.
 
-
-## [API Chat](./wiki/api_chat.txt) (Deprecated remain for retrocompatibility)
-
-## [API Chat Japaness](./wiki/api_chat_ja.txt) (Deprecated remain for retrocompatibility)
 
 ## Api
 
 All informations about the api can be found here [API](./wiki/api.md)
+
+##### [API Chat](./wiki/api_chat.txt) (Deprecated remain for retro compatibility)
+
+##### [API Chat Japaness](./wiki/api_chat_ja.txt) (Deprecated remain for retro compatibility)
 
 # Build
 
