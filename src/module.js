@@ -14,50 +14,7 @@ Hooks.once("setup", function () {
 });
 
 Hooks.once("ready", function () {
-  new window.Ardittristan.ColorSetting(CONSTANTS.MODULE_ID, "textcolor", {
-    name: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.textcolor.title`),
-    hint: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.textcolor.hint`),
-    label: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.pickcolor.label`),
-    restricted: true,
-    defaultColor: "#000000eb",
-    scope: "world",
-  });
-
-  new window.Ardittristan.ColorSetting(CONSTANTS.MODULE_ID, "backgroundcolor", {
-    name: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.backgroundcolor.title`),
-    hint: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.backgroundcolor.hint`),
-    label: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.pickcolor.label`),
-    restricted: true,
-    defaultColor: "#000000ff",
-    scope: "world",
-  });
-
-  new window.Ardittristan.ColorSetting(CONSTANTS.MODULE_ID, "buttoncolor", {
-    name: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.buttoncolor.title`),
-    hint: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.buttoncolor.hint`),
-    label: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.pickcolor.label`),
-    restricted: true,
-    defaultColor: "#ffffffd8",
-    scope: "world",
-  });
-
-  new window.Ardittristan.ColorSetting(CONSTANTS.MODULE_ID, "buttonhovercolor", {
-    name: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.buttonhovercolor.title`),
-    hint: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.buttonhovercolor.hint`),
-    label: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.pickcolor.label`),
-    restricted: true,
-    defaultColor: "#c8c8c8d8",
-    scope: "world",
-  });
-
-  new window.Ardittristan.ColorSetting(CONSTANTS.MODULE_ID, "buttonactivecolor", {
-    name: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.buttonactivecolor.title`),
-    hint: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.buttonactivecolor.hint`),
-    label: game.i18n.localize(`${CONSTANTS.MODULE_ID}.settings.pickcolor.label`),
-    restricted: true,
-    defaultColor: "#838383d8",
-    scope: "world",
-  });
+  registerSettingsReady();
 });
 
 Hooks.on("chatMessage", (ChatLog, content) => {

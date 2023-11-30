@@ -1,4 +1,4 @@
-The api is reachable from the variable `game.modules.get('choices').api` or from the socket libary `socketLib` on the variable `game.modules.get('choices').socket` if present and active.
+The api is reachable from the variable `game.modules.get('choices-plus').api` or from the socket libary `socketLib` on the variable `game.modules.get('choices-plus').socket` if present and active.
 
 You can find some javascript examples here [macros](./macros/)
 
@@ -39,7 +39,7 @@ You can find some javascript examples here [macros](./macros/)
 
 ```javascript
 
-game.modules.get('choices').api.showChoices(
+game.modules.get('choices-plus').api.showChoices(
 {
     title: "Title of the choice",
     text: "Summary text of the Choice",
@@ -65,7 +65,7 @@ game.modules.get('choices').api.showChoices(
 
 ```javascript
 
-game.modules.get('choices').api.showChoices(
+game.modules.get('choices-plus').api.showChoices(
 {
     title: "Title of the choice",
     text: "Summary text of the Choice"

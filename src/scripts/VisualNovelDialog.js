@@ -38,8 +38,8 @@ export class VisualNovelDialog {
       this.text = data.text;
     }
 
-    const choicesContainer = $(`<div class="choices-container"></div>`);
-    this.element = $(`<div id="choices-dialog"></div>`);
+    const choicesContainer = $(`<div class="choices-plus-container"></div>`);
+    this.element = $(`<div id="choices-plus-dialog"></div>`);
     this.element.append(choicesContainer);
     this.containerHTML = choicesContainer;
     // NOTE: This piece of code is been moved under the render method
@@ -133,11 +133,11 @@ export class VisualNovelDialog {
       this.element.find(".time").text(seconds);
       seconds--;
       await this.sleep(1000);
-      if (!$("#choices-dialog").length) {
+      if (!$("#choices-plus-dialog").length) {
         return;
       }
     }
-    if ($("#choices-dialog").length) {
+    if ($("#choices-plus-dialog").length) {
       this.resolveVote();
     }
   }
@@ -163,12 +163,12 @@ export class VisualNovelDialog {
     // const img = user.character?.img ?? user.avatar;
     const img = getUserCharacter(user)?.img ?? user.avatar;
     this.choices.forEach((choice, index) => {
-      const choiceChosen = choice.element.find(".choice-chosen");
+      const choiceChosen = choice.element.find(".choice-plus-chosen");
 
       choiceChosen.find(`[data-userid=${userId}]`).remove();
       if (choicesIndexes.includes(index)) {
         choice.element
-          .find(".choice-chosen")
+          .find(".choice-plus-chosen")
           .append(`<img src=${img} data-userid=${userId} style="background-color:${game.users.get(userId)?.color};">`);
       }
       if (choice.element.find("img").length > 0) {
@@ -218,7 +218,7 @@ export class VisualNovelDialog {
     //create the title element
     let title = $(`<h1>${this.title}</h1>`);
     //create the choices element
-    let choicesHTML = $(`<div id=CONSTANTS.MODULE_ID></div>`);
+    let choicesHTML = $(`<div id="choices-plus"></div>`);
     //setup timer
     if (this.time) {
       this.startTimer();
@@ -227,7 +227,7 @@ export class VisualNovelDialog {
       this.playSound();
     }
     if (this.img) {
-      let img = $(`<img class="choices-bg" src="${this.img}">`);
+      let img = $(`<img class="choices-plus-bg" src="${this.img}">`);
       this.containerHTML.append(img);
     }
     //loop through all the choices
@@ -252,14 +252,14 @@ export class VisualNovelDialog {
       let choiceElement;
       if (hasStyleBackgroundImage) {
         choiceElement = $(
-          `<div class="choice choice-with-background ${isDisable ? `choice-disable` : ``}" ${styleToAdd}>
-            <div class="choice-chosen"></div>  
+          `<div class="choice-plus choice-plus-with-background ${isDisable ? `choice-plus-disable` : ``}" ${styleToAdd}>
+            <div class="choice-plus-chosen"></div>  
             <img
-              class="choice-image"
+              class="choice-plus-image"
               src="${choice.backgroundImage}"
               alt=""
             ></img>
-            <div class="choice-text">
+            <div class="choice-plus-text">
             ${isDisable ? `<span class="crossed-out">` : ``}
             ${choice.text ? choice.text : choice.content}
             ${isDisable ? `</span>` : ``}
@@ -268,9 +268,9 @@ export class VisualNovelDialog {
         );
       } else {
         choiceElement = $(
-          `<div class="choice ${isDisable ? `choice-disable` : ``}" ${styleToAdd}>
-            <div class="choice-chosen"></div>
-            <div class="choice-text">
+          `<div class="choice-plus ${isDisable ? `choice-plus-disable` : ``}" ${styleToAdd}>
+            <div class="choice-plus-chosen"></div>
+            <div class="choice-plus-text">
             ${isDisable ? `<span class="crossed-out">` : ``}
             ${choice.text ? choice.text : choice.content}
             ${isDisable ? `</span>` : ``}
@@ -280,7 +280,7 @@ export class VisualNovelDialog {
       }
       //add the choice element to the choices element
       choicesHTML.append(choiceElement);
-      choiceElement.find(".choice-chosen").hide();
+      choiceElement.find(".choice-plus-chosen").hide();
       choice.element = choiceElement;
     }
     //add the title and choices element to the dialog element
@@ -294,8 +294,8 @@ export class VisualNovelDialog {
         async: true,
       });
       let choiceSummaryElementHTML = $(
-        `<div class="choice-summary">
-          <div class="choice-summary-text">${textHTML}</div>
+        `<div class="choice-plus-summary">
+          <div class="choice-plus-summary-text">${textHTML}</div>
         </div>`
       );
       this.containerHTML.append(choiceSummaryElementHTML);
@@ -310,24 +310,24 @@ export class VisualNovelDialog {
     //setup the click event for the choices
     this.choices.forEach((choice) => {
       choice.element.click((e) => {
-        const isSelected = $(e.currentTarget).hasClass("choice-active");
-        const isDisable = $(e.currentTarget).hasClass("choice-disable");
+        const isSelected = $(e.currentTarget).hasClass("choice-plus-active");
+        const isDisable = $(e.currentTarget).hasClass("choice-plus-disable");
         if (isDisable) {
           warn(`You cannot choose this option!`, true);
           return;
         }
         if (!_this.multi) {
-          _this.choices.forEach((choice) => choice.element.removeClass("choice-active"));
+          _this.choices.forEach((choice) => choice.element.removeClass("choice-plus-active"));
         }
-        $(e.currentTarget).toggleClass("choice-active", isSelected);
-        $(e.currentTarget).toggleClass("choice-active");
+        $(e.currentTarget).toggleClass("choice-plus-active", isSelected);
+        $(e.currentTarget).toggleClass("choice-plus-active");
         if (!_this.show) {
           info(`Show is disabled the active choice`, false, _this.choices);
           return;
         }
         let chosenIndex = [];
         _this.choices.forEach((choice, index) => {
-          if (choice.element.hasClass("choice-active")) {
+          if (choice.element.hasClass("choice-plus-active")) {
             chosenIndex.push(index);
           }
         });
@@ -411,11 +411,11 @@ export class VisualNovelDialog {
       buttonActive: this.buttonactivecolor,
     };
     let root = document.documentElement;
-    root.style.setProperty("--choices-font-color", colors.text);
-    root.style.setProperty("--choices-background-color", colors.background);
-    root.style.setProperty("--choices-button-color", colors.button);
-    root.style.setProperty("--choices-button-hover-color", colors.buttonHover);
-    root.style.setProperty("--choices-button-active-color", colors.buttonActive);
+    root.style.setProperty("--choices-plus-font-color", colors.text);
+    root.style.setProperty("--choices-plus-background-color", colors.background);
+    root.style.setProperty("--choices-plus-button-color", colors.button);
+    root.style.setProperty("--choices-plus-button-hover-color", colors.buttonHover);
+    root.style.setProperty("--choices-plus-button-active-color", colors.buttonActive);
   }
 
   resolveVote() {
