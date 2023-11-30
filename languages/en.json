@@ -1,6 +1,8 @@
 {
     "choices.settings.alwaysontop.name": "Always on top",
     "choices.settings.alwaysontop.hint": "If enabled, the choice will be on top of all other UI elements",
+    "choices.settings.timerSize.name": "Timer size",
+    "choices.settings.timerSize.hint": "Set the size of the timer on the choice dialog",
     "choices.settings.pickcolor.label": "Pick color",
     "choices.settings.textcolor.name": "Text color",
     "choices.settings.textcolor.hint": "The color of the text",

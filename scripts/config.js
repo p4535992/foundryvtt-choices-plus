@@ -1,3 +1,7 @@
+
+import API from "./api.js";
+import { ChoicesSocket, registerSocket } from "./socket.js";
+
 Hooks.once("init", function () {
   game.settings.register("choices", "alwaysontop", {
     name: game.i18n.localize("choices.settings.alwaysontop.name"),
@@ -9,8 +13,8 @@ Hooks.once("init", function () {
   });
 
   game.settings.register("choices", "timerSize", {
-    name: game.i18n.localize("choices.settings.alwaysontop.name"),
-    hint: game.i18n.localize("choices.settings.alwaysontop.hint"),
+    name: game.i18n.localize("choices.settings.timerSize.name"),
+    hint: game.i18n.localize("choices.settings.timerSize.hint"),
     scope: "world",
     config: true,
     type: Number,
@@ -22,6 +26,13 @@ Hooks.once("init", function () {
     default: 2,
   });
 });
+
+
+Hooks.once("setup", function () {
+  	// Set api
+    const data = game.modules.get("choices");
+    data.api = API;
+}); 
 
 Hooks.once("ready", function () {
   new window.Ardittristan.ColorSetting("choices", "textcolor", {
@@ -79,32 +90,7 @@ Hooks.on("chatMessage", (ChatLog, content) => {
   }
 });
 
-let ChoicesSocket;
-
 Hooks.once("socketlib.ready", () => {
-  ChoicesSocket = socketlib.registerModule("choices");
-  ChoicesSocket.register("showChoices", ChoicesSocketFunctions.showChoices);
-  ChoicesSocket.register("sendChoice", ChoicesSocketFunctions.sendChoice);
-  ChoicesSocket.register("resolve", ChoicesSocketFunctions.resolve);
-  ChoicesSocket.register("cancel", ChoicesSocketFunctions.cancel);
+  registerSocket();
 });
 
-class ChoicesSocketFunctions {
-  static showChoices(data) {
-    //ui.sidebar.collapse();
-    //ui.nav.collapse();
-    new VisualNovelDialog(data).render();
-  }
-
-  static sendChoice(userId, choices) {
-    game.VisualNovelDialog.updateChoices(userId, choices);
-  }
-
-  static resolve() {
-    game.VisualNovelDialog.resolveVote();
-  }
-
-  static cancel() {
-    game.VisualNovelDialog.cancelVote();
-  }
-}
