@@ -1,6 +1,6 @@
 
-import API from "./api.js";
-import { ChoicesSocket, registerSocket } from "./socket.js";
+import API from "./scripts/api.js";
+import { ChoicesSocket, registerSocket } from "./scripts/socket.js";
 
 Hooks.once("init", function () {
   game.settings.register("choices", "alwaysontop", {

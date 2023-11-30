@@ -1,4 +1,4 @@
-import { ForienEasyPollsHelpers } from "./fep-helpers.js";
+import { ForienEasyPollsHelpers } from "./apps/fep-helpers.js";
 import { error, getActorSync, getMacroSync, getPlaylistSoundPathSync, getSceneSync, getUserCharacter, isRealNumber, isRealBoolean, isValidImage, runMacro, info, parseAsArray, warn } from "./lib.js";
 import { ChoicesSocket } from "./socket.js";
 

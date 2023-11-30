@@ -1,5 +1,5 @@
 import { error, getUserSync, parseAsArray } from "./lib.js";
-import { VisualNovelDialog } from "./module.js";
+import { VisualNovelDialog } from "./VisualNovelDialog.js";
 import { ChoicesSocket } from "./socket.js";
 
 const API = {

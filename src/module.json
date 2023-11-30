@@ -60,7 +60,7 @@
     {
       "name": "choices-plus-macros",
       "label": "Choices Macros",
-      "path": "packs/choices-plus-macros.db",
+      "path": "packs/choices-plus-macros",
       "type": "Macro",
       "private": false,
 	    "module": "choices-plus"
