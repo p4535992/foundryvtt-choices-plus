@@ -114,6 +114,7 @@ Any issues, bugs, or feature requests are always welcome to be reported directly
 
 - **[choices](https://github.com/theripper93/choices)** : [MIT](https://github.com/theripper93/choices/blob/master/LICENSE)
 
+All the images used in this module are generated with [bing create](https://www.bing.com/create) under these [term of use](https://www.bing.com/new/termsofuse?FORM=GENTOS)
 
 This package is under an [MIT license](LICENSE) and the [Foundry Virtual Tabletop Limited License Agreement for module development](https://foundryvtt.com/article/license/).
 
