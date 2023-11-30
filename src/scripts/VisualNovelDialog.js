@@ -1,4 +1,5 @@
 import { ForienEasyPollsHelpers } from "./apps/fep-helpers.js";
+import CONSTANTS from "./constants.js";
 import {
   error,
   getActorSync,
@@ -125,7 +126,7 @@ export class VisualNovelDialog {
 
   async startTimer() {
     let timerElement = $(`<div class="timer"><div class="time"></div></div>`);
-    timerElement.css("font-size", game.settings.get("choices", "timerSize") + "em");
+    timerElement.css("font-size", game.settings.get(CONSTANTS.MODULE_ID, "timerSize") + "em");
     this.containerHTML.prepend(timerElement);
     let seconds = parseInt(this.time);
     while (seconds > 0) {
@@ -204,7 +205,7 @@ export class VisualNovelDialog {
       return this.close();
     }
     const _this = this;
-    if (game.settings.get("choices", "alwaysontop") || this.alwaysOnTop) {
+    if (game.settings.get(CONSTANTS.MODULE_ID, "alwaysontop") || this.alwaysOnTop) {
       // this.element.css("z-index", "9999");
       // NOTE: If there is a text with linked document too let the rendering of the document
       // visible we must set the z-index from 9999 to 100
@@ -217,7 +218,7 @@ export class VisualNovelDialog {
     //create the title element
     let title = $(`<h1>${this.title}</h1>`);
     //create the choices element
-    let choicesHTML = $(`<div id="choices"></div>`);
+    let choicesHTML = $(`<div id=CONSTANTS.MODULE_ID></div>`);
     //setup timer
     if (this.time) {
       this.startTimer();
@@ -396,11 +397,11 @@ export class VisualNovelDialog {
   }
 
   _initColors(data) {
-    this.textcolor = data?.textcolor || game.settings.get("choices", "textcolor");
-    this.backgroundcolor = data?.backgroundcolor || game.settings.get("choices", "backgroundcolor");
-    this.buttoncolor = data?.buttoncolor || game.settings.get("choices", "buttoncolor");
-    this.buttonhovercolor = data?.buttonhovercolor || game.settings.get("choices", "buttonhovercolor");
-    this.buttonactivecolor = data?.buttonactivecolor || game.settings.get("choices", "buttonactivecolor");
+    this.textcolor = data?.textcolor || game.settings.get(CONSTANTS.MODULE_ID, "textcolor");
+    this.backgroundcolor = data?.backgroundcolor || game.settings.get(CONSTANTS.MODULE_ID, "backgroundcolor");
+    this.buttoncolor = data?.buttoncolor || game.settings.get(CONSTANTS.MODULE_ID, "buttoncolor");
+    this.buttonhovercolor = data?.buttonhovercolor || game.settings.get(CONSTANTS.MODULE_ID, "buttonhovercolor");
+    this.buttonactivecolor = data?.buttonactivecolor || game.settings.get(CONSTANTS.MODULE_ID, "buttonactivecolor");
 
     const colors = {
       text: this.textcolor,

@@ -49,6 +49,10 @@ This module uses the [socketLib](https://github.com/manuelVo/foundryvtt-socketli
 
 This module uses the [colorsettings](https://github.com/ardittristan/VTTColorSettings) library for add a color picker. It is a hard dependency and it is recommended for the best experience and compatibility with other modules.
 
+## Feature
+
+- [Experimental] Integration  with [Forien's Easy Polls](https://github.com/Forien/foundryvtt-forien-easy-polls)
+
 
 ## Api
 

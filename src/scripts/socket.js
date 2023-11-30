@@ -1,4 +1,5 @@
 import API from "./api.js";
+import CONSTANTS from "./constants.js";
 
 export let ChoicesSocket;
 
@@ -7,7 +8,7 @@ export function registerSocket() {
     return ChoicesSocket;
   }
 
-  ChoicesSocket = socketlib.registerModule("choices");
+  ChoicesSocket = socketlib.registerModule(CONSTANTS.MODULE_ID);
   ChoicesSocket.register("showChoices", ChoicesSocketFunctions.showChoices);
   ChoicesSocket.register("sendChoice", ChoicesSocketFunctions.sendChoice);
   ChoicesSocket.register("resolve", ChoicesSocketFunctions.resolve);
@@ -15,7 +16,7 @@ export function registerSocket() {
   ChoicesSocket.register("render", ChoicesSocketFunctions.render);
 
   // Set socket
-  const data = game.modules.get("choices");
+  const data = game.modules.get(CONSTANTS.MODULE_ID);
   data.socket = ChoicesSocket;
 
   return ChoicesSocket;
