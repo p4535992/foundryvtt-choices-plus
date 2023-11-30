@@ -16,7 +16,7 @@
 
 Module for creating small scenes with multiple choices novel game style, with a powerful [api](./wiki/api.md) you can create a chain of choice for your players.
 
-**Note: This is module is inspired from the  wonderful work done by [theRipper93](https://theripper93.com/) with its [automated-evocations](https://github.com/theripper93/choices) module.
+**Note: This is module is inspired from the  wonderful work done by [theRipper93](https://theripper93.com/) with its [Choices](https://github.com/theripper93/choices) module.
 If you want to support more modules of this kind, I invite you to go and support his patreon**
 
 [![alt-text](https://img.shields.io/badge/-Patreon-%23ff424d?style=for-the-badge)](https://www.patreon.com/theripper93) [![alt-text](https://img.shields.io/badge/-Discord-%235662f6?style=for-the-badge)](https://discord.gg/F53gBjR97G)
