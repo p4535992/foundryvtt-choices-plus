@@ -1,4 +1,3 @@
-
 import API from "./scripts/api.js";
 import { ChoicesSocket, registerSocket } from "./scripts/socket.js";
 
@@ -27,12 +26,11 @@ Hooks.once("init", function () {
   });
 });
 
-
 Hooks.once("setup", function () {
-  	// Set api
-    const data = game.modules.get("choices");
-    data.api = API;
-}); 
+  // Set api
+  const data = game.modules.get("choices");
+  data.api = API;
+});
 
 Hooks.once("ready", function () {
   new window.Ardittristan.ColorSetting("choices", "textcolor", {
@@ -93,4 +91,3 @@ Hooks.on("chatMessage", (ChatLog, content) => {
 Hooks.once("socketlib.ready", () => {
   registerSocket();
 });
-

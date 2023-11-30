@@ -1,216 +1,212 @@
-:root{
-    --choices-button-color: #fff;
-    --choices-summary-button-color: rgba(0, 0, 0, 0.247);
-    --choices-button-active-color: rgb(28, 124, 235);
-    --choices-button-hover-color: rgb(132, 208, 252);
-    --choices-background-color: rgb(0, 0, 0);
-    --choices-font-color: #000;
+:root {
+  --choices-button-color: #fff;
+  --choices-summary-button-color: rgba(0, 0, 0, 0.247);
+  --choices-button-active-color: rgb(28, 124, 235);
+  --choices-button-hover-color: rgb(132, 208, 252);
+  --choices-background-color: rgb(0, 0, 0);
+  --choices-font-color: #000;
 }
 
-#choices-dialog{
-    color: var(--choices-font-color);
-    background-color: var(--choices-background-color);
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
+#choices-dialog {
+  color: var(--choices-font-color);
+  background-color: var(--choices-background-color);
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
 }
 
-#choices-dialog .choices-container{
-    background-color: var(--choices-background-color);
-    width: 90%;
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+#choices-dialog .choices-container {
+  background-color: var(--choices-background-color);
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
-#choices-dialog #choices{
-    margin-top: auto;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    z-index: 10;
-    opacity: 0.8;
-    overflow-y: auto;
-}
-
-#choices-dialog .choices-container h1{
-    text-align: center;
-    font-size: xxx-large;
-    border: none;
-    padding: calc(4% - 0.5em) 0;
-    z-index: 1;
-    text-transform: uppercase;
-    background-color: rgba(0, 0, 0, 0.247);
-}
-#choices-dialog .choices-container .choices-bg{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    object-fit: cover;
-    border: none;
-    border-radius: 20px;
-}
-#choices-dialog .choice{
-    background-color: var(--choices-button-color);
-    width: 40%;
-    aspect-ratio: 5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    border-radius: 10px;
-    margin: 2%;
-    cursor: pointer;
-    font-size: x-large;
-    position: relative;
+#choices-dialog #choices {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  z-index: 10;
+  opacity: 0.8;
+  overflow-y: auto;
 }
 
-#choices-dialog .choice.choice-active, #choices-dialog .choice.choice-active:hover{
-    background-color: var(--choices-button-active-color);
+#choices-dialog .choices-container h1 {
+  text-align: center;
+  font-size: xxx-large;
+  border: none;
+  padding: calc(4% - 0.5em) 0;
+  z-index: 1;
+  text-transform: uppercase;
+  background-color: rgba(0, 0, 0, 0.247);
+}
+#choices-dialog .choices-container .choices-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  border: none;
+  border-radius: 20px;
+}
+#choices-dialog .choice {
+  background-color: var(--choices-button-color);
+  width: 40%;
+  aspect-ratio: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  margin: 2%;
+  cursor: pointer;
+  font-size: x-large;
+  position: relative;
 }
 
-#choices-dialog .choice:hover{
-    background-color: var(--choices-button-hover-color);
+#choices-dialog .choice.choice-active,
+#choices-dialog .choice.choice-active:hover {
+  background-color: var(--choices-button-active-color);
 }
 
-#choices-dialog .choice-chosen{
-    display: flex;
-    justify-content: center;
-    max-height: 50%;
-    height: 50%;
-    width: 100%;
-    position: absolute;
-    gap: 5%;
-    transform: translateY(-100%);
-    z-index: 2000;
+#choices-dialog .choice:hover {
+  background-color: var(--choices-button-hover-color);
 }
 
-#choices-dialog .choice-chosen img{
-    border-radius: 50%;
-    height: 100%;
-    object-fit: cover;
-    padding-top: 100;
-    aspect-ratio: 1 / 1;
+#choices-dialog .choice-chosen {
+  display: flex;
+  justify-content: center;
+  max-height: 50%;
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  gap: 5%;
+  transform: translateY(-100%);
+  z-index: 2000;
 }
 
-#choices-dialog .choice-text{
-    z-index: 1;
-    text-transform: uppercase;
+#choices-dialog .choice-chosen img {
+  border-radius: 50%;
+  height: 100%;
+  object-fit: cover;
+  padding-top: 100;
+  aspect-ratio: 1 / 1;
 }
 
-#choices-dialog .choice-summary{
-    background-color: var(--choices-summary-button-color);
-    /*width: 100%;*/
-    aspect-ratio: 5;
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    justify-content: space-evenly;
-    border-radius: 10px;
-    margin: 2%;
-    cursor: pointer;
-    position: relative;
-    max-height: 20%;
+#choices-dialog .choice-text {
+  z-index: 1;
+  text-transform: uppercase;
 }
 
-#choices-dialog .choice-summary-text{
-    z-index: 1;
-    overflow: auto;
+#choices-dialog .choice-summary {
+  background-color: var(--choices-summary-button-color);
+  /*width: 100%;*/
+  aspect-ratio: 5;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: space-evenly;
+  border-radius: 10px;
+  margin: 2%;
+  cursor: pointer;
+  position: relative;
+  max-height: 20%;
+}
+
+#choices-dialog .choice-summary-text {
+  z-index: 1;
+  overflow: auto;
 }
 
 #choices-dialog .gm-buttons,
-#choices-dialog .player-buttons
-{
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    z-index: 1;
-    width: 100%;
-    height: 5%;
-    margin-right: 5%;
+#choices-dialog .player-buttons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 1;
+  width: 100%;
+  height: 5%;
+  margin-right: 5%;
 }
 
 #choices-dialog .gm-buttons button,
-#choices-dialog .player-buttons button 
-{
-    border: none;
-    height: 100%;
-    max-width: 10%;
-    font-size: xx-large;
-    max-width: 2em;
+#choices-dialog .player-buttons button {
+  border: none;
+  height: 100%;
+  max-width: 10%;
+  font-size: xx-large;
+  max-width: 2em;
 }
 
 #choices-dialog .gm-buttons button:hover,
 #choices-dialog .player-buttons button:hover {
-    border: none;
-    filter: brightness(130%);
-    box-shadow: none;
+  border: none;
+  filter: brightness(130%);
+  box-shadow: none;
 }
 
 #choices-dialog .gm-buttons button:focus,
-#choices-dialog .player-buttons button:focus
-{
-    box-shadow: none;
-    border: none;
+#choices-dialog .player-buttons button:focus {
+  box-shadow: none;
+  border: none;
 }
 
 #choices-dialog .gm-buttons button:first-child,
-#choices-dialog .player-buttons button:first-child
-{
-    background-color: greenyellow;
+#choices-dialog .player-buttons button:first-child {
+  background-color: greenyellow;
 }
 
-#choices-dialog .gm-buttons button:last-child, 
-#choices-dialog .player-buttons button:last-child
-{
-    background-color: rgb(255, 81, 81);
+#choices-dialog .gm-buttons button:last-child,
+#choices-dialog .player-buttons button:last-child {
+  background-color: rgb(255, 81, 81);
 }
 
-#choices-dialog .timer{
-    left: auto;
-    right: auto;
-    top: 20px;
-    margin:20px;
-    background-color: var(--choices-button-color);
-    border-radius: 50%;
-    font-size: xx-large;
-    width: 2em;
-    height: 2em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-    align-self: center;
-    opacity: 0.8;
+#choices-dialog .timer {
+  left: auto;
+  right: auto;
+  top: 20px;
+  margin: 20px;
+  background-color: var(--choices-button-color);
+  border-radius: 50%;
+  font-size: xx-large;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  align-self: center;
+  opacity: 0.8;
 }
 
-#choices-dialog .portraits-container{
-    z-index: 1;
-    position: absolute;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    align-items: flex-end;
-    justify-content: space-evenly;
-    overflow: hidden;
+#choices-dialog .portraits-container {
+  z-index: 1;
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  overflow: hidden;
 }
 
-#choices-dialog .portrait-image{
-    height: 70%;
-    border: none;
-    object-fit: contain;
-    object-position: bottom;
-    animation: choicesFadeIn 0.7s ease-in-out;
+#choices-dialog .portrait-image {
+  height: 70%;
+  border: none;
+  object-fit: contain;
+  object-position: bottom;
+  animation: choicesFadeIn 0.7s ease-in-out;
 }
 
 /** support button choice image background */
@@ -221,102 +217,105 @@
 } */
 
 #choices .choice.choice-with-background .choice-image {
-    opacity: 0.6;
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-    cursor:pointer;
-    border: none;
+  opacity: 0.6;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: none;
 }
 
 #choices .choice.choice-with-background .choice-text {
-    position: relative;
+  position: relative;
 }
 
 /** support button choice disable utility https://jsfiddle.net/rwhal06/jEGpv/297/ */
 
 #choices .choice.choice-disable {
-    overflow: hidden;
+  overflow: hidden;
 }
 
-#choices .choice.choice-disable .x-overlay, #choices .choice.choice-disable .x-emoji-overlay {
-    position: relative;
+#choices .choice.choice-disable .x-overlay,
+#choices .choice.choice-disable .x-emoji-overlay {
+  position: relative;
 }
-#choices .choice.choice-disable .x-overlay:after, #choices .choice.choice-disable .x-emoji-overlay:after {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    color: red;
-    text-align: center;
+#choices .choice.choice-disable .x-overlay:after,
+#choices .choice.choice-disable .x-emoji-overlay:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: red;
+  text-align: center;
 }
 
 #choices .choice.choice-disable .x-overlay:after {
-    content: '\d7';
-    font-size: 54px;
-    line-height: 18px;
-    opacity: 0.7;
+  content: "\d7";
+  font-size: 54px;
+  line-height: 18px;
+  opacity: 0.7;
 }
 
 #choices .choice.choice-disable .x-emoji-overlay:after {
-    content: "\274c";
-    padding: 3px;
-    font-size: 27px;
-    line-height: 18px;
-    opacity: 0.5;
+  content: "\274c";
+  padding: 3px;
+  font-size: 27px;
+  line-height: 18px;
+  opacity: 0.5;
 }
 
 #choices .choice.choice-disable .strike {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 #choices .choice.choice-disable .strike::before {
-    content: '';
-    border-bottom: 2px solid red;
-    width: 110%;
-    position: absolute;
-    left: -2px;
-    top: 46%;
+  content: "";
+  border-bottom: 2px solid red;
+  width: 110%;
+  position: absolute;
+  left: -2px;
+  top: 46%;
 }
 
 #choices .choice.choice-disable .crossed-out {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
-#choices .choice.choice-disable .crossed-out::before, #choices .choice.choice-disable .crossed-out::after {
-    content: '';
-    width: 110%;
-    position: absolute;
-    left: -5%;
-    top: 45%;
-    opacity: 0.7;
+#choices .choice.choice-disable .crossed-out::before,
+#choices .choice.choice-disable .crossed-out::after {
+  content: "";
+  width: 110%;
+  position: absolute;
+  left: -5%;
+  top: 45%;
+  opacity: 0.7;
 }
 
 #choices .choice.choice-disable .crossed-out::before {
-    border-bottom: 6px solid red;
-    -webkit-transform: skewY(-20deg);
-    transform: skewY(-20deg);
+  border-bottom: 6px solid red;
+  -webkit-transform: skewY(-20deg);
+  transform: skewY(-20deg);
 }
 
 #choices .choice.choice-disable .crossed-out::after {
-    border-bottom: 6px solid red;
-    -webkit-transform: skewY(20deg);
-    transform: skewY(20deg);
+  border-bottom: 6px solid red;
+  -webkit-transform: skewY(20deg);
+  transform: skewY(20deg);
 }
 
 @keyframes choicesFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(50%);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

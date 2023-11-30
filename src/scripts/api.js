@@ -3,7 +3,6 @@ import { VisualNovelDialog } from "./VisualNovelDialog.js";
 import { ChoicesSocket } from "./socket.js";
 
 const API = {
-
   // VisualNovelDialog: {},
 
   async showChoices(inAttributes) {
@@ -11,41 +10,40 @@ const API = {
     //ui.nav.collapse();
 
     // This is the old chat functionality
-    if (typeof inAttributes === 'string' || inAttributes instanceof String) {
+    if (typeof inAttributes === "string" || inAttributes instanceof String) {
       new VisualNovelDialog({
-        content: inAttributes.trim()
-      }).render(); 
-    } 
+        content: inAttributes.trim(),
+      }).render();
+    }
     // This is the old chat functionality
-    else if(inAttributes.content) {
+    else if (inAttributes.content) {
       new VisualNovelDialog({
-        content: inAttributes.content
-      }).render(); 
+        content: inAttributes.content,
+      }).render();
       // The sharing here is done with the chat command
-    } 
-    else {
+    } else {
       if (typeof inAttributes !== "object") {
         throw new error("showChoices | inAttributes must be of type object");
       }
-      if(inAttributes.player?.length > 0) {
+      if (inAttributes.player?.length > 0) {
         const recipients = [];
         let players = parseAsArray(inAttributes.player);
-        for(let userRef of players) {
+        for (let userRef of players) {
           let user = getUserSync(userRef, true);
-          if(user?.id) {
+          if (user?.id) {
             recipients.push(user.id);
           }
         }
         ChoicesSocket.executeForUsers("render", recipients, inAttributes);
       } else {
         // If is GM execute the dialog for everyone
-        if(game.user.isGM) {
+        if (game.user.isGM) {
           ChoicesSocket.executeForEveryone("render", inAttributes);
         }
         // If is not a gm launch the dialog for himself
         else {
           inAttributes.launchAsPlayer = true;
-          if(inAttributes.player?.length > 0) {
+          if (inAttributes.player?.length > 0) {
             let players = parseAsArray(inAttributes.player);
             players.push(game.user.id);
             inAttributes.player = players;
@@ -55,7 +53,6 @@ const API = {
           this.render(inAttributes);
         }
       }
-      
     }
   },
 
@@ -65,7 +62,7 @@ const API = {
     }
 
     // Only one choice at the time ?
-    if(game.VisualNovelDialog) {
+    if (game.VisualNovelDialog) {
       await this.cancelVote(inAttributes);
       game.VisualNovelDialog = null;
     }
@@ -89,7 +86,7 @@ const API = {
       buttonhovercolor: inAttributes.buttonHoverColor,
       buttonactivecolor: inAttributes.buttonActiveColor,
       alwaysOnTop: inAttributes.alwaysOnTop,
-      choices: inAttributes.choices
+      choices: inAttributes.choices,
     });
     const launchAsPlayer = String(inAttributes.launchAsPlayer) === "true" ? true : false;
     await game.VisualNovelDialog.render(launchAsPlayer);
@@ -108,8 +105,7 @@ const API = {
 
   async cancelVote(inAttributes) {
     return await game.VisualNovelDialog.cancelVote();
-  }
-
+  },
 };
 
 export default API;

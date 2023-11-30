@@ -63,13 +63,11 @@
       "path": "packs/choices-plus-macros",
       "type": "Macro",
       "private": false,
-	    "module": "choices-plus"
+      "module": "choices-plus"
     }
   ],
   "scripts": [],
-  "styles": [
-    "styles/module.css"
-  ],
+  "styles": ["styles/module.css"],
   "esmodules": ["module.js"],
   "compatibility": {
     "minimum": 11,
