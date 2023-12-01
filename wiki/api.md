@@ -6,9 +6,19 @@ You can find some javascript examples here **=> [macros](./macros/) <=**
 
 **Note on chaining IF YOU USE THE DEPRECATED CHAT OPTION :** If you want to chain choices, the choice needs to have `democracy=true` and `resolveGM=true`, any option that calls another choice needs to have `chain=true`
 
-**Note on chaining IF YOU USE THE NEW API OPTION :** If you want to chain choices, the choice needs to have and, any option that calls another choice needs to have `chain=true`, `resolveGM=true` and a reference to the other choice macro `macro=xxx`
+**Note on chaining IF YOU USE THE NEW API OPTION :** If you want to chain choices, the choice needs to have and, any option that calls another choice needs to have `chain=true` and a reference to the other choice macro `macro=xxx` (the xxx is this case usually a macro reference to another `game.modules.get("choices-plus").api.showChoices`, but there is no control about it).
 
-**Note on the execution of the macro:** executes Macro command, giving speaker, actor, token, character, and event constants. This is recognized as the macro itself. Pass an event as the first argument. Is the same concept used from [Item Macro](https://github.com/Foundry-Workshop/Item-Macro/), but without the item, also the main reference is not the item, but the actor, we used the actor set as character by default or the first owned actor by the user, same concept of [Item Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles)
+**Note on the execution of the macro:** executes Macro command, giving speaker, actor, token, character, and event constants. This is recognized as the macro itself. Pass an event as the first argument. Is the same concept used from [Item Macro](https://github.com/Foundry-Workshop/Item-Macro/), but without the item, also the main reference is not the item, but the actor, we used the actor set as character by default or the first owned actor by the user, same concept of [Item Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles). The macro is launched under as a asynchronus call so  `await ` command are good.
+
+So when you set up to run a macro with this module this arguments are already "setted":`
+- **speaker**: The chat message speaker referenced to the actor.
+- **actor**: The actor reference.
+- **token**: The token (if present on the current scene), referenced to the actor.
+- **character**: The character is the actor reference to the one setted to the specific player (cannot be the same of the actor reference).
+- **event**: The javascript event passed from the module to the macro.
+- **args**: Additional arguments passed form the moduel to the macro.
+
+
 
 **Returns**: <code>Promise&lt;void&gt;</code> - Return nothing
 
@@ -114,7 +124,7 @@ game.modules.get('choices-plus').api.showChoices(
 | [options.scene] | <code>string</code> | OPTIONAL: a scene name or id, or uuid, when the choice is resolved this scene will be viewed. | This choice option can be triggered with the name or the id or the uuid the priority for check is anyway uuid -> id -> name. |
 | [options.sound] | <code>string</code> | OPTIONAL: usually a sound file path, but i can be the PlaySound name or id or uuid, when the choice is resolved this sound will be played once | This choice option can be triggered with the name or the id or the uuid the priority for check is anyway uuid -> id -> name. |
 | [options.macro] | <code>string</code> | a macro name or id or uuid, when the choice is resolved this macro will be executed, if you have the advanced macros module you can provide a comma separated list of args to be passed to the macro (eg [macro=myMacro,arg0,arg1]). | This choice option can be triggered with the name or the id or the uuid the priority for check is anyway uuid -> id -> name. |
-| [options.chain] | <code>boolean</code> | OPTIONAL: set to true if this options triggers a macro with a choice. Remember if you want to chain choices, the choice needs to have `macro=xxx` and `resolveGM=true` (default false) | This choice option can be triggered with the name or the id or the uuid the priority for check is anyway uuid -> id -> name. |
+| [options.chain] | <code>boolean</code> | OPTIONAL: set to true if this options triggers a macro with a choice. Remember if you want to chain choices, the choice needs to have `macro=xxx` (the xxx is this case usually a macro reference to another `game.modules.get("choices-plus").api.showChoices`, but there is no control about it) and `chain=true` (default false) | This choice option can be triggered with the name or the id or the uuid the priority for check is anyway uuid -> id -> name. |
 | [options.backgroundColor] | <code>string</code> | OPTIONAL: This is the background color to apply to the choice button | This will override the options 'backgroundColor'|
 | [options.backgroundImage] | <code>string</code> | OPTIONAL: This is the background image to apply to the choice button | |
 | [options.disable] | <code>boolean</code> | OPTIONAL: For some reason you want to see to choice, but it cannot be selected (also a big red cross appear on this option just to make it clear) | |
@@ -143,8 +153,7 @@ game.modules.get('choices-plus').api.showChoices(
 {
     text: "Go to the scene",
     macro: "Macro.duidg9et345",
-    resolveGM: true,
-    chain: false
+    chain: true
 }
 
 ```
