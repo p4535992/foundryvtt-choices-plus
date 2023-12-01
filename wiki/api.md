@@ -16,7 +16,7 @@ So when you set up to run a macro with this module this arguments are already "s
 - **token**: The token (if present on the current scene), referenced to the actor.
 - **character**: The character is the actor reference to the one setted to the specific player (cannot be the same of the actor reference).
 - **event**: The javascript event passed from the module to the macro.
-- **args**: Additional arguments passed form the moduel to the macro.
+- **args**: Additional arguments passed from the module to the macro.
 
 
 
