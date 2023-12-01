@@ -4,9 +4,9 @@ You can find some javascript examples here **=> [macros](./macros/) <=**
 
 #### showChoices({options}):void ⇒ <code>Promise&lt;void&gt;</code>
 
-**Note on chaining IF YOU USE THE CHAT OPTION :** If you want to chain choices, the choice needs to have `democracy=true` and `resolveGM=true`, any option that calls another choice needs to have `chain=true`
+**Note on chaining IF YOU USE THE DEPRECATED CHAT OPTION :** If you want to chain choices, the choice needs to have `democracy=true` and `resolveGM=true`, any option that calls another choice needs to have `chain=true`
 
-**Note on chaining IF YOU USE THE API OPTION :** If you want to chain choices, the choice needs to have and, any option that calls another choice needs to have `chain=true`, `resolveGM=true` and a reference to the other choice macro `macro=xxx`
+**Note on chaining IF YOU USE THE NEW API OPTION :** If you want to chain choices, the choice needs to have and, any option that calls another choice needs to have `chain=true`, `resolveGM=true` and a reference to the other choice macro `macro=xxx`
 
 **Note on the execution of the macro:** executes Macro command, giving speaker, actor, token, character, and event constants. This is recognized as the macro itself. Pass an event as the first argument. Is the same concept used from [Item Macro](https://github.com/Foundry-Workshop/Item-Macro/), but without the item, also the main reference is not the item, but the actor, we used the actor set as character by default or the first owned actor by the user, same concept of [Item Piles](https://github.com/fantasycalendar/FoundryVTT-ItemPiles)
 
