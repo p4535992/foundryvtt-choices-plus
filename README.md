@@ -21,6 +21,8 @@ If you want to support more modules of this kind, I invite you to go and support
 
 [![alt-text](https://img.shields.io/badge/-Patreon-%23ff424d?style=for-the-badge)](https://www.patreon.com/theripper93) [![alt-text](https://img.shields.io/badge/-Discord-%235662f6?style=for-the-badge)](https://discord.gg/F53gBjR97G)
 
+**NOTE these video are pretty old the new Choices Plus has a much better behaviour, but just for guve you a hint about the result you can obtain with this module**
+
 ![](./wiki/videos/video_example_1.gif)
 
 ![](./wiki/videos/video_example_2.gif)
