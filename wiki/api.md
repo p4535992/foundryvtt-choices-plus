@@ -1,6 +1,6 @@
 The api is reachable from the variable `game.modules.get('choices-plus').api` or from the socket libary `socketLib` on the variable `game.modules.get('choices-plus').socket` if present and active.
 
-You can find some javascript examples here [macros](./macros/)
+You can find some javascript examples here **=> [macros](./macros/) <=**
 
 #### showChoices({options}):void ⇒ <code>Promise&lt;void&gt;</code>
 
