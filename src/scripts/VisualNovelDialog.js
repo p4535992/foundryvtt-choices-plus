@@ -253,6 +253,13 @@ export class VisualNovelDialog {
       if (hasStyleBackgroundImage) {
         choiceElement = $(
           `<div class="choice-plus choice-plus-with-background ${isDisable ? `choice-plus-disable` : ``}" ${styleToAdd}>
+            ${
+              choice.portraits?.length > 0
+                ? `<div class="choice-plus-portraits-container">${this._renderPortraitsChoice(
+                    choice.portraits
+                  ).html()}</div>`
+                : ""
+            }
             <div class="choice-plus-chosen"></div>  
             <img
               class="choice-plus-image"
@@ -269,6 +276,13 @@ export class VisualNovelDialog {
       } else {
         choiceElement = $(
           `<div class="choice-plus ${isDisable ? `choice-plus-disable` : ``}" ${styleToAdd}>
+            ${
+              choice.portraits?.length > 0
+                ? `<div class="choice-plus-portraits-container">${this._renderPortraitsChoice(
+                    choice.portraits
+                  ).html()}</div>`
+                : ""
+            }
             <div class="choice-plus-chosen"></div>
             <div class="choice-plus-text">
             ${isDisable ? `<span class="crossed-out">` : ``}
@@ -303,7 +317,8 @@ export class VisualNovelDialog {
     this.containerHTML.append(choicesHTML);
     //process portraits
     if (this.portraits?.length > 0) {
-      this._renderPortraits();
+      const portraitsHTML = this._renderPortraits();
+      this.containerHTML.append(portraitsHTML);
     }
     //add the dialog element to the body
     $("body").append(this.element);
@@ -357,7 +372,33 @@ export class VisualNovelDialog {
       let portrait = $(`<img class="portrait-image" src="${img}">`);
       portraitsHTML.append(portrait);
     }
-    this.containerHTML.append(portraitsHTML);
+    //this.containerHTML.append(portraitsHTML);
+    return portraitsHTML;
+  }
+
+  _renderPortraitsChoice(portraits) {
+    let portraitsHTML = $(`<div class="choice-plus-portraits-container"></div>`);
+    let images = [];
+
+    for (let portrait of portraits) {
+      const actor = getActorSync(portrait, true);
+      // TODO add integration for token image
+      let img = actor?.img ?? portrait;
+      // Integration module theatre
+      if (actor && game.modules.get("theatre")?.active) {
+        const theatrePortrait = actor.getFlag("theatre", "baseinsert");
+        img = theatrePortrait ?? img;
+      }
+      if (isValidImage(img)) {
+        images.push(img);
+      }
+    }
+    for (let img of images) {
+      let portrait = $(`<img class="portrait-image" src="${img}">`);
+      portraitsHTML.append(portrait);
+    }
+    //this.containerHTML.append(portraitsHTML);
+    return portraitsHTML;
   }
 
   isPlayer() {
@@ -463,10 +504,11 @@ export class VisualNovelDialog {
       const playListSound = getPlaylistSoundPathSync(choice.sound);
       AudioHelper.play({ src: playListSound, volume: 0.5, loop: false }, false);
     }
-    if (choice.chain && !game.user.isGM) {
-      ui.notifications.warn("Only the gm can resolve a chain choice");
-      return;
-    }
+    // TODO we really eed this ?
+    // if (choice.chain && !game.user.isGM) {
+    //   ui.notifications.warn("Only the gm can resolve a chain choice");
+    //   return;
+    // }
     if (choice.macro) {
       const args = parseAsArray(choice.macro);
       runMacro(args[0], args.slice(1));

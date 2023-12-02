@@ -128,6 +128,7 @@ game.modules.get('choices-plus').api.showChoices(
 | [options.backgroundColor] | <code>string</code> | OPTIONAL: This is the background color to apply to the choice button | This will override the options 'backgroundColor'|
 | [options.backgroundImage] | <code>string</code> | OPTIONAL: This is the background image to apply to the choice button | |
 | [options.disable] | <code>boolean</code> | OPTIONAL: For some reason you want to see to choice, but it cannot be selected (also a big red cross appear on this option just to make it clear) | |
+| [options.portraits] | <code>string or string[]</code> | OPTIONAL: a comma separated list on a string or just a array of strings of actor names, if not provided no portrait is show | NOTE: You can use actor name, or id or uuid associated to a actor |
 
 
 **Example of a simple choice option**

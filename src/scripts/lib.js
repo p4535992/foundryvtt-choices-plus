@@ -592,10 +592,10 @@ export async function getPlaylistSoundPathAsync(target) {
 
 /* ========================================== */
 
-export async function runMacro(macroId, ...macroData) {
-  let macroFounded = await getMacroAsync(macroId);
+export async function runMacro(macroReference, ...macroData) {
+  let macroFounded = await getMacroAsync(macroReference);
   if (!macroFounded) {
-    throw error(`Could not find macro with reference "${macroId}"`, true);
+    throw error(`Could not find macro with reference "${macroReference}"`, true);
   }
   // Credit to Otigon, Zhell, Gazkhan and MrVauxs for the code in this section
   /*
@@ -681,7 +681,7 @@ export async function runMacro(macroId, ...macroData) {
       warn(`Something is wrong a macro can be only a 'char' or a 'script'`, true);
     }
   } catch (err) {
-    throw error(`Error when executing macro ${macroId}!`, true, macroDataArr, err);
+    throw error(`Error when executing macro ${macroReference}!`, true, macroDataArr, err);
   }
 
   return result;

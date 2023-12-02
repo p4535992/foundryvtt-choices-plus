@@ -100,6 +100,24 @@
   aspect-ratio: 1 / 1;
 }
 
+#choices-plus-dialog .choice-plus-portraits-container {
+  display: flex;
+  justify-content: center;
+  max-height: 100%;
+  height: 100%;
+  width: 100%;
+  gap: 5%;
+  z-index: 2000;
+}
+
+#choices-plus-dialog .choice-plus-portraits-container img {
+  border-radius: 50%;
+  height: 100%;
+  object-fit: cover;
+  padding-top: 100;
+  aspect-ratio: 1 / 1;
+}
+
 #choices-plus-dialog .choice-plus-text {
   z-index: 1;
   text-transform: uppercase;
