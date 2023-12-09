@@ -29,7 +29,7 @@ const API = {
         const recipients = [];
         let players = parseAsArray(inAttributes.player);
         for (let userRef of players) {
-          let user = getUserSync(userRef, true);
+          let user = getUserSync(userRef, true, true);
           if (user?.id) {
             recipients.push(user.id);
           }

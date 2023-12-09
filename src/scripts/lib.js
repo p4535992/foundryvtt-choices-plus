@@ -130,7 +130,7 @@ export function getUuid(target) {
   return document?.uuid ?? false;
 }
 
-export async function getCompendiumCollectionAsync(target, ignoreError) {
+export async function getCompendiumCollectionAsync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`CompendiumCollection is undefined`, true, target);
   }
@@ -141,30 +141,42 @@ export async function getCompendiumCollectionAsync(target, ignoreError) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof CompendiumCollection) {
     return target;
   }
   if (stringIsUuid(target)) {
     target = await fromUuid(target);
   } else {
-    target = game.packs.get(target) ?? game.packs.getName(target);
+    target = game.packs.get(target);
+    if (!target && !ignoreName) {
+      target = game.packs.getName(target);
+    }
   }
   if (!target) {
     if (ignoreError) {
       warn(`CompendiumCollection is not found`, false, target);
-      return target;
+      return;
     } else {
       throw error(`CompendiumCollection is not found`, true, target);
     }
   }
   // Type checking
   if (!(target instanceof CompendiumCollection)) {
-    throw error(`Invalid CompendiumCollection`, true, target);
+    if (ignoreError) {
+      warn(`Invalid CompendiumCollection`, true, target);
+      return;
+    } else {
+      throw error(`Invalid CompendiumCollection`, true, target);
+    }
   }
   return target;
 }
 
-export function getUserSync(target, ignoreError) {
+export function getUserSync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`User is undefined`, true, target);
   }
@@ -175,30 +187,42 @@ export function getUserSync(target, ignoreError) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof User) {
     return target;
   }
   if (stringIsUuid(target)) {
     target = fromUuidSync(target);
   } else {
-    target = game.users.get(target) ?? game.users.getName(target);
+    target = game.users.get(target);
+    if (!target && !ignoreName) {
+      target = game.users.getName(target);
+    }
   }
   if (!target) {
     if (ignoreError) {
       warn(`User is not found`, false, target);
-      return target;
+      return;
     } else {
       throw error(`User is not found`, true, target);
     }
   }
   // Type checking
   if (!(target instanceof User)) {
-    throw error(`Invalid User`, true, target);
+    if (ignoreError) {
+      warn(`Invalid User`, true, target);
+      return;
+    } else {
+      throw error(`Invalid User`, true, target);
+    }
   }
   return target;
 }
 
-export function getActorSync(target, ignoreError) {
+export function getActorSync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`Actor is undefined`, true, target);
   }
@@ -209,30 +233,42 @@ export function getActorSync(target, ignoreError) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof Actor) {
     return target;
   }
   if (stringIsUuid(target)) {
     target = fromUuidSync(target);
   } else {
-    target = game.actors.get(target) ?? game.actors.getName(target);
+    target = game.actors.get(target);
+    if (!target && !ignoreName) {
+      target = game.actors.getName(target);
+    }
   }
   if (!target) {
     if (ignoreError) {
       warn(`Actor is not found`, false, target);
-      return target;
+      return;
     } else {
       throw error(`Actor is not found`, true, target);
     }
   }
   // Type checking
   if (!(target instanceof Actor)) {
-    throw error(`Invalid Actor`, true, target);
+    if (ignoreError) {
+      warn(`Invalid Actor`, true, target);
+      return;
+    } else {
+      throw error(`Invalid Actor`, true, target);
+    }
   }
   return target;
 }
 
-export async function getActorAsync(target, ignoreError) {
+export async function getActorAsync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`Actor is undefined`, true, target);
   }
@@ -243,30 +279,42 @@ export async function getActorAsync(target, ignoreError) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof Actor) {
     return target;
   }
   if (stringIsUuid(target)) {
     target = await fromUuid(target);
   } else {
-    target = game.actors.get(target) ?? game.actors.getName(target);
+    target = game.actors.get(target);
+    if (!target && !ignoreName) {
+      target = game.actors.getName(target);
+    }
   }
   if (!target) {
     if (ignoreError) {
       warn(`Actor is not found`, false, target);
-      return target;
+      return;
     } else {
       throw error(`Actor is not found`, true, target);
     }
   }
   // Type checking
   if (!(target instanceof Actor)) {
-    throw error(`Invalid Actor`, true, target);
+    if (ignoreError) {
+      warn(`Invalid Actor`, true, target);
+      return;
+    } else {
+      throw error(`Invalid Actor`, true, target);
+    }
   }
   return target;
 }
 
-export function getJournalSync(target, ignoreError) {
+export function getJournalSync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`Journal is undefined`, true, target);
   }
@@ -277,30 +325,42 @@ export function getJournalSync(target, ignoreError) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof Journal) {
     return target;
   }
   if (stringIsUuid(target)) {
     target = fromUuidSync(target);
   } else {
-    target = game.Journals.get(target) ?? game.Journals.getName(target);
+    target = game.journal.get(target);
+    if (!target && !ignoreName) {
+      target = game.journal.getName(target);
+    }
   }
   if (!target) {
     if (ignoreError) {
       warn(`Journal is not found`, false, target);
-      return target;
+      return;
     } else {
       throw error(`Journal is not found`, true, target);
     }
   }
   // Type checking
   if (!(target instanceof Journal)) {
-    throw error(`Invalid Journal`, true, target);
+    if (ignoreError) {
+      warn(`Invalid Journal`, true, target);
+      return;
+    } else {
+      throw error(`Invalid Journal`, true, target);
+    }
   }
   return target;
 }
 
-export async function getJournalAsync(target, ignoreError) {
+export async function getJournalAsync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`Journal is undefined`, true, target);
   }
@@ -311,30 +371,42 @@ export async function getJournalAsync(target, ignoreError) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof Journal) {
     return target;
   }
   if (stringIsUuid(target)) {
     target = await fromUuid(target);
   } else {
-    target = game.Journals.get(target) ?? game.Journals.getName(target);
+    target = game.journal.get(target);
+    if (!target && !ignoreName) {
+      target = game.journal.getName(target);
+    }
   }
   if (!target) {
     if (ignoreError) {
       warn(`Journal is not found`, false, target);
-      return target;
+      return;
     } else {
       throw error(`Journal is not found`, true, target);
     }
   }
   // Type checking
   if (!(target instanceof Journal)) {
-    throw error(`Invalid Journal`, true, target);
+    if (ignoreError) {
+      warn(`Invalid Journal`, true, target);
+      return;
+    } else {
+      throw error(`Invalid Journal`, true, target);
+    }
   }
   return target;
 }
 
-export function getMacroSync(target) {
+export function getMacroSync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`Macro is undefined`, true, target);
   }
@@ -345,25 +417,42 @@ export function getMacroSync(target) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof Macro) {
     return target;
   }
   if (stringIsUuid(target)) {
     target = fromUuidSync(target);
   } else {
-    target = game.macros.get(target) ?? game.macros.getName(target);
+    target = game.macros.get(target);
+    if (!target && !ignoreName) {
+      target = game.macros.getName(target);
+    }
   }
   if (!target) {
-    throw error(`Macro is not found`, true, target);
+    if (ignoreError) {
+      warn(`Macro is not found`, true, target);
+      return;
+    } else {
+      throw error(`Macro is not found`, true, target);
+    }
   }
   // Type checking
   if (!(target instanceof Macro)) {
-    throw error(`Invalid Macro`, true, target);
+    if (ignoreError) {
+      warn(`Invalid Macro`, true, target);
+      return;
+    } else {
+      throw error(`Invalid Macro`, true, target);
+    }
   }
   return target;
 }
 
-export async function getMacroAsync(target) {
+export async function getMacroAsync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`Macro is undefined`, true, target);
   }
@@ -374,25 +463,42 @@ export async function getMacroAsync(target) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof Macro) {
     return target;
   }
   if (stringIsUuid(target)) {
     target = await fromUuid(target);
   } else {
-    target = game.macros.get(target) ?? game.macros.getName(target);
+    target = game.macros.get(target);
+    if (!target && !ignoreName) {
+      target = game.macros.getName(target);
+    }
   }
   if (!target) {
-    throw error(`Macro is not found`, true, target);
+    if (ignoreError) {
+      warn(`Macro is not found`, true, target);
+      return;
+    } else {
+      throw error(`Macro is not found`, true, target);
+    }
   }
   // Type checking
   if (!(target instanceof Macro)) {
-    throw error(`Invalid Macro`, true, target);
+    if (ignoreError) {
+      warn(`Invalid Macro`, true, target);
+      return;
+    } else {
+      throw error(`Invalid Macro`, true, target);
+    }
   }
   return target;
 }
 
-export function getSceneSync(target) {
+export function getSceneSync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`Scene is undefined`, true, target);
   }
@@ -403,25 +509,42 @@ export function getSceneSync(target) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof Scene) {
     return target;
   }
   if (stringIsUuid(target)) {
     target = fromUuidSync(target);
   } else {
-    target = game.scenes.get(target) ?? game.scenes.getName(target);
+    target = game.scenes.get(target);
+    if (!target && !ignoreName) {
+      target = game.scenes.getName(target);
+    }
   }
   if (!target) {
-    throw error(`Scene is not found`, true, target);
+    if (ignoreError) {
+      warn(`Scene is not found`, true, target);
+      return;
+    } else {
+      throw error(`Scene is not found`, true, target);
+    }
   }
   // Type checking
   if (!(target instanceof Scene)) {
-    throw error(`Invalid Scene`, true, target);
+    if (ignoreError) {
+      warn(`Invalid Scene`, true, target);
+      return;
+    } else {
+      throw error(`Invalid Scene`, true, target);
+    }
   }
   return target;
 }
 
-export async function getSceneAsync(target) {
+export async function getSceneAsync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`Scene is undefined`, true, target);
   }
@@ -432,25 +555,42 @@ export async function getSceneAsync(target) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof Scene) {
     return target;
   }
   if (stringIsUuid(target)) {
     target = await fromUuid(target);
   } else {
-    target = game.scenes.get(target) ?? game.scenes.getName(target);
+    target = game.scenes.get(target);
+    if (!target && !ignoreName) {
+      target = game.scenes.getName(target);
+    }
   }
   if (!target) {
-    throw error(`Scene is not found`, true, target);
+    if (ignoreError) {
+      warn(`Scene is not found`, true, target);
+      return;
+    } else {
+      throw error(`Scene is not found`, true, target);
+    }
   }
   // Type checking
   if (!(target instanceof Scene)) {
-    throw error(`Invalid Scene`, true, target);
+    if (ignoreError) {
+      warn(`Invalid Scene`, true, target);
+      return;
+    } else {
+      throw error(`Invalid Scene`, true, target);
+    }
   }
   return target;
 }
 
-export function getItemSync(target, ignoreError) {
+export function getItemSync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`Item is undefined`, true, target);
   }
@@ -461,30 +601,42 @@ export function getItemSync(target, ignoreError) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof Item) {
     return target;
   }
   if (stringIsUuid(target)) {
     target = fromUuidSync(target);
   } else {
-    target = game.items.get(target) ?? game.items.getName(target);
+    target = game.items.get(target);
+    if (!target && !ignoreName) {
+      target = game.items.getName(target);
+    }
   }
   if (!target) {
     if (ignoreError) {
       warn(`Item is not found`, false, target);
-      return target;
+      return;
     } else {
       throw error(`Item is not found`, true, target);
     }
   }
   // Type checking
   if (!(target instanceof Item)) {
-    throw error(`Invalid Item`, true, target);
+    if (ignoreError) {
+      warn(`Invalid Item`, true, target);
+      return;
+    } else {
+      throw error(`Invalid Item`, true, target);
+    }
   }
   return target;
 }
 
-export async function getItemAsync(target, ignoreError) {
+export async function getItemAsync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`Item is undefined`, true, target);
   }
@@ -495,30 +647,42 @@ export async function getItemAsync(target, ignoreError) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof Item) {
     return target;
   }
   if (stringIsUuid(target)) {
     target = await fromUuid(target);
   } else {
-    target = game.items.get(target) ?? game.items.getName(target);
+    target = game.items.get(target);
+    if (!target && !ignoreName) {
+      target = game.items.getName(target);
+    }
   }
   if (!target) {
     if (ignoreError) {
       warn(`Item is not found`, false, target);
-      return target;
+      return;
     } else {
       throw error(`Item is not found`, true, target);
     }
   }
   // Type checking
   if (!(target instanceof Item)) {
-    throw error(`Invalid Item`, true, target);
+    if (ignoreError) {
+      warn(`Invalid Item`, true, target);
+      return;
+    } else {
+      throw error(`Invalid Item`, true, target);
+    }
   }
   return target;
 }
 
-export function getPlaylistSoundPathSync(target) {
+export function getPlaylistSoundPathSync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`PlaylistSound is undefined`, true, target);
   }
@@ -529,6 +693,10 @@ export function getPlaylistSoundPathSync(target) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof PlaylistSound) {
     return target;
   }
@@ -545,16 +713,26 @@ export function getPlaylistSoundPathSync(target) {
       });
   }
   if (!target) {
-    throw error(`PlaylistSound is not found`, true, target);
+    if (ignoreError) {
+      warn(`PlaylistSound is not found`, true, target);
+      return;
+    } else {
+      throw error(`PlaylistSound is not found`, true, target);
+    }
   }
   // Type checking
   if (!(target instanceof PlaylistSound)) {
-    throw error(`Invalid PlaylistSound`, true, target);
+    if (ignoreError) {
+      warn(`Invalid PlaylistSound`, true, target);
+      return;
+    } else {
+      throw error(`Invalid PlaylistSound`, true, target);
+    }
   }
   return target.path;
 }
 
-export async function getPlaylistSoundPathAsync(target) {
+export async function getPlaylistSoundPathAsync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`PlaylistSound is undefined`, true, target);
   }
@@ -565,6 +743,10 @@ export async function getPlaylistSoundPathAsync(target) {
   if (target.document) {
     target = target.document;
   }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
   if (target instanceof PlaylistSound) {
     return target;
   }
@@ -581,11 +763,21 @@ export async function getPlaylistSoundPathAsync(target) {
       });
   }
   if (!target) {
-    throw error(`PlaylistSound is not found`, true, target);
+    if (ignoreError) {
+      warn(`PlaylistSound is not found`, true, target);
+      return;
+    } else {
+      throw error(`PlaylistSound is not found`, true, target);
+    }
   }
   // Type checking
   if (!(target instanceof PlaylistSound)) {
-    throw error(`Invalid PlaylistSound`, true, target);
+    if (ignoreError) {
+      warn(`Invalid PlaylistSound`, true, target);
+      return;
+    } else {
+      throw error(`Invalid PlaylistSound`, true, target);
+    }
   }
   return target.path;
 }
@@ -593,7 +785,7 @@ export async function getPlaylistSoundPathAsync(target) {
 /* ========================================== */
 
 export async function runMacro(macroReference, ...macroData) {
-  let macroFounded = await getMacroAsync(macroReference);
+  let macroFounded = await getMacroAsync(macroReference, false, true);
   if (!macroFounded) {
     throw error(`Could not find macro with reference "${macroReference}"`, true);
   }

@@ -150,7 +150,7 @@ export class VisualNovelDialog {
     if (!game.user.isGM) {
       return;
     }
-    const playListSound = getPlaylistSoundPathSync(this.sound);
+    const playListSound = getPlaylistSoundPathSync(this.sound, true, true);
     this.choiceSound = await AudioHelper.play({ src: playListSound, volume: 0.5, loop: true }, true);
   }
 
@@ -356,7 +356,7 @@ export class VisualNovelDialog {
     let images = [];
 
     for (let portrait of this.portraits) {
-      const actor = getActorSync(portrait, true);
+      const actor = getActorSync(portrait, true, true);
       // TODO add integration for token image
       let img = actor?.img ?? portrait;
       // Integration module theatre
@@ -381,7 +381,7 @@ export class VisualNovelDialog {
     let images = [];
 
     for (let portrait of portraits) {
-      const actor = getActorSync(portrait, true);
+      const actor = getActorSync(portrait, true, true);
       // TODO add integration for token image
       let img = actor?.img ?? portrait;
       // Integration module theatre
@@ -497,11 +497,11 @@ export class VisualNovelDialog {
       return;
     }
     if (choice.scene) {
-      const scene = getSceneSync(choice.scene);
+      const scene = getSceneSync(choice.scene, true, true);
       scene?.view();
     }
     if (choice.sound) {
-      const playListSound = getPlaylistSoundPathSync(choice.sound);
+      const playListSound = getPlaylistSoundPathSync(choice.sound, true, true);
       AudioHelper.play({ src: playListSound, volume: 0.5, loop: false }, false);
     }
     // TODO we really eed this ?
