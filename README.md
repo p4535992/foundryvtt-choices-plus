@@ -25,6 +25,9 @@ If you want to support more modules of this kind, I invite you to go and support
 
 ## Features
 
+- Module for creating small scenes with multiple choices novel game style, with a powerful [api](./wiki/api.md) you can create a chain of choice for your players.
+- [Experimental] Integration  with [Forien's Easy Polls](https://github.com/Forien/foundryvtt-forien-easy-polls)
+
 **NOTE these video are pretty old the new Choices Plus has a much better behaviour, but just for guve you a hint about the result you can obtain with this module**
 
 ![](./wiki/videos/video_example_1.gif)
@@ -54,11 +57,6 @@ This module uses the [socketLib](https://github.com/manuelVo/foundryvtt-socketli
 ### Color Settings
 
 This module uses the [colorsettings](https://github.com/ardittristan/VTTColorSettings) library for add a color picker. It is a hard dependency and it is recommended for the best experience and compatibility with other modules.
-
-## Feature
-
-- [Experimental] Integration  with [Forien's Easy Polls](https://github.com/Forien/foundryvtt-forien-easy-polls)
-
 
 ## Api
 
