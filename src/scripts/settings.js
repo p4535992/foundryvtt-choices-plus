@@ -35,6 +35,15 @@ export const registerSettings = function () {
     default: 2,
   });
 
+  game.settings.register(CONSTANTS.MODULE_ID, "enableIntegrationWithFEP", {
+    name: `${CONSTANTS.MODULE_ID}.settings.enableIntegrationWithFEP.title`,
+    hint: `${CONSTANTS.MODULE_ID}.settings.enableIntegrationWithFEP.hint`,
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean,
+  });
+
   // ========================================================================
 
   game.settings.register(CONSTANTS.MODULE_ID, "debug", {

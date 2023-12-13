@@ -20,6 +20,8 @@
   "choices-plus.settings.debug.title": "Enable debugging",
   "choices-plus.settings.debug.label": "Prints debug messages to the console",
   "choices-plus.settings.debug.hint": " ",
+  "choices-plus.settings.enableIntegrationWithFEP.title": "[Experimental] Integration  with 'Forien's Easy Polls'",
+  "choices-plus.settings.enableIntegrationWithFEP.hint": "Use the module 'Forien's Easy Polls' for manage the democratic option ont he choice",
   "choices-plus.dialogs.resetsettings.title": "Reset Module Settings",
   "choices-plus.dialogs.resetsettings.content": "Are you sure you want to reset all of the module settings to the current system's defaults? <strong>THIS CANNOT BE UNDONE!</strong>",
   "choices-plus.dialogs.resetsettings.confirm": "Reset Module Settings",

@@ -1,6 +1,11 @@
+import CONSTANTS from "../constants";
+
 export class ForienEasyPollsHelpers {
   static isFepActive() {
-    return game.modules.get("forien-easy-polls")?.active;
+    return (
+      game.modules.get("forien-easy-polls")?.active &&
+      game.settings.get(CONSTANTS.MODULE_ID, "enableIntegrationWithFEP")
+    );
   }
 
   /**
