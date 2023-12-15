@@ -123,7 +123,7 @@ game.modules.get('choices-plus').api.showChoices(
 | [options.text] | <code>string</code> | The text to show on the button | |
 | [options.scene] | <code>string</code> | OPTIONAL: a scene name or id, or uuid, when the choice is resolved this scene will be viewed. | This choice option can be triggered with the name or the id or the uuid the priority for check is anyway uuid -> id -> name. |
 | [options.sound] | <code>string</code> | OPTIONAL: usually a sound file path, but i can be the PlaySound name or id or uuid, when the choice is resolved this sound will be played once | This choice option can be triggered with the name or the id or the uuid the priority for check is anyway uuid -> id -> name. |
-| [options.macro] | <code>string</code> | a macro name or id or uuid, when the choice is resolved this macro will be executed, if you have the advanced macros module you can provide a comma separated list of args to be passed to the macro (eg [macro=myMacro,arg0,arg1]). | This choice option can be triggered with the name or the id or the uuid the priority for check is anyway uuid -> id -> name. |
+| [options.macro] | <code>string</code> | OPTIONAL: a macro name or id or uuid, when the choice is resolved this macro will be executed, if you have the advanced macros module you can provide a comma separated list of args to be passed to the macro (eg [macro=myMacro,arg0,arg1]). | This choice option can be triggered with the name or the id or the uuid the priority for check is anyway uuid -> id -> name. |
 | [options.chain] | <code>boolean</code> | OPTIONAL: set to true if this options triggers a macro with a choice. Remember if you want to chain choices, the choice needs to have `macro=xxx` (the xxx is this case usually a macro reference to another `game.modules.get("choices-plus").api.showChoices`, but there is no control about it) and `chain=true` (default false) | This choice option can be triggered with the name or the id or the uuid the priority for check is anyway uuid -> id -> name. |
 | [options.backgroundColor] | <code>string</code> | OPTIONAL: This is the background color to apply to the choice button | This will override the options 'backgroundColor'|
 | [options.backgroundImage] | <code>string</code> | OPTIONAL: This is the background image to apply to the choice button | |
@@ -143,6 +143,7 @@ game.modules.get('choices-plus').api.showChoices(
     backgroundColor: null, // OPTIONAL
     backgroundImage: null, // OPTIONAL
     disable: false, // OPTIONAL
+    portraits: [], // OPTIONAL
 }
 
 ```
