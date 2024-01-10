@@ -1,3 +1,7 @@
+### 1.0.4
+
+- Little bug fix on the getCompendiumlib method
+
 ### 1.0.3
 
 - Add module settings for enable/disable FEP integration
