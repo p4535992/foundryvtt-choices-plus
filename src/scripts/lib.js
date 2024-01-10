@@ -130,6 +130,52 @@ export function getUuid(target) {
   return document?.uuid ?? false;
 }
 
+export async function getCompendiumCollectionSync(target, ignoreError = false, ignoreName = true) {
+  if (!target) {
+    throw error(`CompendiumCollection is undefined`, true, target);
+  }
+  if (target instanceof CompendiumCollection) {
+    return target;
+  }
+  // This is just a patch for compatibility with others modules
+  if (target.document) {
+    target = target.document;
+  }
+  if (target.uuid) {
+    target = target.uuid;
+  }
+
+  if (target instanceof CompendiumCollection) {
+    return target;
+  }
+  if (stringIsUuid(target)) {
+    target = fromUuid(target);
+  } else {
+    target = game.packs.get(target);
+    if (!target && !ignoreName) {
+      target = game.packs.getName(target);
+    }
+  }
+  if (!target) {
+    if (ignoreError) {
+      warn(`CompendiumCollection is not found`, false, target);
+      return;
+    } else {
+      throw error(`CompendiumCollection is not found`, true, target);
+    }
+  }
+  // Type checking
+  if (!(target instanceof CompendiumCollection)) {
+    if (ignoreError) {
+      warn(`Invalid CompendiumCollection`, true, target);
+      return;
+    } else {
+      throw error(`Invalid CompendiumCollection`, true, target);
+    }
+  }
+  return target;
+}
+
 export async function getCompendiumCollectionAsync(target, ignoreError = false, ignoreName = true) {
   if (!target) {
     throw error(`CompendiumCollection is undefined`, true, target);
