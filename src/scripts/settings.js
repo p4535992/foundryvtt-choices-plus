@@ -1,4 +1,4 @@
-import { debug, log, warn, i18n } from "./lib.js";
+import { debug, log, warn, i18n } from "./lib/lib.js";
 import CONSTANTS from "./constants.js";
 
 export const registerSettings = function () {
