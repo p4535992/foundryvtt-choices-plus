@@ -14,7 +14,7 @@ import {
   info,
   parseAsArray,
   warn,
-} from "./lib.js";
+} from "./lib/lib.js";
 import { ChoicesSocket } from "./socket.js";
 
 export class VisualNovelDialog {

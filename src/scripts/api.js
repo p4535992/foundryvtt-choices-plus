@@ -1,4 +1,4 @@
-import { error, getUserSync, parseAsArray } from "./lib.js";
+import { error, getUserSync, parseAsArray } from "./lib/lib.js";
 import { VisualNovelDialog } from "./VisualNovelDialog.js";
 import { ChoicesSocket } from "./socket.js";
 
