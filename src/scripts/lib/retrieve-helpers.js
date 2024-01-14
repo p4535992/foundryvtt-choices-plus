@@ -1,6 +1,6 @@
 export class RetrieveHelpers {
   static getDocument(target) {
-    if (stringIsUuid(target)) {
+    if (RetrieveHelpers.stringIsUuid(target)) {
       target = fromUuidSync(target);
     }
     return target?.document ?? target;
@@ -11,7 +11,7 @@ export class RetrieveHelpers {
   }
 
   static getUuid(target) {
-    if (stringIsUuid(target)) {
+    if (RetrieveHelpers.stringIsUuid(target)) {
       return target;
     }
     const document = getDocument(target);
@@ -37,7 +37,7 @@ export class RetrieveHelpers {
     if (targetTmp instanceof CompendiumCollection) {
       return targetTmp;
     }
-    // if (stringIsUuid(targetTmp)) {
+    // if (RetrieveHelpers.stringIsUuid(targetTmp)) {
     //   targetTmp = fromUuid(targetTmp);
     // } else {
     targetTmp = game.packs.get(targetTmp);
@@ -84,7 +84,7 @@ export class RetrieveHelpers {
     if (targetTmp instanceof CompendiumCollection) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = await fromUuid(targetTmp);
     } else {
       targetTmp = game.packs.get(targetTmp);
@@ -131,7 +131,7 @@ export class RetrieveHelpers {
     if (targetTmp instanceof User) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = fromUuidSync(targetTmp);
     } else {
       targetTmp = game.users.get(targetTmp);
@@ -178,7 +178,7 @@ export class RetrieveHelpers {
     if (targetTmp instanceof Actor) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = fromUuidSync(targetTmp);
     } else {
       targetTmp = game.actors.get(targetTmp);
@@ -225,7 +225,7 @@ export class RetrieveHelpers {
     if (targetTmp instanceof Actor) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = await fromUuid(targetTmp);
     } else {
       targetTmp = game.actors.get(targetTmp);
@@ -272,7 +272,7 @@ export class RetrieveHelpers {
     if (targetTmp instanceof Journal) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = fromUuidSync(targetTmp);
     } else {
       targetTmp = game.journal.get(targetTmp);
@@ -319,7 +319,7 @@ export class RetrieveHelpers {
     if (targetTmp instanceof Journal) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = await fromUuid(targetTmp);
     } else {
       targetTmp = game.journal.get(targetTmp);
@@ -366,7 +366,7 @@ export class RetrieveHelpers {
     if (targetTmp instanceof Macro) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = fromUuidSync(targetTmp);
     } else {
       targetTmp = game.macros.get(targetTmp);
@@ -413,7 +413,7 @@ export class RetrieveHelpers {
     if (targetTmp instanceof Macro) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = await fromUuid(targetTmp);
     } else {
       targetTmp = game.macros.get(targetTmp);
@@ -460,7 +460,7 @@ export class RetrieveHelpers {
     if (targetTmp instanceof Scene) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = fromUuidSync(targetTmp);
     } else {
       targetTmp = game.scenes.get(targetTmp);
@@ -507,7 +507,7 @@ export class RetrieveHelpers {
     if (targetTmp instanceof Scene) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = await fromUuid(targetTmp);
     } else {
       targetTmp = game.scenes.get(targetTmp);
@@ -554,7 +554,7 @@ export class RetrieveHelpers {
     if (targetTmp instanceof Item) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = fromUuidSync(targetTmp);
     } else {
       targetTmp = game.items.get(targetTmp);
@@ -601,7 +601,7 @@ export class RetrieveHelpers {
     if (targetTmp instanceof Item) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = await fromUuid(targetTmp);
     } else {
       targetTmp = game.items.get(targetTmp);
@@ -651,7 +651,7 @@ export class RetrieveHelpers {
     if (typeof targetTmp === "string" || targetTmp instanceof String) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = fromUuidSync(targetTmp);
     } else {
       targetTmp = game.playlists.contents
@@ -702,7 +702,7 @@ export class RetrieveHelpers {
     if (typeof targetTmp === "string" || targetTmp instanceof String) {
       return targetTmp;
     }
-    if (stringIsUuid(targetTmp)) {
+    if (RetrieveHelpers.stringIsUuid(targetTmp)) {
       targetTmp = await fromUuid(targetTmp);
     } else {
       targetTmp = game.playlists.contents
