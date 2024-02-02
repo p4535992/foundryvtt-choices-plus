@@ -1,3 +1,7 @@
+### 1.0.6
+
+- Change module title to "Choices Plus"
+
 ### 1.0.5
 
 - Clean up some code
