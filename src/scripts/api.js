@@ -1,6 +1,8 @@
-import { error, getUserSync, parseAsArray } from "./lib/lib.js";
+import { parseAsArray } from "./lib/lib.js";
 import { VisualNovelDialog } from "./VisualNovelDialog.js";
 import { ChoicesSocket } from "./socket.js";
+import Logger from "./lib/Logger.js";
+import { RetrieveHelpers } from "./lib/retrieve-helpers.js";
 
 const API = {
   // VisualNovelDialog: {},
@@ -23,13 +25,13 @@ const API = {
       // The sharing here is done with the chat command
     } else {
       if (typeof inAttributes !== "object") {
-        throw new error("showChoices | inAttributes must be of type object");
+        throw Logger.error("showChoices | inAttributes must be of type object");
       }
       if (inAttributes.player?.length > 0) {
         const recipients = [];
         let players = parseAsArray(inAttributes.player);
         for (let userRef of players) {
-          let user = getUserSync(userRef, true, true);
+          let user = RetrieveHelpers.getUserSync(userRef, true, true);
           if (user?.id) {
             recipients.push(user.id);
           }
@@ -58,7 +60,7 @@ const API = {
 
   async render(inAttributes) {
     if (typeof inAttributes !== "object") {
-      throw new error("render | inAttributes must be of type object");
+      throw Logger.error("render | inAttributes must be of type object");
     }
 
     // Only one choice at the time ?
@@ -94,7 +96,7 @@ const API = {
 
   async sendAndUpdateChoices(inAttributes) {
     if (typeof inAttributes !== "object") {
-      throw new error("sendChoice | inAttributes must be of type object");
+      throw Logger.error("sendChoice | inAttributes must be of type object");
     }
     return await game.VisualNovelDialog.updateChoices(inAttributes.userId, inAttributes.choices);
   },

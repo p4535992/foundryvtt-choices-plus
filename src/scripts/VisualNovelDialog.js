@@ -1,20 +1,8 @@
 import { ForienEasyPollsHelpers } from "./apps/fep-helpers.js";
 import CONSTANTS from "./constants.js";
-import {
-  error,
-  getActorSync,
-  getMacroSync,
-  getPlaylistSoundPathSync,
-  getSceneSync,
-  getUserCharacter,
-  isRealNumber,
-  isRealBoolean,
-  isValidImage,
-  runMacro,
-  info,
-  parseAsArray,
-  warn,
-} from "./lib/lib.js";
+import Logger from "./lib/Logger.js";
+import { getUserCharacter, isRealNumber, isRealBoolean, isValidImage, runMacro, parseAsArray } from "./lib/lib.js";
+import { RetrieveHelpers } from "./lib/retrieve-helpers.js";
 import { ChoicesSocket } from "./socket.js";
 
 export class VisualNovelDialog {
@@ -89,7 +77,7 @@ export class VisualNovelDialog {
     this.choices = this.choices.map((choice) => this._processLineFromChat(choice));
     // delete this.title;
     delete this.lines;
-    console.log(this);
+    Logger.log("", this);
   }
 
   _processLineFromChat(line) {
@@ -150,14 +138,14 @@ export class VisualNovelDialog {
     if (!game.user.isGM) {
       return;
     }
-    const playListSound = getPlaylistSoundPathSync(this.sound, true, true);
+    const playListSound = RetrieveHelpers.getPlaylistSoundPathSync(this.sound, true, true);
     this.choiceSound = await AudioHelper.play({ src: playListSound, volume: 0.5, loop: true }, true);
   }
 
   updateChoices(userId, choicesIndexes) {
     const user = game.users.get(userId);
     if (!user) {
-      error(`Cannot find user by id '${userId}'`, true);
+      Logger.error(`Cannot find user by id '${userId}'`, true);
       return;
     }
     // const img = user.character?.img ?? user.avatar;
@@ -328,7 +316,7 @@ export class VisualNovelDialog {
         const isSelected = $(e.currentTarget).hasClass("choice-plus-active");
         const isDisable = $(e.currentTarget).hasClass("choice-plus-disable");
         if (isDisable) {
-          warn(`You cannot choose this option!`, true);
+          Logger.warn(`You cannot choose this option!`, true);
           return;
         }
         if (!_this.multi) {
@@ -337,7 +325,7 @@ export class VisualNovelDialog {
         $(e.currentTarget).toggleClass("choice-plus-active", isSelected);
         $(e.currentTarget).toggleClass("choice-plus-active");
         if (!_this.show) {
-          info(`Show is disabled the active choice`, false, _this.choices);
+          Logger.info(`Show is disabled the active choice`, false, _this.choices);
           return;
         }
         let chosenIndex = [];
@@ -356,7 +344,7 @@ export class VisualNovelDialog {
     let images = [];
 
     for (let portrait of this.portraits) {
-      const actor = getActorSync(portrait, true, true);
+      const actor = RetrieveHelpers.getActorSync(portrait, true, true);
       // TODO add integration for token image
       let img = actor?.img ?? portrait;
       // Integration module theatre
@@ -381,7 +369,7 @@ export class VisualNovelDialog {
     let images = [];
 
     for (let portrait of portraits) {
-      const actor = getActorSync(portrait, true, true);
+      const actor = RetrieveHelpers.getActorSync(portrait, true, true);
       // TODO add integration for token image
       let img = actor?.img ?? portrait;
       // Integration module theatre
@@ -493,20 +481,20 @@ export class VisualNovelDialog {
 
   resolve(choice) {
     if (game.user.isGM && !this.resolveGM) {
-      ui.notifications.warn("The gm cannot resolve this choice");
+      Logger.warn("The gm cannot resolve this choice", true);
       return;
     }
     if (choice.scene) {
-      const scene = getSceneSync(choice.scene, true, true);
+      const scene = RetrieveHelpers.getSceneSync(choice.scene, true, true);
       scene?.view();
     }
     if (choice.sound) {
-      const playListSound = getPlaylistSoundPathSync(choice.sound, true, true);
+      const playListSound = RetrieveHelpers.getPlaylistSoundPathSync(choice.sound, true, true);
       AudioHelper.play({ src: playListSound, volume: 0.5, loop: false }, false);
     }
     // TODO we really eed this ?
     // if (choice.chain && !game.user.isGM) {
-    //   ui.notifications.warn("Only the gm can resolve a chain choice");
+    //   Logger.warn("Only the gm can resolve a chain choice", true);
     //   return;
     // }
     if (choice.macro) {

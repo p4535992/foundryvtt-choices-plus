@@ -1,5 +1,5 @@
-import { debug, log, warn, i18n } from "./lib/lib.js";
 import CONSTANTS from "./constants.js";
+import Logger from "./lib/Logger.js";
 
 export const registerSettings = function () {
   // game.settings.registerMenu(CONSTANTS.MODULE_ID, "resetAllSettings", {
@@ -123,7 +123,7 @@ class ResetSettingsDialog extends FormApplication {
               ?.get("world")
               ?.filter((setting) => setting.key.startsWith(`${CONSTANTS.MODULE_ID}.`));
             for (let setting of worldSettings) {
-              log(`Reset setting '${setting.key}'`);
+              Logger.log(`Reset setting '${setting.key}'`);
               await setting.delete();
             }
             //window.location.reload();

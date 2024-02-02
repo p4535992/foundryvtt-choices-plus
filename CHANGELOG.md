@@ -1,3 +1,7 @@
+### 1.0.5
+
+- Clean up some code
+
 ### 1.0.4
 
 - Little bug fix on the getCompendiumlib method
