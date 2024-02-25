@@ -1,3 +1,7 @@
+### 1.0.7
+
+- Update retrieve-helpers
+
 ### 1.0.6
 
 - Change module title to "Choices Plus"
