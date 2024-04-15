@@ -1,109 +1,108 @@
 {
-  "id": "choices-plus",
-  "title": "Choices Plus",
-  "description": "Display multiple choices for the player to choose from in a Visual Novel Style.",
-  "version": "1.0.7",
-  "authors": [
-    {
-      "name": "p4535992",
-      "url": "https://github.com/p4535992",
-      "discord": "",
-      "twitter": "",
-      "patreon": "p4535992",
-      "github": "p4535992",
-      "ko-fi": "",
-      "reddit": "",
-      "email": ""
-    }
-  ],
-  "type": "module",
-  "socket": true,
-  "includes": [
-    "./assets/**",
-    "./lang/**",
-    "./languages/**",
-    "./scripts/**",
-    "./styles/**",
-    "./templates/**",
-    "./module.json",
-    "./README.md",
-    "./icons/**",
-    "./packs/**"
-  ],
-  "media": [
-    {
-      "type": "icon",
-      "location": ""
-    },
-    {
-      "type": "cover",
-      "location": ""
-    },
-    {
-      "type": "screenshot",
-      "location": ""
-    }
-  ],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "languages/en.json"
-    },
-    {
-      "lang": "ja",
-      "name": "日本語 (Japanese)",
-      "path": "languages/ja.json"
-    }
-  ],
-  "packs": [
-    {
-      "name": "choices-plus-macros",
-      "label": "Choices Macros",
-      "path": "packs/choices-plus-macros",
-      "type": "Macro",
-      "private": false,
-      "module": "choices-plus"
-    }
-  ],
-  "scripts": [],
-  "styles": ["styles/module.css"],
-  "esmodules": ["module.js"],
-  "compatibility": {
-    "minimum": 11,
-    "verified": 11,
-    "maximum": 11
-  },
-  "manifestPlusVersion": "1.2.0",
-  "url": "https://github.com/p4535992/foundryvtt-choices-plus",
-  "manifest": "https://github.com/p4535992/foundryvtt-choices-plus/releases/download/1.0.7/module.json",
-  "download": "https://github.com/p4535992/foundryvtt-choices-plus/releases/download/1.0.7/module.zip",
-  "readme": "https://github.com/p4535992/foundryvtt-choices-plus/blob/master/README.md",
-  "changelog": "https://github.com/p4535992/foundryvtt-choices-plus/blob/master/CHANGELOG.md",
-  "bugs": "https://github.com/p4535992/foundryvtt-choices-plus/issues",
-  "allowBugReporter": true,
-  "relationships": {
-    "systems": [],
-    "requires": [
-      {
-        "id": "lib-wrapper",
-        "type": "module",
-        "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json",
-        "compatibility": {}
-      },
-      {
-        "id": "socketlib",
-        "type": "module",
-        "manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-socketlib/develop/module.json",
-        "compatibility": {}
-      },
-      {
-        "id": "colorsettings",
-        "type": "module",
-        "manifest": "https://github.com/ardittristan/VTTColorSettings/releases/latest/download/module.json",
-        "compatibility": {}
-      }
+    "id": "choices-plus",
+    "title": "Choices Plus",
+    "description": "Display multiple choices for the player to choose from in a Visual Novel Style.",
+    "version": "1.0.7",
+    "authors": [
+        {
+            "name": "p4535992",
+            "url": "https://github.com/p4535992",
+            "discord": "",
+            "twitter": "",
+            "patreon": "p4535992",
+            "github": "p4535992",
+            "ko-fi": "",
+            "reddit": "",
+            "email": ""
+        }
     ],
-    "conflicts": []
-  }
+    "type": "module",
+    "socket": true,
+    "includes": [
+        "./assets/**",
+        "./lang/**",
+        "./languages/**",
+        "./scripts/**",
+        "./styles/**",
+        "./templates/**",
+        "./module.json",
+        "./README.md",
+        "./icons/**",
+        "./packs/**"
+    ],
+    "media": [
+        {
+            "type": "icon",
+            "location": ""
+        },
+        {
+            "type": "cover",
+            "location": ""
+        },
+        {
+            "type": "screenshot",
+            "location": ""
+        }
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "languages/en.json"
+        },
+        {
+            "lang": "ja",
+            "name": "日本語 (Japanese)",
+            "path": "languages/ja.json"
+        }
+    ],
+    "packs": [
+        {
+            "name": "choices-plus-macros",
+            "label": "Choices Macros",
+            "path": "packs/choices-plus-macros",
+            "type": "Macro",
+            "private": false,
+            "module": "choices-plus"
+        }
+    ],
+    "scripts": [],
+    "styles": ["styles/choices-plus.css"],
+    "esmodules": ["module.js"],
+    "compatibility": {
+        "minimum": 11,
+        "verified": 11,
+        "maximum": 11
+    },
+    "url": "https://github.com/p4535992/foundryvtt-choices-plus",
+    "manifest": "https://github.com/p4535992/foundryvtt-choices-plus/releases/download/1.0.7/module.json",
+    "download": "https://github.com/p4535992/foundryvtt-choices-plus/releases/download/1.0.7/module.zip",
+    "readme": "https://github.com/p4535992/foundryvtt-choices-plus/blob/master/README.md",
+    "changelog": "https://github.com/p4535992/foundryvtt-choices-plus/blob/master/CHANGELOG.md",
+    "bugs": "https://github.com/p4535992/foundryvtt-choices-plus/issues",
+    "allowBugReporter": true,
+    "relationships": {
+        "systems": [],
+        "requires": [
+            {
+                "id": "lib-wrapper",
+                "type": "module",
+                "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json",
+                "compatibility": {}
+            },
+            {
+                "id": "socketlib",
+                "type": "module",
+                "manifest": "https://raw.githubusercontent.com/manuelVo/foundryvtt-socketlib/develop/module.json",
+                "compatibility": {}
+            },
+            {
+                "id": "colorsettings",
+                "type": "module",
+                "manifest": "https://github.com/ardittristan/VTTColorSettings/releases/latest/download/module.json",
+                "compatibility": {}
+            }
+        ],
+        "conflicts": []
+    }
 }

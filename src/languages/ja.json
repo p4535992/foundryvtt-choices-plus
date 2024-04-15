@@ -1,15 +1,15 @@
 {
-  "choices-plus.settings.alwaysontop.title": "常に上に表示",
-  "choices-plus.settings.alwaysontop.hint": "選択肢画面が常に他のUIより上に表示されるようになります。",
-  "choices-plus.settings.pickcolor.label": "色選択",
-  "choices-plus.settings.textcolor.title": "テキスト色",
-  "choices-plus.settings.textcolor.hint": "テキストを設定します。",
-  "choices-plus.settings.backgroundcolor.title": "背景色",
-  "choices-plus.settings.backgroundcolor.hint": "背景の色を設定します。",
-  "choices-plus.settings.buttoncolor.title": "ボタン色",
-  "choices-plus.settings.buttoncolor.hint": "選択肢のボタンの色を設定します。",
-  "choices-plus.settings.buttonhovercolor.title": "ボタンホバー色",
-  "choices-plus.settings.buttonhovercolor.hint": "選択肢のボタンにマウスをホバーしたときの色を設定します。",
-  "choices-plus.settings.buttonactivecolor.title": "ボタン選択色",
-  "choices-plus.settings.buttonactivecolor.hint": "選択した後のボタンの色を設定します。"
+    "choices-plus.settings.alwaysontop.title": "常に上に表示",
+    "choices-plus.settings.alwaysontop.hint": "選択肢画面が常に他のUIより上に表示されるようになります。",
+    "choices-plus.settings.pickcolor.label": "色選択",
+    "choices-plus.settings.textcolor.title": "テキスト色",
+    "choices-plus.settings.textcolor.hint": "テキストを設定します。",
+    "choices-plus.settings.backgroundcolor.title": "背景色",
+    "choices-plus.settings.backgroundcolor.hint": "背景の色を設定します。",
+    "choices-plus.settings.buttoncolor.title": "ボタン色",
+    "choices-plus.settings.buttoncolor.hint": "選択肢のボタンの色を設定します。",
+    "choices-plus.settings.buttonhovercolor.title": "ボタンホバー色",
+    "choices-plus.settings.buttonhovercolor.hint": "選択肢のボタンにマウスをホバーしたときの色を設定します。",
+    "choices-plus.settings.buttonactivecolor.title": "ボタン選択色",
+    "choices-plus.settings.buttonactivecolor.hint": "選択した後のボタンの色を設定します。"
 }
