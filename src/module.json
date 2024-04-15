@@ -66,7 +66,11 @@
             "module": "choices-plus"
         }
     ],
-    "scripts": [],
+    "scripts": [
+        "scripts/libs/improved-macro-editor/highlight.min.js",
+        "scripts/libs/improved-macro-editor/codejar.min.js",
+        "scripts/libs/improved-macro-editor/languages/javascript.min.js"
+    ],
     "styles": ["styles/choices-plus.css", "styles/improved-macro-editor-highlight-syntax.css"],
     "esmodules": ["module.js"],
     "compatibility": {
