@@ -1,9 +1,9 @@
 import CONSTANTS from "../constants.js";
 import Logger from "./Logger.js";
 
-import { CodeJar } from "../libs/improved-macro-editor/codejar.min.js";
-import highlight from "../libs/improved-macro-editor/highlight.min.js";
-import javascript from "../libs/improved-macro-editor/languages/javascript.min.js";
+// import CodeJar from "../libs/improved-macro-editor/codejar.min.js";
+// import highlight from "../libs/improved-macro-editor/highlight.min.js";
+// import javascript from "../libs/improved-macro-editor/languages/javascript.min.js";
 
 export class ActorChoicesPlusMacroConfig extends MacroConfig {
     /*
@@ -90,7 +90,7 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
             top: (window.innerHeight - size.height) / 2,
         });
 
-        const textarea = this._element[0].querySelectorAll("textarea")[0] || html.find('textarea[name="command"]'); // TODO
+        const textarea = html.find('textarea[name="command"]'); // this._element[0].querySelectorAll("textarea")[0] || html.find('textarea[name="command"]');
         const code = textarea.val();
         textarea.after('<code class="improved-macro-editor hljs language-javascript"></code>');
         textarea.parent().css({ position: "relative" });
