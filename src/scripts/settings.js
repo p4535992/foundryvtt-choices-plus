@@ -46,6 +46,80 @@ export const registerSettings = function () {
 
     // ========================================================================
 
+    game.keybindings.register(CONSTANTS.MODULE_ID, "commentCommand", {
+        name: `${CONSTANTS.MODULE_ID}.keybindings.commentCommand.title`,
+        editable: [],
+    });
+
+    game.settings.register(CONSTANTS.MODULE_ID, "windowSizeMacroEditor", {
+        name: `${CONSTANTS.MODULE_ID}.settings.windowSizeMacroEditor.title`,
+        hint: `${CONSTANTS.MODULE_ID}.settings.windowSizeMacroEditor.hint`,
+        scope: "client",
+        config: true,
+        default: "medium",
+        choices: {
+            small: "900 x 650",
+            medium: "1500 x 1000",
+            large: "1800 x 1200",
+        },
+        type: String,
+    });
+
+    // ========================================================================
+
+    game.settings.register(CONSTANTS.MODULE_ID, "defaultmacro", {
+        name: `${CONSTANTS.MODULE_ID}.settings.defaultmacro.title`,
+        hint: `${CONSTANTS.MODULE_ID}.settings.defaultmacro.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        requiresReload: true,
+    });
+
+    game.settings.register(CONSTANTS.MODULE_ID, "visibilty", {
+        name: `${CONSTANTS.MODULE_ID}.settings.visibilty.title`,
+        hint: `${CONSTANTS.MODULE_ID}.settings.visibilty.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        requiresReload: true,
+    });
+
+    game.settings.register(CONSTANTS.MODULE_ID, "icon", {
+        name: `${CONSTANTS.MODULE_ID}.settings.icon.title`,
+        hint: `${CONSTANTS.MODULE_ID}.settings.icon.hint`,
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        requiresReload: true,
+    });
+
+    if (game.system.id !== "dnd5e") {
+        game.settings.register(CONSTANTS.MODULE_ID, "charsheet", {
+            name: `${CONSTANTS.MODULE_ID}.settings.charsheet.title`,
+            hint: `${CONSTANTS.MODULE_ID}.settings.charsheet.hint`,
+            scope: "world",
+            config: true,
+            default: false,
+            type: Boolean,
+            requiresReload: true,
+        });
+
+        game.settings.register(CONSTANTS.MODULE_ID, "click", {
+            name: `${CONSTANTS.MODULE_ID}.settings.click.title`,
+            hint: `${CONSTANTS.MODULE_ID}.settings.click.hint`,
+            scope: "world",
+            config: true,
+            default: false,
+            type: Boolean,
+            requiresReload: true,
+        });
+    }
+    // ========================================================================
+
     game.settings.register(CONSTANTS.MODULE_ID, "debug", {
         name: `${CONSTANTS.MODULE_ID}.settings.debug.title`,
         hint: `${CONSTANTS.MODULE_ID}.settings.debug.hint`,

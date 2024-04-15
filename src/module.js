@@ -1,5 +1,7 @@
 import API from "./scripts/api.js";
 import CONSTANTS from "./scripts/constants.js";
+import { ActorChoicesPlusMacroConfig } from "./scripts/lib/ActorChoicesPlusMacroConfig.js";
+import ChoicesPlusHelpers from "./scripts/lib/choices-plus-helpers.js";
 import { registerSettings, registerSettingsReady } from "./scripts/settings.js";
 import { ChoicesSocket, registerSocket } from "./scripts/socket.js";
 
@@ -27,10 +29,12 @@ Hooks.once("ready", function () {
             },
         ]);
     }
+
+    ChoicesPlusHelpers.registerActor();
+    // ChoicesPlusHelpers.systemHandler();
 });
 
 Hooks.on("chatMessage", (ChatLog, content) => {
-    //debugger;
     if (content.toLowerCase().startsWith("/choice")) {
         const data = content.replace("/choice", "");
         ChoicesSocket.executeForEveryone("showChoices", data);
@@ -40,4 +44,8 @@ Hooks.on("chatMessage", (ChatLog, content) => {
 
 Hooks.once("socketlib.ready", () => {
     registerSocket();
+});
+
+Hooks.on("renderActorSheet", (app, html, data) => {
+    ActorChoicesPlusMacroConfig._init(app, html, data);
 });
