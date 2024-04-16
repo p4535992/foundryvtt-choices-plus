@@ -338,7 +338,8 @@
     }
 }
 
-#choices-plus .macro-sheet .form-group.command .improved-macro-editor {
+#choices-plus .macro-sheet .form-group.command .improved-macro-editor,
+.macro-sheet .form-group.command .improved-macro-editor {
     position: absolute;
     top: 0;
     bottom: 0;

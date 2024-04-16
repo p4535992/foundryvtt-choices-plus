@@ -39,7 +39,7 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
         event.preventDefault();
         let actor = this.options.actor;
         let command = this._element[0].querySelectorAll("textarea")[0].value;
-        let type = this._element[0].querySelectorAll("select")[1].value;
+        let type = this._element[0].querySelectorAll("select")[1].value?.toLowerCase();
 
         Logger.debug("ActorChoicesPlusMacroConfig | _onExecute  | ", { event, actor, command, type });
 
@@ -67,48 +67,8 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
 
     static _init(app, html, data) {
         Logger.debug("ActorChoicesPlusMacroConfig | _init  | ", { app, html, data });
-        /*
-        highlight.registerLanguage("javascript", javascript);
-        highlight.configure({
-            ignoreUnescapedHTML: true,
-        });
 
-        const windowSizes = {
-            small: { width: 900, height: 650 },
-            medium: { width: 1500, height: 1000 },
-            large: { width: 1800, height: 1200 },
-        };
-
-        const size = windowSizes[game.settings.get(CONSTANTS.MODULE_ID, "windowSizeMacroEditor")];
-
-        app.setPosition({
-            width: size.width,
-            height: size.height,
-        });
-        app.setPosition({
-            left: (window.innerWidth - size.width) / 2,
-            top: (window.innerHeight - size.height) / 2,
-        });
-
-        const textarea = html.find('textarea[name="command"]'); // this._element[0].querySelectorAll("textarea")[0] || html.find('textarea[name="command"]');
-        const code = textarea.val();
-        textarea.after('<code class="improved-macro-editor hljs language-javascript"></code>');
-        textarea.parent().css({ position: "relative" });
-        // textarea.after('<div class="editor-container"><code class="improved-macro-editor hljs language-javascript"></code></div>');
-        textarea.hide();
-
-        const editorElement = html.find(".improved-macro-editor")[0];
-
-        const jar = CodeJar(editorElement, highlight.highlightElement, {
-            tab: " ".repeat(4),
-        });
-        jar.updateCode(code);
-        jar.onUpdate((code) => {
-            textarea.val(code);
-        });
-        */
-
-        if ((game.settings.get(CONSTANTS.MODULE_ID, "visibilty") && app.object.isOwner) || game.user.isGM) {
+        if ((game.settings.get(CONSTANTS.MODULE_ID, "visibility") && app.object.isOwner) || game.user.isGM) {
             let openButton = $(
                 `<a class="open-${CONSTANTS.MODULE_ID}" title="${CONSTANTS.MODULE_ID}">
                     <i class="fas fa-sd-card"></i>${game.settings.get(CONSTANTS.MODULE_ID, "icon") ? "" : "Choices Plus"}
@@ -130,11 +90,52 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
                 }
                 macroTmp.render(true);
 
-                Logger.debug("ItemMacroConfig.js | _init click  | ", { event, macro: macroTmp, actor: actorTmp });
+                Logger.debug("ActorMacroConfig | _init click  | ", { event, macro: macroTmp, actor: actorTmp });
             });
-            html.closest(".app").find(".open-itemacro").remove();
+            html.closest(".app").find(`.open-${CONSTANTS.MODULE_ID}`).remove();
             let titleElement = html.closest(".app").find(".window-title");
             openButton.insertAfter(titleElement);
         }
     }
 }
+
+Hooks.on("renderMacroConfig", (app, html, data) => {
+    highlight.registerLanguage("javascript", javascript);
+    highlight.configure({
+        ignoreUnescapedHTML: true,
+    });
+
+    const windowSizes = {
+        small: { width: 900, height: 650 },
+        medium: { width: 1500, height: 1000 },
+        large: { width: 1800, height: 1200 },
+    };
+
+    const size = windowSizes[game.settings.get(CONSTANTS.MODULE_ID, "windowSizeMacroEditor")];
+
+    app.setPosition({
+        width: size.width,
+        height: size.height,
+    });
+    app.setPosition({
+        left: (window.innerWidth - size.width) / 2,
+        top: (window.innerHeight - size.height) / 2,
+    });
+
+    const textarea = html.find('textarea[name="command"]'); // this._element[0].querySelectorAll("textarea")[0] || html.find('textarea[name="command"]');
+    const code = textarea.val();
+    textarea.after('<code class="improved-macro-editor hljs language-javascript"></code>');
+    textarea.parent().css({ position: "relative" });
+    // textarea.after('<div class="editor-container"><code class="improved-macro-editor hljs language-javascript"></code></div>');
+    textarea.hide();
+
+    const editorElement = html.find(".improved-macro-editor")[0];
+
+    const jar = CodeJar(editorElement, highlight.highlightElement, {
+        tab: " ".repeat(4),
+    });
+    jar.updateCode(code);
+    jar.onUpdate((code) => {
+        textarea.val(code);
+    });
+});

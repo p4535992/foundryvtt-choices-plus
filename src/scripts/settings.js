@@ -77,9 +77,9 @@ export const registerSettings = function () {
         requiresReload: true,
     });
 
-    game.settings.register(CONSTANTS.MODULE_ID, "visibilty", {
-        name: `${CONSTANTS.MODULE_ID}.settings.visibilty.title`,
-        hint: `${CONSTANTS.MODULE_ID}.settings.visibilty.hint`,
+    game.settings.register(CONSTANTS.MODULE_ID, "visibility", {
+        name: `${CONSTANTS.MODULE_ID}.settings.visibility.title`,
+        hint: `${CONSTANTS.MODULE_ID}.settings.visibility.hint`,
         scope: "world",
         config: true,
         default: false,
