@@ -1,9 +1,9 @@
 import CONSTANTS from "../constants.js";
 import Logger from "./Logger.js";
 
-// import CodeJar from "../libs/improved-macro-editor/codejar.min.js";
-// import highlight from "../libs/improved-macro-editor/highlight.min.js";
-// import javascript from "../libs/improved-macro-editor/languages/javascript.min.js";
+import CodeJar from "./improved-macro-editor/codejar.min.js";
+import highlight from "./improved-macro-editor/highlight.min.js";
+import javascript from "./improved-macro-editor/languages/javascript.min.js";
 
 export class ActorChoicesPlusMacroConfig extends MacroConfig {
     /*
@@ -67,7 +67,7 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
 
     static _init(app, html, data) {
         Logger.debug("ActorChoicesPlusMacroConfig | _init  | ", { app, html, data });
-
+        /*
         highlight.registerLanguage("javascript", javascript);
         highlight.configure({
             ignoreUnescapedHTML: true,
@@ -79,7 +79,7 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
             large: { width: 1800, height: 1200 },
         };
 
-        const size = windowSizes[game.settings.get("improved-macro-editor", "window-size")];
+        const size = windowSizes[game.settings.get(CONSTANTS.MODULE_ID, "windowSizeMacroEditor")];
 
         app.setPosition({
             width: size.width,
@@ -106,6 +106,7 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
         jar.onUpdate((code) => {
             textarea.val(code);
         });
+        */
 
         if ((game.settings.get(CONSTANTS.MODULE_ID, "visibilty") && app.object.isOwner) || game.user.isGM) {
             let openButton = $(
@@ -114,24 +115,24 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
                 </a>`,
             );
             openButton.click(async (event) => {
-                let Macro = null;
-                let Item = await fromUuid(app.document.uuid);
+                let macroTmp = null;
+                let actorTmp = await fromUuid(app.document.uuid);
 
                 for (let key in app.document.apps) {
                     let obj = app.document.apps[key];
                     if (obj instanceof ActorChoicesPlusMacroConfig) {
-                        Macro = obj;
+                        macroTmp = obj;
                         break;
                     }
                 }
-                if (!Macro) {
-                    Macro = new ActorChoicesPlusMacroConfig(Item.getMacro(), { item: Item });
+                if (!macroTmp) {
+                    macroTmp = new ActorChoicesPlusMacroConfig(actorTmp.getChoicesPlusMacro(), { actor: actorTmp });
                 }
-                Macro.render(true);
+                macroTmp.render(true);
 
-                Logger.debug("ActorChoicesPlusMacroConfig | _init click  | ", { event, Macro, Item });
+                Logger.debug("ItemMacroConfig.js | _init click  | ", { event, macro: macroTmp, actor: actorTmp });
             });
-            html.closest(".app").find(`.open-${CONSTANTS.MODULE_ID}`).remove();
+            html.closest(".app").find(".open-itemacro").remove();
             let titleElement = html.closest(".app").find(".window-title");
             openButton.insertAfter(titleElement);
         }

@@ -46,8 +46,8 @@ export const registerSettings = function () {
 
     // ========================================================================
 
-    game.keybindings.register(CONSTANTS.MODULE_ID, "commentCommand", {
-        name: `${CONSTANTS.MODULE_ID}.keybindings.commentCommand.title`,
+    game.keybindings.register(CONSTANTS.MODULE_ID, "commentCommandMacroEditor", {
+        name: `${CONSTANTS.MODULE_ID}.keybindings.commentCommandMacroEditor.title`,
         editable: [],
     });
 
