@@ -32,52 +32,52 @@ export default class ChoicesPlusHelpers {
         // );
     }
 
-    static _TokenPrototypeOnClickLeftTokenHandler(wrapped, ...args) {
-        const token = this;
-        const isEi = token.actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE) ?? false;
-        // Prevent deselection of currently controlled token when clicking environment token
-        if (isEi) {
-            const macro = token.actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.MACRO);
-            if (game.user.isGM) {
-                new Dialog({
-                    title: "Choices Plus",
-                    content: "",
-                    buttons: {
-                        confirm: {
-                            icon: '<i class="fas fa-check"></i>',
-                            label: "Show Choices",
-                            callback: async () => {
-                                API.showChoicesFromMacro(macro);
-                            },
-                        },
-                        cancel: {
-                            icon: '<i class="fas fa-times"></i>',
-                            label: "Open Sheet",
-                            callback: async () => {
-                                return wrapped(...args);
-                            },
-                        },
-                    },
-                    default: "cancel",
-                });
-            } else {
-                API.showChoicesFromMacro(macro);
-            }
-        } else {
-            return wrapped(...args);
-        }
-    }
+    // static _TokenPrototypeOnClickLeftTokenHandler(wrapped, ...args) {
+    //     const token = this;
+    //     const isEi = token.actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE) ?? false;
+    //     // Prevent deselection of currently controlled token when clicking environment token
+    //     if (isEi) {
+    //         const macro = token.actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.MACRO);
+    //         if (game.user.isGM) {
+    //             new Dialog({
+    //                 title: "Choices Plus",
+    //                 content: "",
+    //                 buttons: {
+    //                     confirm: {
+    //                         icon: '<i class="fas fa-check"></i>',
+    //                         label: "Show Choices",
+    //                         callback: async () => {
+    //                             API.showChoicesFromMacro(macro);
+    //                         },
+    //                     },
+    //                     cancel: {
+    //                         icon: '<i class="fas fa-times"></i>',
+    //                         label: "Open Sheet",
+    //                         callback: async () => {
+    //                             return wrapped(...args);
+    //                         },
+    //                     },
+    //                 },
+    //                 default: "cancel",
+    //             });
+    //         } else {
+    //             API.showChoicesFromMacro(macro);
+    //         }
+    //     } else {
+    //         return wrapped(...args);
+    //     }
+    // }
 
-    static _NotePrototypeOnClickLeftHandler(wrapped, ...args) {
-        const note = this;
-        const isEi = note.document.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE) ?? false;
-        if (isEi) {
-            const macro = note.document.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.MACRO);
-            API.showChoicesFromMacro(macro);
-        } else {
-            return wrapped(...args);
-        }
-    }
+    // static _NotePrototypeOnClickLeftHandler(wrapped, ...args) {
+    //     const note = this;
+    //     const isEi = note.document.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE) ?? false;
+    //     if (isEi) {
+    //         const macro = note.document.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.MACRO);
+    //         API.showChoicesFromMacro(macro);
+    //     } else {
+    //         return wrapped(...args);
+    //     }
+    // }
 
     static registerActor() {
         Actor.prototype.choicesPlusHasMacro = function () {
@@ -155,8 +155,10 @@ export default class ChoicesPlusHelpers {
             // }
 
             //build script execution
+            const command =
+                `game.modules.get("choices-plus").api.showChoices(` + (macro.command ?? macro?.data?.command) + `);`;
             const scriptFunction = Object.getPrototypeOf(async function () {}).constructor;
-            const body = macro.command ?? macro?.data?.command;
+            const body = command;
             const fn = new scriptFunction("speaker", "actor", "token", "character", "event", "args", body);
 
             Logger.debug("Actor | _choicesPlusExecuteScript | ", { body, fn });

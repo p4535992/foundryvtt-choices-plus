@@ -346,3 +346,11 @@
     right: 0;
     padding: 5px;
 }
+
+div.choices-plus-toggle-disposition .choices-plus-dispositions {
+    visibility: hidden;
+    position: absolute;
+    left: -40px;
+    top: 0px;
+    padding: 3px;
+}

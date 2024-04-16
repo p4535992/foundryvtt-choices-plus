@@ -2,6 +2,7 @@ import API from "./scripts/api.js";
 import CONSTANTS from "./scripts/constants.js";
 import { ActorChoicesPlusMacroConfig } from "./scripts/lib/ActorChoicesPlusMacroConfig.js";
 import ChoicesPlusHelpers from "./scripts/lib/choices-plus-helpers.js";
+import ChoicesPlusTokenHUD from "./scripts/lib/choices-plus-token-hud.js";
 import { registerSettings, registerSettingsReady } from "./scripts/settings.js";
 import { ChoicesSocket, registerSocket } from "./scripts/socket.js";
 
@@ -10,9 +11,7 @@ Hooks.once("init", function () {
 });
 
 Hooks.once("setup", function () {
-    // Set api
-    const data = game.modules.get(CONSTANTS.MODULE_ID);
-    data.api = API;
+    game.modules.get(CONSTANTS.MODULE_ID).api = API;
 });
 
 Hooks.once("ready", function () {
@@ -48,4 +47,8 @@ Hooks.once("socketlib.ready", () => {
 
 Hooks.on("renderActorSheet", (app, html, data) => {
     ActorChoicesPlusMacroConfig._init(app, html, data);
+});
+
+Hooks.on("renderTokenHUD", (hud, html, token) => {
+    ChoicesPlusTokenHUD.prepTokenHUD(hud, html, token);
 });

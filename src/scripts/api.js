@@ -1,4 +1,4 @@
-import { parseAsArray, runMacro } from "./lib/lib.js";
+import { parseAsArray, runMacro, runMacroCommand } from "./lib/lib.js";
 import { VisualNovelDialog } from "./VisualNovelDialog.js";
 import { ChoicesSocket } from "./socket.js";
 import Logger from "./lib/Logger.js";
@@ -8,13 +8,21 @@ import CONSTANTS from "./constants.js";
 const API = {
     // VisualNovelDialog: {},
 
-    async showChoicesFromMacro(macro) {
-        const macroTmp = (await RetrieveHelpers.getMacroAsync(macro, true, false)) || macro;
-        const command = macroTmp?.command;
-        if (command) {
-            this.showChoices(JSON.parse(command));
-        }
-    },
+    async showChoicesFromActor(actor) {},
+
+    // async showChoicesFromMacro(macro) {
+    //     let macroTmp = (await RetrieveHelpers.getMacroAsync(macro, true, false));
+    //     if(!macroTmp) {
+    //         macroTmp = new Macro(macro);
+    //         macroTmp.ownership.default = CONST.DOCUMENT_PERMISSION_LEVELS.OWNER;
+    //     }
+    //     const command = macroTmp?.command;
+    //     if (command) {
+    //         const commandChoicePlus =
+    //         `game.modules.get("choices-plus").api.showChoices(` + command + `);`;
+    //         runMacroCommand(commandChoicePlus);
+    //     }
+    // },
 
     async showChoices(inAttributes) {
         //ui.sidebar.collapse();

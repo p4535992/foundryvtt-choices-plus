@@ -82,7 +82,7 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
         event.preventDefault();
         let actor = this.options.actor;
         let command = this._element[0].querySelectorAll("textarea")[0].value;
-        let enable = this._element[0].querySelectorAll("checkbox")[0].value;
+        let enable = this._element[0].querySelectorAll("input")[1].checked;
         let type = this._element[0].querySelectorAll("select")[1].value?.toLowerCase();
 
         Logger.debug("ActorChoicesPlusMacroConfig | _onExecute  | ", { event, actor, command, type });

@@ -4,6 +4,25 @@ import Logger from "./Logger.js";
 
 /* ========================================== */
 
+export async function runMacroCommand(macro, command, options = {}) {
+    const { speaker, actor, token, character, event, args } = options;
+    // const command = `game.modules.get("choices-plus").api.showChoices(` +
+    // (macro.command ?? macro?.data?.command) + `);`;
+    const scriptFunction = Object.getPrototypeOf(async function () {}).constructor;
+    const body = command;
+    const fn = new scriptFunction("speaker", "actor", "token", "character", "event", "args", body);
+
+    Logger.debug("Actor | _choicesPlusExecuteScript | ", { body, fn });
+
+    //attempt script execution
+    try {
+        return await fn.bind(macro)(speaker, actor, token, character, event, args);
+    } catch (err) {
+        Logger.error(Logger.i18n("error.macroExecution"), true);
+        Logger.error(err);
+    }
+}
+
 export async function runMacro(macroReference, ...macroData) {
     let macroFounded = await RetrieveHelpers.getMacroAsync(macroReference, false, true);
     if (!macroFounded) {
