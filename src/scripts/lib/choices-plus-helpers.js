@@ -4,7 +4,7 @@ import Logger from "./Logger";
 export default class ChoicesPlusHelpers {
     static registerActor() {
         Actor.prototype.choicesPlusHasMacro = function () {
-            let flag = this.getFlag(CONSTANTS.MODULE_ID, `macro`);
+            let flag = this.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.MACRO);
 
             Logger.debug("Actor | choicesPlusHasMacro | ", { flag });
             return !!(flag?.command ?? flag?.data?.command);
@@ -12,7 +12,7 @@ export default class ChoicesPlusHelpers {
 
         Actor.prototype.choicesPlusGetMacro = function () {
             let hasMacro = this.choicesPlusHasMacro();
-            let flag = this.getFlag(CONSTANTS.MODULE_ID, `macro`);
+            let flag = this.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.MACRO);
 
             Logger.debug("Actor | choicesPlusGetMacro | ", { hasMacro, flag });
 
@@ -25,13 +25,13 @@ export default class ChoicesPlusHelpers {
         };
 
         Actor.prototype.choicesPlusSetMacro = async function (macro) {
-            let flag = this.getFlag(CONSTANTS.MODULE_ID, `macro`);
+            let flag = this.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.MACRO);
 
             Logger.debug("Actor | choicesPlusSetMacro | ", { macro, flag });
 
             if (macro instanceof Macro) {
                 const data = macro.toObject();
-                return await this.setFlag(CONSTANTS.MODULE_ID, `macro`, data);
+                return await this.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.MACRO, data);
             }
         };
 

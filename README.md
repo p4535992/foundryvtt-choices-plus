@@ -23,7 +23,7 @@ If you want to support more modules of this kind, I invite you to go and support
 
 ### and if you feel generous you can to buy me a coffee [![alt-text](https://img.shields.io/badge/-Patreon-%23ff424d?style=for-the-badge)](https://www.patreon.com/p4535992)
 
-A special ty to [Forien](https://github.com/Foundry-Workshop) for the modue [Item Macro](https://github.com/Foundry-Workshop/Item-Macro), and to []() for the module []() from which I have taken epr some module functionality.
+A special ty to [Forien](https://github.com/Foundry-Workshop) for the modue [Item Macro](https://github.com/Foundry-Workshop/Item-Macro), and to [teroparvinen](https://github.com/teroparvinen/foundry-improved-macro-editor) for module [Improved Macro Editor](https://github.com/teroparvinen/foundry-improved-macro-editor) from which I have taken some module functionality.
 
 ## Features
 
