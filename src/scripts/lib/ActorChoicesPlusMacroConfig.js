@@ -31,6 +31,10 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
         const context = super.getData();
         context.data.img = options.actor.img;
         context.data.name = "Choices Plus : " + context.data.name;
+        context.data.enable = foundry.utils.getProperty(
+            options.actor,
+            `flags.${CONSTANTS.MODULE_ID}.${CONSTANTS.FLAGS.ENABLE}`,
+        );
         return context;
     }
 
@@ -78,21 +82,22 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
         event.preventDefault();
         let actor = this.options.actor;
         let command = this._element[0].querySelectorAll("textarea")[0].value;
+        let enable = this._element[0].querySelectorAll("checkbox")[0].value;
         let type = this._element[0].querySelectorAll("select")[1].value?.toLowerCase();
 
         Logger.debug("ActorChoicesPlusMacroConfig | _onExecute  | ", { event, actor, command, type });
 
-        await this.updateMacro({ command, type });
+        await this.updateMacro({ command, enable, type });
         actor.choicesPlusExecuteMacro(event);
     }
 
-    async updateMacro({ command, type }) {
+    async updateMacro({ command, enable, type }) {
         let actor = this.options.actor;
         let macro = actor.choicesPlusGetMacro();
 
         Logger.debug("ActorChoicesPlusMacroConfig | updateMacro  | ", { command, type, actor, macro });
 
-        if (macro.command != command)
+        if (macro.command != command) {
             await actor.choicesPlusSetMacro(
                 new Macro({
                     name: actor.name,
@@ -102,6 +107,9 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
                     author: game.user.id,
                 }),
             );
+        }
+
+        await actor.setFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE, enable);
     }
 
     static _init(app, html, data) {

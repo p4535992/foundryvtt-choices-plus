@@ -6,6 +6,7 @@ const CONSTANTS = {
     imageRegBase64: /(data:image\/[^;]+;base64[^"]+)/gi,
     FLAGS: {
         MACRO: "macro",
+        ENABLE: "enable",
     },
 };
 

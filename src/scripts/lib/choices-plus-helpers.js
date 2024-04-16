@@ -1,7 +1,84 @@
+import API from "../api";
 import CONSTANTS from "../constants";
 import Logger from "./Logger";
 
 export default class ChoicesPlusHelpers {
+    static registerClicks() {
+        // ACTOR
+        // libWrapper.register(
+        //     CONSTANTS.MODULE_ID,
+        //     "Token.prototype._onClickLeft",
+        //     ChoicesPlusHelpers._TokenPrototypeOnClickLeftTokenHandler,
+        //     "MIXED",
+        // );
+        // libWrapper.register(
+        //     CONSTANTS.MODULE_ID,
+        //     "Token.prototype._onClickLeft2",
+        //     ChoicesPlusHelpers._TokenPrototypeOnClickLeftTokenHandler,
+        //     "MIXED",
+        // );
+        // NOTE
+        // libWrapper.register(
+        //     CONSTANTS.MODULE_ID,
+        //     "Note.prototype._onClickLeft",
+        //     ChoicesPlusHelpers._NotePrototypeOnClickLeftHandler,
+        //     "MIXED",
+        // );
+        // libWrapper.register(
+        //     CONSTANTS.MODULE_ID,
+        //     "Note.prototype._onClickLeft2",
+        //     ChoicesPlusHelpers._NotePrototypeOnClickLeftHandler,
+        //     "MIXED",
+        // );
+    }
+
+    static _TokenPrototypeOnClickLeftTokenHandler(wrapped, ...args) {
+        const token = this;
+        const isEi = token.actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE) ?? false;
+        // Prevent deselection of currently controlled token when clicking environment token
+        if (isEi) {
+            const macro = token.actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.MACRO);
+            if (game.user.isGM) {
+                new Dialog({
+                    title: "Choices Plus",
+                    content: "",
+                    buttons: {
+                        confirm: {
+                            icon: '<i class="fas fa-check"></i>',
+                            label: "Show Choices",
+                            callback: async () => {
+                                API.showChoicesFromMacro(macro);
+                            },
+                        },
+                        cancel: {
+                            icon: '<i class="fas fa-times"></i>',
+                            label: "Open Sheet",
+                            callback: async () => {
+                                return wrapped(...args);
+                            },
+                        },
+                    },
+                    default: "cancel",
+                });
+            } else {
+                API.showChoicesFromMacro(macro);
+            }
+        } else {
+            return wrapped(...args);
+        }
+    }
+
+    static _NotePrototypeOnClickLeftHandler(wrapped, ...args) {
+        const note = this;
+        const isEi = note.document.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE) ?? false;
+        if (isEi) {
+            const macro = note.document.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.MACRO);
+            API.showChoicesFromMacro(macro);
+        } else {
+            return wrapped(...args);
+        }
+    }
+
     static registerActor() {
         Actor.prototype.choicesPlusHasMacro = function () {
             let flag = this.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.MACRO);

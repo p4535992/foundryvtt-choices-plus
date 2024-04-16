@@ -1,11 +1,20 @@
-import { parseAsArray } from "./lib/lib.js";
+import { parseAsArray, runMacro } from "./lib/lib.js";
 import { VisualNovelDialog } from "./VisualNovelDialog.js";
 import { ChoicesSocket } from "./socket.js";
 import Logger from "./lib/Logger.js";
 import { RetrieveHelpers } from "./lib/retrieve-helpers.js";
+import CONSTANTS from "./constants.js";
 
 const API = {
     // VisualNovelDialog: {},
+
+    async showChoicesFromMacro(macro) {
+        const macroTmp = (await RetrieveHelpers.getMacroAsync(macro, true, false)) || macro;
+        const command = macroTmp?.command;
+        if (command) {
+            this.showChoices(JSON.parse(command));
+        }
+    },
 
     async showChoices(inAttributes) {
         //ui.sidebar.collapse();

@@ -31,7 +31,7 @@ Hooks.once("ready", function () {
     }
 
     ChoicesPlusHelpers.registerActor();
-    // ChoicesPlusHelpers.systemHandler();
+    ChoicesPlusHelpers.registerClicks();
 });
 
 Hooks.on("chatMessage", (ChatLog, content) => {
