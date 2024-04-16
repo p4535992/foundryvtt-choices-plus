@@ -1,3 +1,7 @@
+### 1.0.8
+
+- Add embedded editor macro to actor
+
 ### 1.0.7
 
 - Update retrieve-helpers

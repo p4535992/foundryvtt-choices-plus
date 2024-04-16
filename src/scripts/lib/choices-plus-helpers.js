@@ -3,18 +3,18 @@ import Logger from "./Logger";
 
 export default class ChoicesPlusHelpers {
     static registerActor() {
-        Actor.prototype.hasChoicesPlusMacro = function () {
+        Actor.prototype.choicesPlusHasMacro = function () {
             let flag = this.getFlag(CONSTANTS.MODULE_ID, `macro`);
 
-            Logger.debug("Actor | hasChoicesPlusMacro | ", { flag });
+            Logger.debug("Actor | choicesPlusHasMacro | ", { flag });
             return !!(flag?.command ?? flag?.data?.command);
         };
 
-        Actor.prototype.getChoicesPlusMacro = function () {
-            let hasMacro = this.hasChoicesPlusMacro();
+        Actor.prototype.choicesPlusGetMacro = function () {
+            let hasMacro = this.choicesPlusHasMacro();
             let flag = this.getFlag(CONSTANTS.MODULE_ID, `macro`);
 
-            Logger.debug("Actor | getChoicesPlusMacro | ", { hasMacro, flag });
+            Logger.debug("Actor | choicesPlusGetMacro | ", { hasMacro, flag });
 
             if (hasMacro) {
                 const command = !!flag?.command;
@@ -24,10 +24,10 @@ export default class ChoicesPlusHelpers {
             return new Macro({ img: this.img, name: this.name, scope: "global", type: "script" });
         };
 
-        Actor.prototype.setChoicesPlusMacro = async function (macro) {
+        Actor.prototype.choicesPlusSetMacro = async function (macro) {
             let flag = this.getFlag(CONSTANTS.MODULE_ID, `macro`);
 
-            Logger.debug("Actor | setChoicesPlusMacro | ", { macro, flag });
+            Logger.debug("Actor | choicesPlusSetMacro | ", { macro, flag });
 
             if (macro instanceof Macro) {
                 const data = macro.toObject();
@@ -35,27 +35,27 @@ export default class ChoicesPlusHelpers {
             }
         };
 
-        Actor.prototype.executeChoicesPlusMacro = async function (...args) {
-            if (!this.hasChoicesPlusMacro()) {
+        Actor.prototype.choicesPlusExecuteMacro = async function (...args) {
+            if (!this.choicesPlusHasMacro()) {
                 return;
             }
-            const type = this.getChoicesPlusMacro()?.type;
+            const type = this.choicesPlusGetMacro()?.type;
             switch (type) {
                 case "chat": {
                     //left open if chat macros ever become a thing you would want to do inside an actor?
                     break;
                 }
                 case "script": {
-                    return await this._executeChoicesPlusScript(...args);
+                    return await this._choicesPlusExecuteScript(...args);
                 }
             }
         };
 
-        Actor.prototype._executeChoicesPlusScript = async function (...args) {
+        Actor.prototype._choicesPlusExecuteScript = async function (...args) {
             //add variable to the evaluation of the script
 
             const actor = this;
-            const macro = actor.getChoicesPlusMacro();
+            const macro = actor.choicesPlusGetMacro();
             const speaker = ChatMessage.getSpeaker({ actor: actor });
 
             /* MMH@TODO Check the types returned by linked and unlinked */
@@ -63,7 +63,7 @@ export default class ChoicesPlusHelpers {
             const character = game.user.character;
             const event = getEvent();
 
-            Logger.debug("Actor | _executeChoicesPlusScript | ", {
+            Logger.debug("Actor | _choicesPlusExecuteScript | ", {
                 macro,
                 speaker,
                 actor,
@@ -82,7 +82,7 @@ export default class ChoicesPlusHelpers {
             const body = macro.command ?? macro?.data?.command;
             const fn = new scriptFunction("speaker", "actor", "token", "character", "event", "args", body);
 
-            Logger.debug("Actor | _executeChoicesPlusScript | ", { body, fn });
+            Logger.debug("Actor | _choicesPlusExecuteScript | ", { body, fn });
 
             //attempt script execution
             try {
