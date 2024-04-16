@@ -1,3 +1,4 @@
+import API from "./api.js";
 import { ForienEasyPollsHelpers } from "./apps/fep-helpers.js";
 import CONSTANTS from "./constants.js";
 import Logger from "./lib/Logger.js";
@@ -494,11 +495,9 @@ export class VisualNovelDialog {
             const playListSound = RetrieveHelpers.getPlaylistSoundPathSync(choice.sound, true, true);
             AudioHelper.play({ src: playListSound, volume: 0.5, loop: false }, false);
         }
-        // TODO we really eed this ?
-        // if (choice.chain && !game.user.isGM) {
-        //   Logger.warn("Only the gm can resolve a chain choice", true);
-        //   return;
-        // }
+        if (choice.chain) {
+            API.showChoices(choice);
+        }
         if (choice.macro) {
             const args = parseAsArray(choice.macro);
             runMacro(args[0], args.slice(1));

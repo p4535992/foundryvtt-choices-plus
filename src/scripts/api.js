@@ -8,8 +8,6 @@ import CONSTANTS from "./constants.js";
 const API = {
     // VisualNovelDialog: {},
 
-    async showChoicesFromActor(actor) {},
-
     // async showChoicesFromMacro(macro) {
     //     let macroTmp = (await RetrieveHelpers.getMacroAsync(macro, true, false));
     //     if(!macroTmp) {

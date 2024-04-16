@@ -157,7 +157,10 @@ game.modules.get('choices-plus').api.showChoices(
 {
     text: "Go to the scene",
     macro: "Macro.duidg9et345",
-    chain: true
+    chain: true,
+    choices: [
+        ...
+    ]
 }
 
 ```
