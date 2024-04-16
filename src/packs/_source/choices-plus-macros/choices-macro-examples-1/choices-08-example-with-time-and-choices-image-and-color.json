@@ -1,0 +1,28 @@
+{
+  "name": "Choices 08 - Example with time and choices image and color",
+  "type": "script",
+  "scope": "global",
+  "_id": "MZtt8utb81Y2hxmy",
+  "author": "oCwK7lMkd1S1suQj",
+  "img": "icons/svg/dice-target.svg",
+  "command": "game.modules.get(\"choices-plus\").api.showChoices(\n    {\n        title: \"Example 8 with time and choices image and color\", \n        text: \"<p>This is a html code.</p>\",\n        time: 30,\n        img: \"https://i.pinimg.com/originals/f4/30/56/f43056ea6e34f2071621a736b6d6da36.jpg\",\n        choices: [\n            {\n                scene: \"Scene Choice 1\",\n                text: \"Go to the scene 'Scene Choice 1'\",\n                backgroundImage: \"https://i.imgur.com/ZOY8OLS.png\",\n                backgroundColor: \"#fcba03\",\n            },\n            {\n                scene: \"Scene Choice 2\",\n                text: \"Go to the scene 'Scene Choice 2'\",\n                backgroundImage: \"https://i.imgur.com/oQBQnNy.png\",\n                backgroundColor: \"#036ffc\",\n            },\n            {\n                scene: \"Scene Choice 3\",\n                text: \"Go to the scene 'Scene Choice 3'\",\n                backgroundImage: \"https://i.imgur.com/gFrhSc8.png\",\n                backgroundColor: \"#fc4e03\",\n            }\n        ]\n    }\n)",
+  "folder": "xniCyCkTVyebM3pv",
+  "sort": 500000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "7c2db91b1a15dad70bb879eb17b25ff7d9c8fbe4"
+    }
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.2",
+    "coreVersion": "11.315",
+    "createdTime": 1697372385085,
+    "modifiedTime": 1713294509397,
+    "lastModifiedBy": "packsbuilder0000"
+  },
+  "_key": "!macros!MZtt8utb81Y2hxmy"
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Choices Macro Examples 1",
+  "sorting": "a",
+  "folder": null,
+  "type": "Macro",
+  "_id": "xniCyCkTVyebM3pv",
+  "sort": 100000,
+  "color": "#db2956",
+  "flags": {
+    "scene-packer": {
+      "hash": "f819269f7bc3adffc8edef4099cb063cf3c90964"
+    }
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.2",
+    "coreVersion": "11.315",
+    "createdTime": 1701378961720,
+    "modifiedTime": 1713294509338,
+    "lastModifiedBy": "packsbuilder0000"
+  },
+  "_key": "!folders!xniCyCkTVyebM3pv"
+}

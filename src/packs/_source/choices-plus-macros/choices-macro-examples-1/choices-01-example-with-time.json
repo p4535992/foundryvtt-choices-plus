@@ -1,0 +1,28 @@
+{
+  "name": "Choices 01 - Example with time",
+  "type": "script",
+  "_id": "tH4Jlz6GVEspGtE5",
+  "author": "oCwK7lMkd1S1suQj",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "game.modules.get(\"choices-plus\").api.showChoices(\n    {\n        alwaysOnTop: false,\n        title: \"Example 1 with time\", \n        text: \"<p>This is a html code.</p>\",\n        time: 30,\n        img: \"https://i.pinimg.com/originals/f4/30/56/f43056ea6e34f2071621a736b6d6da36.jpg\",\n        choices: [\n            {\n                scene: \"Scene Choice 1\",\n                text: \"Go to the scene 'Scene Choice 1'\"\n            },\n            {\n                scene: \"Scene Choice 2\",\n                text: \"Go to the scene 'Scene Choice 2'\"\n            },\n            {\n                scene: \"Scene Choice 3\",\n                text: \"Go to the scene 'Scene Choice 3'\"\n            }\n        ]\n    }\n)",
+  "folder": "xniCyCkTVyebM3pv",
+  "sort": 100000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "5ea59b45d0ebf735675dc45fb2cda1fd2fdcfbcd"
+    }
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.2",
+    "coreVersion": "11.315",
+    "createdTime": 1697360739449,
+    "modifiedTime": 1713294509397,
+    "lastModifiedBy": "packsbuilder0000"
+  },
+  "_key": "!macros!tH4Jlz6GVEspGtE5"
+}
