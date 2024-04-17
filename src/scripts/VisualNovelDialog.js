@@ -2,39 +2,78 @@ import API from "./api.js";
 import { ForienEasyPollsHelpers } from "./apps/fep-helpers.js";
 import CONSTANTS from "./constants.js";
 import Logger from "./lib/Logger.js";
+import ChoicesPlusHelpers from "./lib/choices-plus-helpers.js";
 import { getUserCharacter, isRealNumber, isRealBoolean, isValidImage, runMacro, parseAsArray } from "./lib/lib.js";
 import { RetrieveHelpers } from "./lib/retrieve-helpers.js";
 import { ChoicesSocket } from "./socket.js";
 
 export class VisualNovelDialog {
     constructor(data) {
-        // NOTE: If data.content is present the call is from the chat behavior
-        this.content = data.text ? data.text : data.content;
-        this._initColors(data);
-        this._getDefaults(data);
+        // // NOTE: If data.content is present the call is from the chat behavior
+        // this.content = data.text ? data.text : data.content;
+        // this._initColors(data);
+        // this._getDefaults(data);
 
-        if (data.content) {
-            this._parseDataFromChat();
-        } else {
-            this.choices = data.choices ?? [];
-        }
+        const newOptions = ChoicesPlusHelpers.updateOptions(data);
 
-        // NOTE: The title is after because the _parseData method delete that field
-        if (data.content) {
-            this.title = this.title?.content ? this.title?.content : "Title not present";
-        } else {
-            this.title = data.title ? data.title : "Title not present";
-            this.text = data.text;
-        }
+        this.content = newOptions.content;
+
+        this.multi = newOptions.multi;
+        this.time = newOptions.time;
+        this.img = newOptions.img;
+        this.show = newOptions.show;
+        this.player = newOptions.player;
+        this.democracy = newOptions.democracy;
+        this.default = newOptions.default;
+        this.displayResult = newOptions.displayResult;
+        this.resolveGM = newOptions.resolveGM;
+        this.portraits = newOptions.portraits;
+        this.alwaysOnTop = newOptions.alwaysOnTop;
+        this.textcolor = newOptions.textcolor;
+        this.backgroundcolor = newOptions.backgroundcolor;
+        this.buttoncolor = newOptions.buttoncolor;
+        this.buttonhovercolor = newOptions.buttonhovercolor;
+        this.buttonactivecolor = newOptions.buttonactivecolor;
+
+        this.fastClick = newOptions.fastClick;
+
+        const colors = {
+            text: this.textcolor,
+            background: this.backgroundcolor,
+            button: this.buttoncolor,
+            buttonHover: this.buttonhovercolor,
+            buttonActive: this.buttonactivecolor,
+        };
+        let root = document.documentElement;
+        root.style.setProperty("--choices-plus-font-color", colors.text);
+        root.style.setProperty("--choices-plus-background-color", colors.background);
+        root.style.setProperty("--choices-plus-button-color", colors.button);
+        root.style.setProperty("--choices-plus-button-hover-color", colors.buttonHover);
+        root.style.setProperty("--choices-plus-button-active-color", colors.buttonActive);
+
+        // // NOTE: If data.content is present the call is from the chat behavior
+        // if (data.content) {
+        //     this._parseDataFromChat();
+        // } else {
+        //     this.choices = data.choices ?? [];
+        // }
+
+        // // NOTE: The title is after because the _parseData method delete that field
+        // if (data.content) {
+        //     this.title = this.title?.content ? this.title?.content : "Title not present";
+        // } else {
+        //     this.title = data.title ? data.title : "Title not present";
+        //     this.text = data.text;
+        // }
+
+        this.choices = newOptions.choices;
+        this.title = newOptions.title;
+        this.text = newOptions.text;
 
         const choicesContainer = $(`<div class="choices-plus-container"></div>`);
         this.element = $(`<div id="choices-plus-dialog"></div>`);
         this.element.append(choicesContainer);
         this.containerHTML = choicesContainer;
-        // NOTE: This piece of code is been moved under the render method
-        // if(game.user.isGM) {
-        //   this._addGMButtons();
-        // }
         game.VisualNovelDialog = this;
     }
 
@@ -60,58 +99,58 @@ export class VisualNovelDialog {
         closeButton.click(() => ChoicesSocket.executeForEveryone("cancel"));
     }
 
-    _parseDataFromChat() {
-        //splt the content by lines
-        this.lines = this.content.split("\n");
-        //remove empty lines
-        this.lines = this.lines.filter((line) => line.length > 0);
-        //store first line as the title
-        this.title = this._processLineFromChat(this.lines[0]);
-        for (let [k, v] of Object.entries(this.title)) {
-            this[k] = v;
-        }
-        //remove the title from the lines
-        this.lines.shift();
-        //store the lines as the choices
-        this.choices = this.lines;
-        //process the choices
-        this.choices = this.choices.map((choice) => this._processLineFromChat(choice));
-        // delete this.title;
-        delete this.lines;
-        Logger.log("", this);
-    }
+    // _parseDataFromChat() {
+    //     //splt the content by lines
+    //     this.lines = this.content.split("\n");
+    //     //remove empty lines
+    //     this.lines = this.lines.filter((line) => line.length > 0);
+    //     //store first line as the title
+    //     this.title = this._processLineFromChat(this.lines[0]);
+    //     for (let [k, v] of Object.entries(this.title)) {
+    //         this[k] = v;
+    //     }
+    //     //remove the title from the lines
+    //     this.lines.shift();
+    //     //store the lines as the choices
+    //     this.choices = this.lines;
+    //     //process the choices
+    //     this.choices = this.choices.map((choice) => this._processLineFromChat(choice));
+    //     // delete this.title;
+    //     delete this.lines;
+    //     Logger.log("", this);
+    // }
 
-    _processLineFromChat(line) {
-        //match all text between square brackets
-        let matches = line.match(/\[(.*?)\]/g);
-        //if there are no matches, return the line
-        if (matches === null) {
-            return {
-                content: line.trim(),
-            };
-        }
-        //store all non matching text as the content
-        let content = line.replace(/\[(.*?)\]/g, "");
-        //remove leading and trailing whitespace
-        content = content.trim();
-        let result = {
-            content: content,
-        };
-        //loop through all matches
-        for (let match of matches) {
-            //remove the square brackets
-            match = match.replace(/\[|\]/g, "");
-            //split the match by the equals sign
-            let parts = match.split("=");
-            //store the first part as the key
-            let key = parts[0].toLowerCase();
-            //store the second part as the value
-            let value = parts[1];
-            //add the key and value to the result
-            result[key] = value;
-        }
-        return result;
-    }
+    // _processLineFromChat(line) {
+    //     //match all text between square brackets
+    //     let matches = line.match(/\[(.*?)\]/g);
+    //     //if there are no matches, return the line
+    //     if (matches === null) {
+    //         return {
+    //             content: line.trim(),
+    //         };
+    //     }
+    //     //store all non matching text as the content
+    //     let content = line.replace(/\[(.*?)\]/g, "");
+    //     //remove leading and trailing whitespace
+    //     content = content.trim();
+    //     let result = {
+    //         content: content,
+    //     };
+    //     //loop through all matches
+    //     for (let match of matches) {
+    //         //remove the square brackets
+    //         match = match.replace(/\[|\]/g, "");
+    //         //split the match by the equals sign
+    //         let parts = match.split("=");
+    //         //store the first part as the key
+    //         let key = parts[0].toLowerCase();
+    //         //store the second part as the value
+    //         let value = parts[1];
+    //         //add the key and value to the result
+    //         result[key] = value;
+    //     }
+    //     return result;
+    // }
 
     async startTimer() {
         let timerElement = $(`<div class="timer"><div class="time"></div></div>`);
@@ -251,7 +290,7 @@ export class VisualNovelDialog {
                       ).html()}</div>`
                     : ""
             }
-            <div class="choice-plus-chosen"></div>  
+            <div class="choice-plus-chosen"></div>
             <img
               class="choice-plus-image"
               src="${choice.backgroundImage}"
@@ -398,57 +437,57 @@ export class VisualNovelDialog {
         return this.player?.includes(name) || this.player?.includes(id);
     }
 
-    _getDefaults(data) {
-        this.multi = data?.multi || false;
-        if (isRealNumber(data?.time) && data?.time > 0) {
-            this.time = data?.time;
-        } else {
-            this.time = 0;
-        }
-        this.img = data?.img || null;
-        this.show = data?.show || true;
-        if (data?.player) {
-            this.player = parseAsArray(data?.player);
-        } else {
-            this.player = undefined;
-        }
-        this.democracy = data?.democracy || true;
-        this.default = data?.default || 0;
-        this.displayResult = data?.displayResult || true;
-        this.resolveGM = data?.resolveGM || false;
-        if (data?.portraits) {
-            this.portraits = parseAsArray(data?.portraits);
-        } else {
-            this.portraits = undefined;
-        }
-        if (isRealBoolean(data?.alwaysOnTop)) {
-            this.alwaysOnTop = data?.alwaysOnTop;
-        } else {
-            this.alwaysOnTop = false;
-        }
-    }
+    // _getDefaults(data) {
+    //     this.multi = data?.multi || false;
+    //     if (isRealNumber(data?.time) && data?.time > 0) {
+    //         this.time = data?.time;
+    //     } else {
+    //         this.time = 0;
+    //     }
+    //     this.img = data?.img || null;
+    //     this.show = data?.show || true;
+    //     if (data?.player) {
+    //         this.player = parseAsArray(data?.player);
+    //     } else {
+    //         this.player = undefined;
+    //     }
+    //     this.democracy = data?.democracy || true;
+    //     this.default = data?.default || 0;
+    //     this.displayResult = data?.displayResult || true;
+    //     this.resolveGM = data?.resolveGM || false;
+    //     if (data?.portraits) {
+    //         this.portraits = parseAsArray(data?.portraits);
+    //     } else {
+    //         this.portraits = undefined;
+    //     }
+    //     if (isRealBoolean(data?.alwaysOnTop)) {
+    //         this.alwaysOnTop = data?.alwaysOnTop;
+    //     } else {
+    //         this.alwaysOnTop = false;
+    //     }
+    // }
 
-    _initColors(data) {
-        this.textcolor = data?.textcolor || game.settings.get(CONSTANTS.MODULE_ID, "textcolor");
-        this.backgroundcolor = data?.backgroundcolor || game.settings.get(CONSTANTS.MODULE_ID, "backgroundcolor");
-        this.buttoncolor = data?.buttoncolor || game.settings.get(CONSTANTS.MODULE_ID, "buttoncolor");
-        this.buttonhovercolor = data?.buttonhovercolor || game.settings.get(CONSTANTS.MODULE_ID, "buttonhovercolor");
-        this.buttonactivecolor = data?.buttonactivecolor || game.settings.get(CONSTANTS.MODULE_ID, "buttonactivecolor");
+    // _initColors(data) {
+    //     this.textcolor = data?.textcolor || game.settings.get(CONSTANTS.MODULE_ID, "textcolor");
+    //     this.backgroundcolor = data?.backgroundcolor || game.settings.get(CONSTANTS.MODULE_ID, "backgroundcolor");
+    //     this.buttoncolor = data?.buttoncolor || game.settings.get(CONSTANTS.MODULE_ID, "buttoncolor");
+    //     this.buttonhovercolor = data?.buttonhovercolor || game.settings.get(CONSTANTS.MODULE_ID, "buttonhovercolor");
+    //     this.buttonactivecolor = data?.buttonactivecolor || game.settings.get(CONSTANTS.MODULE_ID, "buttonactivecolor");
 
-        const colors = {
-            text: this.textcolor,
-            background: this.backgroundcolor,
-            button: this.buttoncolor,
-            buttonHover: this.buttonhovercolor,
-            buttonActive: this.buttonactivecolor,
-        };
-        let root = document.documentElement;
-        root.style.setProperty("--choices-plus-font-color", colors.text);
-        root.style.setProperty("--choices-plus-background-color", colors.background);
-        root.style.setProperty("--choices-plus-button-color", colors.button);
-        root.style.setProperty("--choices-plus-button-hover-color", colors.buttonHover);
-        root.style.setProperty("--choices-plus-button-active-color", colors.buttonActive);
-    }
+    //     const colors = {
+    //         text: this.textcolor,
+    //         background: this.backgroundcolor,
+    //         button: this.buttoncolor,
+    //         buttonHover: this.buttonhovercolor,
+    //         buttonActive: this.buttonactivecolor,
+    //     };
+    //     let root = document.documentElement;
+    //     root.style.setProperty("--choices-plus-font-color", colors.text);
+    //     root.style.setProperty("--choices-plus-background-color", colors.background);
+    //     root.style.setProperty("--choices-plus-button-color", colors.button);
+    //     root.style.setProperty("--choices-plus-button-hover-color", colors.buttonHover);
+    //     root.style.setProperty("--choices-plus-button-active-color", colors.buttonActive);
+    // }
 
     resolveVote() {
         let choice = this.choices[this.default];

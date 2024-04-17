@@ -2,12 +2,11 @@ import CONSTANTS from "../constants.js";
 import { RetrieveHelpers } from "./retrieve-helpers.js";
 import Logger from "./Logger.js";
 
-/* ========================================== */
+// ==========================================
 
 export async function runMacroCommand(macro, command, options = {}) {
     const { speaker, actor, token, character, event, args } = options;
-    // const command = `game.modules.get("choices-plus").api.showChoices(` +
-    // (macro.command ?? macro?.data?.command) + `);`;
+
     const scriptFunction = Object.getPrototypeOf(async function () {}).constructor;
     const body = command;
     const fn = new scriptFunction("speaker", "actor", "token", "character", "event", "args", body);
@@ -144,6 +143,29 @@ export function isValidImage(pathToImage) {
     return false;
 }
 
+// ==========================================
+
+export function isEmptyObject(obj) {
+    // because Object.keys(new Date()).length === 0;
+    // we have to do some additional check
+    if (obj === null || obj === undefined) {
+        return true;
+    }
+    if (isRealNumber(obj)) {
+        return false;
+    }
+    if (obj instanceof Object && Object.keys(obj).length === 0) {
+        return true;
+    }
+    if (obj instanceof Array && obj.length === 0) {
+        return true;
+    }
+    if (obj && Object.keys(obj).length === 0) {
+        return true;
+    }
+    return false;
+}
+
 export function isRealNumber(inNumber) {
     return !isNaN(inNumber) && typeof inNumber === "number" && isFinite(inNumber);
 }
@@ -152,6 +174,22 @@ export function isRealBoolean(inBoolean) {
     return String(inBoolean) === "true" || String(inBoolean) === "false";
 }
 
+export function isRealBooleanOrElseNull(inBoolean) {
+    return isRealBoolean(inBoolean) ? inBoolean : null;
+}
+
+export function getSubstring(string, char1, char2) {
+    return string.slice(string.indexOf(char1) + 1, string.lastIndexOf(char2));
+}
+
+/**
+ * Parses the given object as an array.
+ * If the object is a string, it splits it by commas and returns an array.
+ * If the object is already an array, it returns the same array.
+ * If the object is neither a string nor an array, it wraps it in an array and returns it.
+ * @param {string|Array|any} obj - The object to be parsed as an array.
+ * @returns {Array} - The parsed array.
+ */
 export function parseAsArray(obj) {
     if (!obj) {
         return [];
@@ -165,4 +203,104 @@ export function parseAsArray(obj) {
         arr = [obj];
     }
     return arr;
+}
+
+/**
+ * Utility method to convert the element to a number
+ * @param {number|string} elementToConvertToNumber
+ * @returns {Promise<number>} The number representation of the element
+ */
+export async function tryToConvertToNumber(elementToConvertToNumber) {
+    if (elementToConvertToNumber) {
+        if (isRealNumber(elementToConvertToNumber)) {
+            // DO NOTHING
+        } else if (String(elementToConvertToNumber) === "0") {
+            elementToConvertToNumber = 0;
+        } else {
+            let elementI = null;
+            try {
+                elementI = Number(elementToConvertToNumber);
+            } catch (e) {}
+            if (elementI && isRealNumber(elementI)) {
+                elementToConvertToNumber = elementI;
+            } else {
+                elementToConvertToNumber = await tryRoll(elementToConvertToNumber, 0);
+            }
+        }
+    } else {
+        elementToConvertToNumber = 0;
+    }
+    return elementToConvertToNumber;
+}
+
+/**
+ * Utility method to convert the element to a number
+ * @param {number|string} elementToConvertToNumber
+ * @returns {number} The number representation of the element
+ */
+export function tryToConvertToNumberSync(elementToConvertToNumber) {
+    if (elementToConvertToNumber) {
+        if (isRealNumber(elementToConvertToNumber)) {
+            // DO NOTHING
+        } else if (String(elementToConvertToNumber) === "0") {
+            elementToConvertToNumber = 0;
+        } else {
+            let elementI = null;
+            try {
+                elementI = Number(elementToConvertToNumber);
+            } catch (e) {}
+            if (elementI && isRealNumber(elementI)) {
+                elementToConvertToNumber = elementI;
+            } else {
+                elementToConvertToNumber = tryRollSync(elementToConvertToNumber, 0);
+            }
+        }
+    } else {
+        elementToConvertToNumber = 0;
+    }
+    return elementToConvertToNumber;
+}
+
+export async function tryRoll(rollFormula, defaultValue = 0) {
+    try {
+        const qtFormula = String(rollFormula);
+        if (qtFormula == null || qtFormula === "" || qtFormula === "1") {
+            return 1;
+        } else {
+            try {
+                const qt = (await new Roll(qtFormula).roll({ async: true })).total || defaultValue;
+                return qt;
+            } catch (e) {
+                Logger.debug(e.message, false, e);
+                const qtRoll = Roll.create(qtFormula);
+                const qt = (await qtRoll.evaluate({ async: true })).total || defaultValue;
+                return qt;
+            }
+        }
+    } catch (e) {
+        Logger.error(e.message, false, e);
+        return defaultValue;
+    }
+}
+
+export function tryRollSync(rollFormula, defaultValue = 0) {
+    try {
+        const qtFormula = String(rollFormula);
+        if (qtFormula == null || qtFormula === "" || qtFormula === "1") {
+            return 1;
+        } else {
+            try {
+                const qt = new Roll(qtFormula).roll({ async: false }).total || defaultValue;
+                return qt;
+            } catch (e) {
+                Logger.debug(e.message, false, e);
+                const qtRoll = Roll.create(qtFormula);
+                const qt = qtRoll.evaluate({ async: false }).total || defaultValue;
+                return qt;
+            }
+        }
+    } catch (e) {
+        Logger.error(e.message, false, e);
+        return defaultValue;
+    }
 }

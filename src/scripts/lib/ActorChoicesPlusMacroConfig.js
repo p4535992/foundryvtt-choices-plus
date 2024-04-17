@@ -42,27 +42,29 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
     activateListeners(html) {
         super.activateListeners(html);
 
-        highlight.registerLanguage("javascript", javascript);
-        highlight.configure({
-            ignoreUnescapedHTML: true,
-        });
+        if (game.settings.get(CONSTANTS.MODULE_ID, "enableImprovedMacroEditor")) {
+            highlight.registerLanguage("javascript", javascript);
+            highlight.configure({
+                ignoreUnescapedHTML: true,
+            });
 
-        const textarea = html.find('textarea[name="command"]'); // this._element[0].querySelectorAll("textarea")[0] || html.find('textarea[name="command"]');
-        const code = textarea.val();
-        textarea.after('<code class="choices-plus-improved-macro-editor hljs language-javascript"></code>');
-        textarea.parent().css({ position: "relative" });
-        // textarea.after('<div class="editor-container"><code class="choices-plus-improved-macro-editor hljs language-javascript"></code></div>');
-        textarea.hide();
+            const textarea = html.find('textarea[name="command"]'); // this._element[0].querySelectorAll("textarea")[0] || html.find('textarea[name="command"]');
+            const code = textarea.val();
+            textarea.after('<code class="choices-plus-improved-macro-editor hljs language-javascript"></code>');
+            textarea.parent().css({ position: "relative" });
+            // textarea.after('<div class="editor-container"><code class="choices-plus-improved-macro-editor hljs language-javascript"></code></div>');
+            textarea.hide();
 
-        const editorElement = html.find(".choices-plus-improved-macro-editor")[0];
+            const editorElement = html.find(".choices-plus-improved-macro-editor")[0];
 
-        const jar = CodeJar(editorElement, highlight.highlightElement, {
-            tab: " ".repeat(4),
-        });
-        jar.updateCode(code);
-        jar.onUpdate((code) => {
-            textarea.val(code);
-        });
+            const jar = CodeJar(editorElement, highlight.highlightElement, {
+                tab: " ".repeat(4),
+            });
+            jar.updateCode(code);
+            jar.onUpdate((code) => {
+                textarea.val(code);
+            });
+        }
     }
 
     /** @override */
@@ -115,10 +117,10 @@ export class ActorChoicesPlusMacroConfig extends MacroConfig {
     static _init(app, html, data) {
         Logger.debug("ActorChoicesPlusMacroConfig | _init  | ", { app, html, data });
 
-        if ((game.settings.get(CONSTANTS.MODULE_ID, "visibility") && app.object.isOwner) || game.user.isGM) {
+        if ((game.settings.get(CONSTANTS.MODULE_ID, "actorMacroVisibility") && app.object.isOwner) || game.user.isGM) {
             let openButton = $(
                 `<a class="open-${CONSTANTS.MODULE_ID}" title="${CONSTANTS.MODULE_ID}">
-                    <i class="fa-solid fa-comments"></i>${game.settings.get(CONSTANTS.MODULE_ID, "icon") ? "" : "Choices Plus"}
+                    <i class="fa-solid fa-comments"></i>${game.settings.get(CONSTANTS.MODULE_ID, "actorMacroOnlyIcon") ? "" : "Choices Plus"}
                 </a>`,
             );
             openButton.click(async (event) => {
