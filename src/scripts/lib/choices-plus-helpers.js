@@ -1,4 +1,3 @@
-import { option } from "yargs";
 import API from "../api";
 import CONSTANTS from "../constants";
 import { isRealBooleanOrElseNull, isRealNumber, parseAsArray, tryToConvertToNumberSync } from "./lib";
@@ -50,7 +49,7 @@ export default class ChoicesPlusHelpers {
         newOptions.time = isRealNumber(options.time) ? options.time : tryToConvertToNumberSync(options.time, 0);
         newOptions.img = options.img || null;
         newOptions.show = isRealBooleanOrElseNull(options.show) ? String(options.show) === "true" : true;
-        newOptions.player = parseAsArray(options.player) || null;
+        newOptions.player = options.player ? parseAsArray(options.player) : null;
         newOptions.democracy = isRealBooleanOrElseNull(options.democracy) ? String(options.democracy) === "true" : true;
         newOptions.default = isRealNumber(options.default)
             ? options.default
@@ -61,16 +60,16 @@ export default class ChoicesPlusHelpers {
         newOptions.resolveGM = isRealBooleanOrElseNull(options.resolveGM)
             ? String(options.resolveGM) === "true"
             : false;
-        newOptions.portraits = parseAsArray(options.portraits) || null;
-        newOptions.textColor = options.textColor || game.settings.get(CONSTANTS.MODULE_ID, "textcolor") || "#000000eb";
-        newOptions.backgroundColo =
-            options.backgroundColor || game.settings.get(CONSTANTS.MODULE_ID, "backgroundcolor") || "#000000ff";
-        newOptions.buttonColor =
-            options.buttonColor || game.settings.get(CONSTANTS.MODULE_ID, "buttoncolor") || "#ffffffd8";
-        newOptions.buttonHoverColor =
-            options.buttonHoverColor || game.settings.get(CONSTANTS.MODULE_ID, "buttonhovercolor") || "#c8c8c8d8";
-        newOptions.buttonActiveColor =
-            options.buttonActiveColor || game.settings.get(CONSTANTS.MODULE_ID, "buttonactivecolor") || "#838383d8";
+        newOptions.portraits = options.portraits ? parseAsArray(options.portraits) : null;
+        newOptions.textcolor = options.textcolor || game.settings.get(CONSTANTS.MODULE_ID, "textcolor") || "#000000eb";
+        newOptions.backgroundcolor =
+            options.backgroundcolor || game.settings.get(CONSTANTS.MODULE_ID, "backgroundcolor") || "#000000ff";
+        newOptions.buttoncolor =
+            options.buttoncolor || game.settings.get(CONSTANTS.MODULE_ID, "buttoncolor") || "#ffffffd8";
+        newOptions.buttonhovercolor =
+            options.buttonhovercolor || game.settings.get(CONSTANTS.MODULE_ID, "buttonhovercolor") || "#c8c8c8d8";
+        newOptions.buttonactivecolor =
+            options.buttonactivecolor || game.settings.get(CONSTANTS.MODULE_ID, "buttonactivecolor") || "#838383d8";
         newOptions.alwaysOnTop = isRealBooleanOrElseNull(options.alwaysOnTop)
             ? String(options.alwaysOnTop) === "true"
             : false;
@@ -112,48 +111,25 @@ export default class ChoicesPlusHelpers {
         // );
     }
 
-    // static _TokenPrototypeOnClickLeftTokenHandler(wrapped, ...args) {
-    //     const token = this;
-    //     const isEi = token.actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE) ?? false;
-    //     // Prevent deselection of currently controlled token when clicking environment token
-    //     if (isEi) {
-    //         const macro = token.actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.MACRO);
-    //         if (game.user.isGM) {
-    //             new Dialog({
-    //                 title: "Choices Plus",
-    //                 content: "",
-    //                 buttons: {
-    //                     confirm: {
-    //                         icon: '<i class="fas fa-check"></i>',
-    //                         label: "Show Choices",
-    //                         callback: async () => {
-    //                             API.showChoicesFromMacro(macro);
-    //                         },
-    //                     },
-    //                     cancel: {
-    //                         icon: '<i class="fas fa-times"></i>',
-    //                         label: "Open Sheet",
-    //                         callback: async () => {
-    //                             return wrapped(...args);
-    //                         },
-    //                     },
-    //                 },
-    //                 default: "cancel",
-    //             });
-    //         } else {
-    //             API.showChoicesFromMacro(macro);
-    //         }
-    //     } else {
-    //         return wrapped(...args);
-    //     }
-    // }
+    static _TokenPrototypeOnClickLeftTokenHandler(wrapped, ...args) {
+        const token = this;
+        if (token.actor) {
+            return;
+        }
+        const isEi = token.actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE) ?? false;
+        const isItemPiles = game.modules.get("item-piles")?.active && game.itempiles.API.isRegularItemPile(token);
+        if (isEi && !game.user.isGM && !isItemPiles) {
+            token.actor.choicesPlusExecuteMacro();
+        } else {
+            return wrapped(...args);
+        }
+    }
 
     // static _NotePrototypeOnClickLeftHandler(wrapped, ...args) {
     //     const note = this;
     //     const isEi = note.document.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE) ?? false;
-    //     if (isEi) {
-    //         const macro = note.document.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.MACRO);
-    //         API.showChoicesFromMacro(macro);
+    //     if (isEi && !game.user.isGM) {
+    //         note.choicesPlusExecuteMacro();
     //     } else {
     //         return wrapped(...args);
     //     }

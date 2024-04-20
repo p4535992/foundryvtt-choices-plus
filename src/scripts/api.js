@@ -84,7 +84,7 @@ const API = {
                     Logger.debug(`Attention you didn't have set a key or title for this choice`, choice);
                 }
             }
-            objChoiceMain.dictionaryChoices = dictionaryChoices;
+            // objChoiceMain.dictionaryChoices = dictionaryChoices;
             this.showChoices(objChoiceMain);
         } else if (typeof options === "object") {
             if (options.player?.length > 0) {

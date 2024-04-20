@@ -232,6 +232,7 @@ export class VisualNovelDialog {
             }
         }
         if (this.player && !this.isPlayer()) {
+            Logger.warn(`this.player && !this.isPlayer() => true`);
             return this.close();
         }
         const _this = this;
