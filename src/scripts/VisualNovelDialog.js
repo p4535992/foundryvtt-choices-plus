@@ -185,7 +185,7 @@ export class VisualNovelDialog {
     updateChoices(userId, choicesIndexes) {
         const user = game.users.get(userId);
         if (!user) {
-            Logger.error(`Cannot find user by id '${userId}'`, true);
+            Logger.error(`VisualNovelDialog | Cannot find user by id '${userId}'`, true);
             return;
         }
         // const img = user.character?.img ?? user.avatar;
@@ -213,6 +213,9 @@ export class VisualNovelDialog {
                 }
             }
         });
+        if (this.fastClick) {
+            API.resolveVote();
+        }
     }
 
     async render(launchAsPlayer = false) {
@@ -232,7 +235,7 @@ export class VisualNovelDialog {
             }
         }
         if (this.player && !this.isPlayer()) {
-            Logger.warn(`this.player && !this.isPlayer() => true`);
+            Logger.info(`this.player && !this.isPlayer() => true`);
             return this.close();
         }
         const _this = this;
@@ -359,7 +362,7 @@ export class VisualNovelDialog {
                 const isSelected = $(e.currentTarget).hasClass("choice-plus-active");
                 const isDisable = $(e.currentTarget).hasClass("choice-plus-disable");
                 if (isDisable) {
-                    Logger.warn(`You cannot choose this option!`, true);
+                    Logger.warn(`VisualNovelDialog | You cannot choose this option!`, true);
                     return;
                 }
                 if (!_this.multi) {
@@ -368,7 +371,7 @@ export class VisualNovelDialog {
                 $(e.currentTarget).toggleClass("choice-plus-active", isSelected);
                 $(e.currentTarget).toggleClass("choice-plus-active");
                 if (!_this.show) {
-                    Logger.info(`Show is disabled the active choice`, false, _this.choices);
+                    Logger.info(`VisualNovelDialog | Show is disabled the active choice`, false, _this.choices);
                     return;
                 }
                 let chosenIndex = [];
@@ -524,7 +527,7 @@ export class VisualNovelDialog {
 
     resolve(choice) {
         if (game.user.isGM && !this.resolveGM) {
-            Logger.warn("The gm cannot resolve this choice", true);
+            Logger.warn("VisualNovelDialog | The gm cannot resolve this choice", true);
             return;
         }
         if (choice.scene) {
@@ -568,14 +571,22 @@ export class VisualNovelDialog {
 
     outputResultSingle() {
         if (!this.displayResult || !game.user.isGM) {
+            Logger.info(`VisualNovelDialog | !this.displayResult || !game.user.isGM  => true`);
             return;
         }
         let results = [];
         this.choices.forEach((choice) => {
             //get user ids
-            const userIds = choice.element.find("img").map((index, img) => {
-                return $(img).data("userid");
-            });
+            let userIds = [];
+            if (choice.element.find("img").length <= 0) {
+                Logger.info(`VisualNodelDialog | choice.element.find("img").length <= 0  => true`);
+                userIds = [game.user.id];
+            } else {
+                for (const img of choice.element.find("img")) {
+                    const userId = $(img).data("userid");
+                    userIds.push(userId);
+                }
+            }
             // NOTE: If choice.content is present the call is from the chat behavior
             results.push({
                 content: choice.text ? choice.text : choice.content,
@@ -585,7 +596,11 @@ export class VisualNovelDialog {
         //create chat message string
         let message = "<hr>";
         results.forEach((result) => {
-            message += `${result.content}: ${result.users.map((u) => game.users.get(u).name).join(", ")}<hr>`;
+            let users = result.users.map((u) => {
+                return game.users.get(u)?.name;
+            });
+            let usersMsg = users ? ": " + users.join(", ") : "";
+            message += `${result.content}${usersMsg}<hr>`;
         });
         ChatMessage.create({ content: message });
     }

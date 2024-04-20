@@ -189,6 +189,17 @@ const API = {
         await game.VisualNovelDialog.render(launchAsPlayer);
     },
 
+    // /**
+    //  * Update the chocie with the user session
+    //  * @param {Object} inAttributes
+    //  * @param {string} [inAttributes.userId] The user id associate to the update.
+    //  * @param {Choice[]} [inAttributes.choices] A array of choice child, every child is a button on the choice dialog.
+    //  * @returns {Promise<void>} Nothing to return.
+    //  */
+    // async sendChoice(inAttributes) {
+    //     return await this.sendAndUpdateChoices(inAttributes);
+    // },
+
     /**
      * Update the chocie with the user session
      * @param {Object} inAttributes
