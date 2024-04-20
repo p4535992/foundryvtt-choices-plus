@@ -28,6 +28,7 @@ export default class ChoicesPlusHelpers {
      * @param {string} [options.buttonHoverColor="#c8c8c8d8"] OPTIONAL: apply a button color as css when hover on the choice (default  #c8c8c8d8).
      * @param {string} [options.buttonActiveColor="#838383d8"] OPTIONAL: apply a button color as css when set active on the choice (default #838383d8).
      * @param {boolean} [options.alwaysOnTop=false] OPTIONAL: true or false, determine if the choice will be on top of all other UI elements, i set with a valid boolean value it will override the module setting 'Always on top'.
+     * @param {boolean} [options.chain=false] OPTIONAL: true or false, determine if the choice will call other choices.
      * @param {Choice[]} [options.choices=null] OPTIONAL: A array of choice child, every child is a button on the choice dialog.
      * @param {Record<string,Choice>} [options.dictionaryChoices=null] PRIVATE: The internal dictionary used for the chain mechanism.
      * @returns {{title: string; text: string; multi: boolean; time: number; img: string; show: boolean; player: string|string; democracy: boolean; default: number; displayResult: boolean; resolveGM: boolean; portraits: string|string[]; textcolor: string; backgroundcolor: string; buttoncolor: string; buttonhovercolor: string; buttonactivecolor: string; alwaysOnTop: boolean; choices: Choice[]; chain: boolean; key: string; main: boolean; fastClick: boolean; dictionaryChoices:Record<string,Choice>;}} Update options
@@ -73,7 +74,16 @@ export default class ChoicesPlusHelpers {
         newOptions.alwaysOnTop = isRealBooleanOrElseNull(options.alwaysOnTop)
             ? String(options.alwaysOnTop) === "true"
             : false;
-        newOptions.choices = options.choices || [];
+
+        newOptions.choices = [];
+        const choicesTmp = options.choices || [];
+        for (const choiceTmp of choicesTmp) {
+            if (choiceTmp) {
+                newOptions.choices.push(ChoicesPlusHelpers.updateOptions(choiceTmp));
+            }
+        }
+        newOptions.chain = isRealBooleanOrElseNull(options.chain) ? String(options.chain) === "true" : false;
+
         newOptions.dictionaryChoices = options.dictionaryChoices || {};
 
         // NOTE: If data.content is present the call is from the chat behavior

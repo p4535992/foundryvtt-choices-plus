@@ -29,6 +29,8 @@ export class VisualNovelDialog {
         this.resolveGM = newOptions.resolveGM;
         this.portraits = newOptions.portraits;
         this.alwaysOnTop = newOptions.alwaysOnTop;
+        this.chain = newOptions.chain;
+
         this.textcolor = newOptions.textcolor;
         this.backgroundcolor = newOptions.backgroundcolor;
         this.buttoncolor = newOptions.buttoncolor;
@@ -185,8 +187,16 @@ export class VisualNovelDialog {
     updateChoices(userId, choicesIndexes) {
         const user = game.users.get(userId);
         if (!user) {
-            Logger.error(`VisualNovelDialog | Cannot find user by id '${userId}'`, true);
+            Logger.error(`VisualNovelDialog | ${this.title} | Cannot find user by id '${userId}'`, true);
             return;
+        }
+        if (this.choices?.length <= 0) {
+            Logger.warn(`VisualNovelDialog | ${this.title} | this.choices?.length <= 0`, false);
+            if (this.fastClick) {
+                API.resolveVote();
+            } else {
+                return;
+            }
         }
         // const img = user.character?.img ?? user.avatar;
         const img = getUserCharacter(user)?.img ?? user.avatar;
@@ -362,7 +372,7 @@ export class VisualNovelDialog {
                 const isSelected = $(e.currentTarget).hasClass("choice-plus-active");
                 const isDisable = $(e.currentTarget).hasClass("choice-plus-disable");
                 if (isDisable) {
-                    Logger.warn(`VisualNovelDialog | You cannot choose this option!`, true);
+                    Logger.warn(`VisualNovelDialog | ${this.title} | You cannot choose this option!`, true);
                     return;
                 }
                 if (!_this.multi) {
@@ -371,7 +381,11 @@ export class VisualNovelDialog {
                 $(e.currentTarget).toggleClass("choice-plus-active", isSelected);
                 $(e.currentTarget).toggleClass("choice-plus-active");
                 if (!_this.show) {
-                    Logger.info(`VisualNovelDialog | Show is disabled the active choice`, false, _this.choices);
+                    Logger.info(
+                        `VisualNovelDialog | ${this.title} | Show is disabled the active choice`,
+                        false,
+                        _this.choices,
+                    );
                     return;
                 }
                 let chosenIndex = [];
@@ -527,7 +541,7 @@ export class VisualNovelDialog {
 
     resolve(choice) {
         if (game.user.isGM && !this.resolveGM) {
-            Logger.warn("VisualNovelDialog | The gm cannot resolve this choice", true);
+            Logger.warn("VisualNovelDialog | ${this.title} | The gm cannot resolve this choice", true);
             return;
         }
         if (choice.scene) {
@@ -539,7 +553,8 @@ export class VisualNovelDialog {
             AudioHelper.play({ src: playListSound, volume: 0.5, loop: false }, false);
         }
         if (choice.chain) {
-            API.showChoices(choice);
+            const c = choice;
+            API.showChoices(c);
         }
         if (choice.macro) {
             const args = parseAsArray(choice.macro);
@@ -550,7 +565,10 @@ export class VisualNovelDialog {
     resolveNull() {}
 
     outputResultMultiple() {
-        if (!this.displayResult || !game.user.isGM) return;
+        if (!this.displayResult || !game.user.isGM) {
+            Logger.info(`VisualNovelDialog | ${this.title} | !this.displayResult || !game.user.isGM => true`);
+            return;
+        }
         let results = [];
         this.choices.forEach((choice) => {
             // NOTE: If choice.content is present the call is from the chat behavior
@@ -571,7 +589,7 @@ export class VisualNovelDialog {
 
     outputResultSingle() {
         if (!this.displayResult || !game.user.isGM) {
-            Logger.info(`VisualNovelDialog | !this.displayResult || !game.user.isGM  => true`);
+            Logger.info(`VisualNovelDialog | ${this.title} | !this.displayResult || !game.user.isGM  => true`);
             return;
         }
         let results = [];
@@ -599,7 +617,7 @@ export class VisualNovelDialog {
             let users = result.users.map((u) => {
                 return game.users.get(u)?.name;
             });
-            let usersMsg = users ? ": " + users.join(", ") : "";
+            let usersMsg = users?.length > 0 ? ": " + users.join(", ") : "";
             message += `${result.content}${usersMsg}<hr>`;
         });
         ChatMessage.create({ content: message });

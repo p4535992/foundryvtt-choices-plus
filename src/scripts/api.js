@@ -47,12 +47,13 @@ const API = {
             }).render();
         }
         // This is the old chat functionality
-        else if (options.content) {
-            new VisualNovelDialog({
-                content: options.content,
-            }).render();
-            // The sharing here is done with the chat command
-        } else if (Array.isArray(options)) {
+        // else if (options.content) {
+        //     new VisualNovelDialog({
+        //         content: options.content,
+        //     }).render();
+        //     // The sharing here is done with the chat command
+        // }
+        else if (Array.isArray(options)) {
             let objChoiceMains = options.filter((choice) => {
                 return choice.main === true;
             });
@@ -214,9 +215,9 @@ const API = {
         if (!inAttributes.userId) {
             throw Logger.error("sendChoice | inAttributes.userId must be set");
         }
-        if (!inAttributes.choices?.length > 0) {
-            throw Logger.error("sendChoice | inAttributes.choices must be set");
-        }
+        // if (!inAttributes.choices?.length > 0) {
+        //     throw Logger.error("sendChoice | inAttributes.choices must be set");
+        // }
         return await game.VisualNovelDialog.updateChoices(inAttributes.userId, inAttributes.choices);
     },
 

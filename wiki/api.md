@@ -48,6 +48,7 @@ So when you set up to run a macro with this module these arguments are already "
 | [options.buttonHoverColor] | <code>string</code> | OPTIONAL: apply a button color as css when hover on the choice (default  #c8c8c8d8)| |
 | [options.buttonActiveColor] | <code>string</code> | OPTIONAL: apply a button color as css when set active on the choice (default #838383d8) | |
 | [options.alwaysOnTop] | <code>boolean</code> | OPTIONAL: true or false, determine if the choice will be on top of all other UI elements, i set with a valid boolean value it will override the module setting 'Always on top' | |
+| [options.chain] | <code>boolean</code> |OPTIONAL: true or false, determine if the choice will call other choices. Default is false. |
 | [options.choices] | <code>Choice[]</code> | OPTIONAL: A array of choice child, every child is a button on the choice dialog | |
 | [options.dictionaryChoices] | <code>Record&lt;string, Choice&gt;</code> | PRIVATE: The internal dictionary used for the chain mechanism |
 
