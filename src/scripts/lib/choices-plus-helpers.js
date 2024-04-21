@@ -116,7 +116,7 @@ export default class ChoicesPlusHelpers {
 
         libWrapper.register(
             CONSTANTS.MODULE_ID,
-            "Token.prototype._onClickRight",
+            "Token.prototype._onClickRight2",
             ChoicesPlusHelpers._TokenPrototypeOnClickRight2TokenHandler,
             "MIXED",
         );
