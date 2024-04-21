@@ -106,6 +106,21 @@ export default class ChoicesPlusHelpers {
         //     ChoicesPlusHelpers._TokenPrototypeOnClickLeftTokenHandler,
         //     "MIXED",
         // );
+
+        // libWrapper.register(
+        //     CONSTANTS.MODULE_ID,
+        //     "Token.prototype._onClickRight2",
+        //     ChoicesPlusHelpers._TokenPrototypeOnClickRight2TokenHandlerOverride,
+        //     "OVERRIDE"
+        // );
+
+        libWrapper.register(
+            CONSTANTS.MODULE_ID,
+            "Token.prototype._onClickRight",
+            ChoicesPlusHelpers._TokenPrototypeOnClickRight2TokenHandler,
+            "MIXED",
+        );
+
         // NOTE
         // libWrapper.register(
         //     CONSTANTS.MODULE_ID,
@@ -121,18 +136,45 @@ export default class ChoicesPlusHelpers {
         // );
     }
 
-    static _TokenPrototypeOnClickLeftTokenHandler(wrapped, ...args) {
+    // static _TokenPrototypeOnClickLeftTokenHandler(wrapped, ...args) {
+    //     const token = this;
+    //     if (token.actor) {
+    //         return;
+    //     }
+    //     const isEi = token.actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE) ?? false;
+    //     const isItemPiles = game.modules.get("item-piles")?.active && game.itempiles.API.isValidItemPile(token);
+    //     if (isEi && !game.user.isGM && !isItemPiles) {
+    //         token.actor.choicesPlusExecuteMacro();
+    //     } else {
+    //         return wrapped(...args);
+    //     }
+    // }
+
+    // static _TokenPrototypeOnClickRight2TokenHandlerOverride(event) {
+    //     if ( !this._propagateRightClick(event) ) event.stopPropagation();
+    //     const isEi = this.actor?.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE) ?? false;
+    //     //  const isItemPiles = game.modules.get("item-piles")?.active && game.itempiles.API.isValidItemPile(token);
+    //     // if ( !this._propagateRightClick(event) ) event.stopPropagation();
+    //     if ( this.isOwner && game.user.can("TOKEN_CONFIGURE") ) {
+    //         return super._onClickRight2(event);
+    //     }
+    //     if (isEi && !game.user.isGM) {
+    //         this.actor.choicesPlusExecuteMacro();
+    //     }
+    //     return this.setTarget(!this.targeted.has(game.user), {releaseOthers: !event.shiftKey});
+    // }
+
+    static _TokenPrototypeOnClickRight2TokenHandler(wrapped, ...args) {
+        // if ( !this._propagateRightClick(event) ) event.stopPropagation();
+        // if ( this.isOwner && game.user.can("TOKEN_CONFIGURE") ) return super._onClickRight2(event);
+        // return this.setTarget(!this.targeted.has(game.user), {releaseOthers: !event.shiftKey});
         const token = this;
-        if (token.actor) {
-            return;
-        }
-        const isEi = token.actor.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE) ?? false;
-        const isItemPiles = game.modules.get("item-piles")?.active && game.itempiles.API.isRegularItemPile(token);
-        if (isEi && !game.user.isGM && !isItemPiles) {
+        const isEi = token.actor?.getFlag(CONSTANTS.MODULE_ID, CONSTANTS.FLAGS.ENABLE) ?? false;
+        //  const isItemPiles = game.modules.get("item-piles")?.active && game.itempiles.API.isValidItemPile(token);
+        if (isEi && !game.user.isGM) {
             token.actor.choicesPlusExecuteMacro();
-        } else {
-            return wrapped(...args);
         }
+        return wrapped(...args);
     }
 
     // static _NotePrototypeOnClickLeftHandler(wrapped, ...args) {
@@ -194,8 +236,8 @@ export default class ChoicesPlusHelpers {
             }
         };
 
-        Actor.prototype._choicesPlusExecuteScript = async function (...args) {
-            //add variable to the evaluation of the script
+        Actor.prototype.ecuteScript = async function (...args) {
+            //add variable to the evaluation of the scr_choicesPlusExipt
 
             const actor = this;
             const macro = actor.choicesPlusGetMacro();
@@ -220,7 +262,7 @@ export default class ChoicesPlusHelpers {
             //     return;
             // }
 
-            //build script execution
+            // build script execution
             const command =
                 `game.modules.get("choices-plus").api.showChoices([` + (macro.command ?? macro?.data?.command) + `]);`;
             const scriptFunction = Object.getPrototypeOf(async function () {}).constructor;
@@ -229,7 +271,7 @@ export default class ChoicesPlusHelpers {
 
             Logger.debug("Actor | _choicesPlusExecuteScript | ", { body, fn });
 
-            //attempt script execution
+            // attempt script execution
             try {
                 return await fn.bind(macro)(speaker, actor, token, character, event, args);
             } catch (err) {
