@@ -9,11 +9,6 @@ import { ChoicesSocket } from "./socket.js";
 
 export class VisualNovelDialog {
     constructor(data) {
-        // // NOTE: If data.content is present the call is from the chat behavior
-        // this.content = data.text ? data.text : data.content;
-        // this._initColors(data);
-        // this._getDefaults(data);
-
         const newOptions = ChoicesPlusHelpers.updateOptions(data);
 
         this.textFontSize = newOptions.textFontSize;
@@ -32,42 +27,20 @@ export class VisualNovelDialog {
         this.alwaysOnTop = newOptions.alwaysOnTop;
         this.chain = newOptions.chain;
 
-        this.textcolor = newOptions.textColor;
-        this.backgroundcolor = newOptions.backgroundColor;
-        this.buttoncolor = newOptions.buttonColor;
-        this.buttonhovercolor = newOptions.buttonHoverColor;
-        this.buttonactivecolor = newOptions.buttonActiveColor;
+        this.textColor = newOptions.textColor;
+        this.backgroundColor = newOptions.backgroundColor;
+        this.buttonColor = newOptions.buttonColor;
+        this.buttonHoverColor = newOptions.buttonHoverColor;
+        this.buttonActiveColor = newOptions.buttonActiveColor;
 
         this.fastClick = newOptions.fastClick;
 
-        const colors = {
-            text: this.textcolor,
-            background: this.backgroundcolor,
-            button: this.buttoncolor,
-            buttonHover: this.buttonhovercolor,
-            buttonActive: this.buttonactivecolor,
-        };
         let root = document.documentElement;
-        root.style.setProperty("--choices-plus-font-color", colors.text);
-        root.style.setProperty("--choices-plus-background-color", colors.background);
-        root.style.setProperty("--choices-plus-button-color", colors.button);
-        root.style.setProperty("--choices-plus-button-hover-color", colors.buttonHover);
-        root.style.setProperty("--choices-plus-button-active-color", colors.buttonActive);
-
-        // // NOTE: If data.content is present the call is from the chat behavior
-        // if (data.content) {
-        //     this._parseDataFromChat();
-        // } else {
-        //     this.choices = data.choices ?? [];
-        // }
-
-        // // NOTE: The title is after because the _parseData method delete that field
-        // if (data.content) {
-        //     this.title = this.title?.content ? this.title?.content : "Title not present";
-        // } else {
-        //     this.title = data.title ? data.title : "Title not present";
-        //     this.text = data.text;
-        // }
+        root.style.setProperty("--choices-plus-font-color", this.textColor);
+        root.style.setProperty("--choices-plus-background-color", this.backgroundColor);
+        root.style.setProperty("--choices-plus-button-color", this.buttonColor);
+        root.style.setProperty("--choices-plus-button-hover-color", this.buttonHoverColor);
+        root.style.setProperty("--choices-plus-button-active-color", this.buttonActiveColor);
 
         this.choices = newOptions.choices;
         this.title = newOptions.title;
@@ -101,59 +74,6 @@ export class VisualNovelDialog {
         resolveButton.click(() => ChoicesSocket.executeForEveryone("resolve"));
         closeButton.click(() => ChoicesSocket.executeForEveryone("cancel"));
     }
-
-    // _parseDataFromChat() {
-    //     //splt the content by lines
-    //     this.lines = this.content.split("\n");
-    //     //remove empty lines
-    //     this.lines = this.lines.filter((line) => line.length > 0);
-    //     //store first line as the title
-    //     this.title = this._processLineFromChat(this.lines[0]);
-    //     for (let [k, v] of Object.entries(this.title)) {
-    //         this[k] = v;
-    //     }
-    //     //remove the title from the lines
-    //     this.lines.shift();
-    //     //store the lines as the choices
-    //     this.choices = this.lines;
-    //     //process the choices
-    //     this.choices = this.choices.map((choice) => this._processLineFromChat(choice));
-    //     // delete this.title;
-    //     delete this.lines;
-    //     Logger.log("", this);
-    // }
-
-    // _processLineFromChat(line) {
-    //     //match all text between square brackets
-    //     let matches = line.match(/\[(.*?)\]/g);
-    //     //if there are no matches, return the line
-    //     if (matches === null) {
-    //         return {
-    //             content: line.trim(),
-    //         };
-    //     }
-    //     //store all non matching text as the content
-    //     let content = line.replace(/\[(.*?)\]/g, "");
-    //     //remove leading and trailing whitespace
-    //     content = content.trim();
-    //     let result = {
-    //         content: content,
-    //     };
-    //     //loop through all matches
-    //     for (let match of matches) {
-    //         //remove the square brackets
-    //         match = match.replace(/\[|\]/g, "");
-    //         //split the match by the equals sign
-    //         let parts = match.split("=");
-    //         //store the first part as the key
-    //         let key = parts[0].toLowerCase();
-    //         //store the second part as the value
-    //         let value = parts[1];
-    //         //add the key and value to the result
-    //         result[key] = value;
-    //     }
-    //     return result;
-    // }
 
     async startTimer() {
         let timerElement = $(`<div class="timer"><div class="time"></div></div>`);
@@ -280,8 +200,8 @@ export class VisualNovelDialog {
             let styleToAdd = `style="`;
             let hasStyleBackgroundImage = false;
             let isDisable = choice.disable;
-            if (choice.backgroundColor) {
-                let styleForButtonChoice1 = `background-color: ${choice.backgroundColor};`;
+            if (choice.buttonColor) {
+                let styleForButtonChoice1 = `background-color: ${choice.buttonColor};`;
                 styleToAdd = styleToAdd + styleForButtonChoice1;
             }
             if (choice.backgroundImage && isValidImage(choice.backgroundImage)) {
@@ -353,7 +273,7 @@ export class VisualNovelDialog {
                 async: true,
             });
             let choiceSummaryElementHTML = $(
-                `<div class="choice-plus-summary">
+                `<div class="choice-plus-summary" style="background-color: ${this.backgroundColor};">
           <div class="choice-plus-summary-text" style="font-size:${this.textFontSize}">${textHTML}</div>
         </div>`,
             );
@@ -455,58 +375,6 @@ export class VisualNovelDialog {
         const id = game.user.id;
         return this.player?.includes(name) || this.player?.includes(id);
     }
-
-    // _getDefaults(data) {
-    //     this.multi = data?.multi || false;
-    //     if (isRealNumber(data?.time) && data?.time > 0) {
-    //         this.time = data?.time;
-    //     } else {
-    //         this.time = 0;
-    //     }
-    //     this.img = data?.img || null;
-    //     this.show = data?.show || true;
-    //     if (data?.player) {
-    //         this.player = parseAsArray(data?.player);
-    //     } else {
-    //         this.player = undefined;
-    //     }
-    //     this.democracy = data?.democracy || true;
-    //     this.default = data?.default || 0;
-    //     this.displayResult = data?.displayResult || true;
-    //     this.resolveGM = data?.resolveGM || false;
-    //     if (data?.portraits) {
-    //         this.portraits = parseAsArray(data?.portraits);
-    //     } else {
-    //         this.portraits = undefined;
-    //     }
-    //     if (isRealBoolean(data?.alwaysOnTop)) {
-    //         this.alwaysOnTop = data?.alwaysOnTop;
-    //     } else {
-    //         this.alwaysOnTop = false;
-    //     }
-    // }
-
-    // _initColors(data) {
-    //     this.textcolor = data?.textcolor || game.settings.get(CONSTANTS.MODULE_ID, "textcolor");
-    //     this.backgroundcolor = data?.backgroundcolor || game.settings.get(CONSTANTS.MODULE_ID, "backgroundcolor");
-    //     this.buttoncolor = data?.buttoncolor || game.settings.get(CONSTANTS.MODULE_ID, "buttoncolor");
-    //     this.buttonhovercolor = data?.buttonhovercolor || game.settings.get(CONSTANTS.MODULE_ID, "buttonhovercolor");
-    //     this.buttonactivecolor = data?.buttonactivecolor || game.settings.get(CONSTANTS.MODULE_ID, "buttonactivecolor");
-
-    //     const colors = {
-    //         text: this.textcolor,
-    //         background: this.backgroundcolor,
-    //         button: this.buttoncolor,
-    //         buttonHover: this.buttonhovercolor,
-    //         buttonActive: this.buttonactivecolor,
-    //     };
-    //     let root = document.documentElement;
-    //     root.style.setProperty("--choices-plus-font-color", colors.text);
-    //     root.style.setProperty("--choices-plus-background-color", colors.background);
-    //     root.style.setProperty("--choices-plus-button-color", colors.button);
-    //     root.style.setProperty("--choices-plus-button-hover-color", colors.buttonHover);
-    //     root.style.setProperty("--choices-plus-button-active-color", colors.buttonActive);
-    // }
 
     resolveVote() {
         let choice = this.choices[this.default];

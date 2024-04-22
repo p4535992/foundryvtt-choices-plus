@@ -161,33 +161,8 @@ const API = {
             game.VisualNovelDialog = null;
         }
 
-        new VisualNovelDialog({
-            title: inAttributes.title,
-            text: inAttributes.text,
-            multi: inAttributes.multi,
-            time: inAttributes.time,
-            img: inAttributes.img,
-            show: inAttributes.show,
-            player: inAttributes.player,
-            democracy: inAttributes.democracy,
-            default: inAttributes.default,
-            displayResult: inAttributes.displayResult,
-            resolveGM: inAttributes.resolveGM,
-            portraits: inAttributes.portraits,
-            textcolor: inAttributes.textcolor,
-            backgroundcolor: inAttributes.backgroundColor,
-            buttoncolor: inAttributes.buttonColor,
-            buttonhovercolor: inAttributes.buttonHoverColor,
-            buttonactivecolor: inAttributes.buttonActiveColor,
-            alwaysOnTop: inAttributes.alwaysOnTop,
-            choices: inAttributes.choices,
-            chain: inAttributes.chain,
-            key: inAttributes.key,
-            main: inAttributes.main,
-            fastClick: inAttributes.fastClick,
-            dictionaryChoices: inAttributes.dictionaryChoices,
-            textFontSize: inAttributes.textFontSize,
-        });
+        new VisualNovelDialog(inAttributes);
+
         const launchAsPlayer = String(inAttributes.launchAsPlayer) === "true" ? true : false;
         await game.VisualNovelDialog.render(launchAsPlayer);
     },
