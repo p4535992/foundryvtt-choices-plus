@@ -236,7 +236,7 @@ export default class ChoicesPlusHelpers {
             }
         };
 
-        Actor.prototype.ecuteScript = async function (...args) {
+        Actor.prototype._choicesPlusExecuteScript = async function (...args) {
             //add variable to the evaluation of the scr_choicesPlusExipt
 
             const actor = this;

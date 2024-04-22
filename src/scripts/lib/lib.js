@@ -11,7 +11,7 @@ export async function runMacroCommand(macro, command, options = {}) {
     const body = command;
     const fn = new scriptFunction("speaker", "actor", "token", "character", "event", "args", body);
 
-    Logger.debug("Actor | _choicesPlusExecuteScript | ", { body, fn });
+    Logger.debug("runMacroCommand | ", { body, fn });
 
     //attempt script execution
     try {

@@ -39,5 +39,7 @@
     "choices-plus.dialogs.systemfound.title": "System Recognized",
     "choices-plus.dialogs.systemfound.content": "This system was previously not supported, but in an recent update it was added as a supported system!<br><br>Do you want to load this system's default Item Pile settings?",
     "choices-plus.dialogs.systemfound.confirm": "Apply System Defaults",
-    "choices-plus.keybindings.commentCommand.title": "Comment lines"
+    "choices-plus.keybindings.commentCommand.title": "Comment lines",
+    "choices-plus.buttons.saveMacro": "Save Macro",
+    "choices-plus.buttons.executeMacro": "Execute Macro"
 }
