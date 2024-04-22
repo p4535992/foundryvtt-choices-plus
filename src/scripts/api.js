@@ -33,7 +33,7 @@ const API = {
      * @param {string} [options.buttonActiveColor="#838383d8"] OPTIONAL: apply a button color as css when set active on the choice (default #838383d8).
      * @param {boolean} [options.alwaysOnTop=false] OPTIONAL: true or false, determine if the choice will be on top of all other UI elements, i set with a valid boolean value it will override the module setting 'Always on top'.
      * @param {Choice[]} [options.choices=null] OPTIONAL: A array of choice child, every child is a button on the choice dialog.
-     * @param {Record<string,Choice>} [options.dictionaryChoices=null] PRIVATE: The internal dictionary used for the chain mechanism.
+     * @param {string} [options.textFontSize] The text font size on the summary panel. Default is "large"
      * @returns {Promise<void>} Nothing to return.
      */
     async showChoices(options) {
@@ -85,6 +85,7 @@ const API = {
                     Logger.debug(`Attention you didn't have set a key or title for this choice`, choice);
                 }
             }
+            // TODO seem to destroy the socket integration
             // objChoiceMain.dictionaryChoices = dictionaryChoices;
             this.showChoices(objChoiceMain);
         } else if (typeof options === "object") {
@@ -146,7 +147,7 @@ const API = {
      * @param {string} [inAttributes.buttonActiveColor="#838383d8"] OPTIONAL: apply a button color as css when set active on the choice (default #838383d8).
      * @param {boolean} [inAttributes.alwaysOnTop=false] OPTIONAL: true or false, determine if the choice will be on top of all other UI elements, i set with a valid boolean value it will override the module setting 'Always on top'.
      * @param {Choice[]} [inAttributes.choices=null] OPTIONAL: A array of choice child, every child is a button on the choice dialog.
-     * @param {Record<string,Choice>} [inAttributes.dictionaryChoices=null] PRIVATE: The internal dictionary used for the chain mechanism.
+     * @param {string} [options.textFontSize] The text font size on the summary panel. Default is "large".
      * @returns {Promise<void>} Nothing to return.
      */
     async render(inAttributes) {
@@ -185,6 +186,7 @@ const API = {
             main: inAttributes.main,
             fastClick: inAttributes.fastClick,
             dictionaryChoices: inAttributes.dictionaryChoices,
+            textFontSize: inAttributes.textFontSize,
         });
         const launchAsPlayer = String(inAttributes.launchAsPlayer) === "true" ? true : false;
         await game.VisualNovelDialog.render(launchAsPlayer);

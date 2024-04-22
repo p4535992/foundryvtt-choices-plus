@@ -31,7 +31,8 @@ export default class ChoicesPlusHelpers {
      * @param {boolean} [options.chain=false] OPTIONAL: true or false, determine if the choice will call other choices.
      * @param {Choice[]} [options.choices=null] OPTIONAL: A array of choice child, every child is a button on the choice dialog.
      * @param {Record<string,Choice>} [options.dictionaryChoices=null] PRIVATE: The internal dictionary used for the chain mechanism.
-     * @returns {{title: string; text: string; multi: boolean; time: number; img: string; show: boolean; player: string|string; democracy: boolean; default: number; displayResult: boolean; resolveGM: boolean; portraits: string|string[]; textcolor: string; backgroundcolor: string; buttoncolor: string; buttonhovercolor: string; buttonactivecolor: string; alwaysOnTop: boolean; choices: Choice[]; chain: boolean; key: string; main: boolean; fastClick: boolean; dictionaryChoices:Record<string,Choice>;}} Update options
+     * @param {string} [options.textFontSize] The text font size on the summary panel. Default is "large".
+     * @returns {{title: string; text: string; multi: boolean; time: number; img: string; show: boolean; player: string|string; democracy: boolean; default: number; displayResult: boolean; resolveGM: boolean; portraits: string|string[]; textcolor: string; backgroundcolor: string; buttoncolor: string; buttonhovercolor: string; buttonactivecolor: string; alwaysOnTop: boolean; choices: Choice[]; chain: boolean; key: string; main: boolean; fastClick: boolean; dictionaryChoices:Record<string,Choice>; textFontSize:string;}} Update options
      */
     static updateOptions(options) {
         let newOptions = {};
@@ -40,37 +41,73 @@ export default class ChoicesPlusHelpers {
         }
 
         newOptions.title = options.title || "Title not present";
+
         newOptions.text = options.text || "";
+
         newOptions.key = options.key || options.title;
+
         newOptions.main = isRealBooleanOrElseNull(options.main) ? String(options.main) === "true" : false;
+
         newOptions.fastClick = isRealBooleanOrElseNull(options.fastClick)
             ? String(options.fastClick) === "true"
             : false;
+
         newOptions.multi = isRealBooleanOrElseNull(options.multi) ? String(options.multi) === "true" : false;
+
         newOptions.time = isRealNumber(options.time) ? options.time : tryToConvertToNumberSync(options.time, 0);
+
         newOptions.img = options.img || null;
+
         newOptions.show = isRealBooleanOrElseNull(options.show) ? String(options.show) === "true" : true;
+
         newOptions.player = options.player ? parseAsArray(options.player) : null;
+
         newOptions.democracy = isRealBooleanOrElseNull(options.democracy) ? String(options.democracy) === "true" : true;
+
         newOptions.default = isRealNumber(options.default)
             ? options.default
             : tryToConvertToNumberSync(options.default, 0);
+
         newOptions.displayResult = isRealBooleanOrElseNull(options.displayResult)
             ? String(options.displayResult) === "true"
             : true;
+
         newOptions.resolveGM = isRealBooleanOrElseNull(options.resolveGM)
             ? String(options.resolveGM) === "true"
             : false;
+
         newOptions.portraits = options.portraits ? parseAsArray(options.portraits) : null;
-        newOptions.textcolor = options.textcolor || game.settings.get(CONSTANTS.MODULE_ID, "textcolor") || "#000000eb";
-        newOptions.backgroundcolor =
-            options.backgroundcolor || game.settings.get(CONSTANTS.MODULE_ID, "backgroundcolor") || "#000000ff";
-        newOptions.buttoncolor =
-            options.buttoncolor || game.settings.get(CONSTANTS.MODULE_ID, "buttoncolor") || "#ffffffd8";
-        newOptions.buttonhovercolor =
-            options.buttonhovercolor || game.settings.get(CONSTANTS.MODULE_ID, "buttonhovercolor") || "#c8c8c8d8";
-        newOptions.buttonactivecolor =
-            options.buttonactivecolor || game.settings.get(CONSTANTS.MODULE_ID, "buttonactivecolor") || "#838383d8";
+
+        newOptions.textColor =
+            options.textColor ||
+            options.textcolor ||
+            game.settings.get(CONSTANTS.MODULE_ID, "textcolor") ||
+            "#000000eb";
+
+        newOptions.backgroundColor =
+            options.backgroundColor ||
+            options.backgroundcolor ||
+            game.settings.get(CONSTANTS.MODULE_ID, "backgroundcolor") ||
+            "#000000ff";
+
+        newOptions.buttonColor =
+            options.buttonColor ||
+            options.buttoncolor ||
+            game.settings.get(CONSTANTS.MODULE_ID, "buttoncolor") ||
+            "#ffffffd8";
+
+        newOptions.buttonHoverColor =
+            options.buttonHoverColor ||
+            options.buttonhovercolor ||
+            game.settings.get(CONSTANTS.MODULE_ID, "buttonhovercolor") ||
+            "#c8c8c8d8";
+
+        newOptions.buttonActiveColor =
+            options.buttonActiveColor ||
+            options.buttonactivecolor ||
+            game.settings.get(CONSTANTS.MODULE_ID, "buttonactivecolor") ||
+            "#838383d8";
+
         newOptions.alwaysOnTop = isRealBooleanOrElseNull(options.alwaysOnTop)
             ? String(options.alwaysOnTop) === "true"
             : false;
@@ -82,6 +119,7 @@ export default class ChoicesPlusHelpers {
                 newOptions.choices.push(ChoicesPlusHelpers.updateOptions(choiceTmp));
             }
         }
+
         newOptions.chain = isRealBooleanOrElseNull(options.chain) ? String(options.chain) === "true" : false;
 
         newOptions.dictionaryChoices = options.dictionaryChoices || {};
@@ -89,51 +127,10 @@ export default class ChoicesPlusHelpers {
         // NOTE: If data.content is present the call is from the chat behavior
         newOptions.content = newOptions.text ? newOptions.text : newOptions.content;
 
+        newOptions.textFontSize =
+            options.textFontSize || game.settings.get(CONSTANTS.MODULE_ID, "textFontSize") || "large";
+
         return newOptions;
-    }
-
-    static registerClicks() {
-        // ACTOR
-        // libWrapper.register(
-        //     CONSTANTS.MODULE_ID,
-        //     "Token.prototype._onClickLeft",
-        //     ChoicesPlusHelpers._TokenPrototypeOnClickLeftTokenHandler,
-        //     "MIXED",
-        // );
-        // libWrapper.register(
-        //     CONSTANTS.MODULE_ID,
-        //     "Token.prototype._onClickLeft2",
-        //     ChoicesPlusHelpers._TokenPrototypeOnClickLeftTokenHandler,
-        //     "MIXED",
-        // );
-
-        // libWrapper.register(
-        //     CONSTANTS.MODULE_ID,
-        //     "Token.prototype._onClickRight2",
-        //     ChoicesPlusHelpers._TokenPrototypeOnClickRight2TokenHandlerOverride,
-        //     "OVERRIDE"
-        // );
-
-        libWrapper.register(
-            CONSTANTS.MODULE_ID,
-            "Token.prototype._onClickRight2",
-            ChoicesPlusHelpers._TokenPrototypeOnClickRight2TokenHandler,
-            "MIXED",
-        );
-
-        // NOTE
-        // libWrapper.register(
-        //     CONSTANTS.MODULE_ID,
-        //     "Note.prototype._onClickLeft",
-        //     ChoicesPlusHelpers._NotePrototypeOnClickLeftHandler,
-        //     "MIXED",
-        // );
-        // libWrapper.register(
-        //     CONSTANTS.MODULE_ID,
-        //     "Note.prototype._onClickLeft2",
-        //     ChoicesPlusHelpers._NotePrototypeOnClickLeftHandler,
-        //     "MIXED",
-        // );
     }
 
     // static _TokenPrototypeOnClickLeftTokenHandler(wrapped, ...args) {

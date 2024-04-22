@@ -44,6 +44,16 @@ export const registerSettings = function () {
         type: Boolean,
     });
 
+    game.settings.register(CONSTANTS.MODULE_ID, "textFontSize", {
+        name: `${CONSTANTS.MODULE_ID}.settings.textFontSize.title`,
+        hint: `${CONSTANTS.MODULE_ID}.settings.textFontSize.hint`,
+        scope: "world",
+        config: true,
+        default: "large",
+        type: String,
+        requiresReload: true,
+    });
+
     // ========================================================================
 
     game.settings.register(CONSTANTS.MODULE_ID, "enableImprovedMacroEditor", {

@@ -141,6 +141,7 @@
 #choices-plus-dialog .choice-plus-summary-text {
     z-index: 1;
     overflow: auto;
+    text-align: center;
 }
 
 #choices-plus-dialog .gm-buttons,

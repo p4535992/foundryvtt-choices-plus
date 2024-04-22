@@ -11,6 +11,50 @@ Hooks.once("init", function () {
     registerSettings();
 });
 
+Hooks.once("libWrapper.Ready", function () {
+    // ACTOR
+    // libWrapper.register(
+    //     CONSTANTS.MODULE_ID,
+    //     "Token.prototype._onClickLeft",
+    //     ChoicesPlusHelpers._TokenPrototypeOnClickLeftTokenHandler,
+    //     "MIXED",
+    // );
+    // libWrapper.register(
+    //     CONSTANTS.MODULE_ID,
+    //     "Token.prototype._onClickLeft2",
+    //     ChoicesPlusHelpers._TokenPrototypeOnClickLeftTokenHandler,
+    //     "MIXED",
+    // );
+
+    // libWrapper.register(
+    //     CONSTANTS.MODULE_ID,
+    //     "Token.prototype._onClickRight2",
+    //     ChoicesPlusHelpers._TokenPrototypeOnClickRight2TokenHandlerOverride,
+    //     "OVERRIDE"
+    // );
+
+    libWrapper.register(
+        CONSTANTS.MODULE_ID,
+        "Token.prototype._onClickRight2",
+        ChoicesPlusHelpers._TokenPrototypeOnClickRight2TokenHandler,
+        "MIXED",
+    );
+
+    // NOTE
+    // libWrapper.register(
+    //     CONSTANTS.MODULE_ID,
+    //     "Note.prototype._onClickLeft",
+    //     ChoicesPlusHelpers._NotePrototypeOnClickLeftHandler,
+    //     "MIXED",
+    // );
+    // libWrapper.register(
+    //     CONSTANTS.MODULE_ID,
+    //     "Note.prototype._onClickLeft2",
+    //     ChoicesPlusHelpers._NotePrototypeOnClickLeftHandler,
+    //     "MIXED",
+    // );
+});
+
 Hooks.once("setup", function () {
     game.modules.get(CONSTANTS.MODULE_ID).api = API;
 });
@@ -45,9 +89,6 @@ Hooks.once("ready", function () {
     }
 
     ChoicesPlusHelpers.registerActor();
-    Hooks.once("libWrapper.Ready", function () {
-        ChoicesPlusHelpers.registerClicks();
-    });
 });
 
 // Hooks.on("chatMessage", (ChatLog, content) => {

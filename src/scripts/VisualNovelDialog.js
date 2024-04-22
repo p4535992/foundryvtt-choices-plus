@@ -16,6 +16,7 @@ export class VisualNovelDialog {
 
         const newOptions = ChoicesPlusHelpers.updateOptions(data);
 
+        this.textFontSize = newOptions.textFontSize;
         this.content = newOptions.content;
 
         this.multi = newOptions.multi;
@@ -31,11 +32,11 @@ export class VisualNovelDialog {
         this.alwaysOnTop = newOptions.alwaysOnTop;
         this.chain = newOptions.chain;
 
-        this.textcolor = newOptions.textcolor;
-        this.backgroundcolor = newOptions.backgroundcolor;
-        this.buttoncolor = newOptions.buttoncolor;
-        this.buttonhovercolor = newOptions.buttonhovercolor;
-        this.buttonactivecolor = newOptions.buttonactivecolor;
+        this.textcolor = newOptions.textColor;
+        this.backgroundcolor = newOptions.backgroundColor;
+        this.buttoncolor = newOptions.buttonColor;
+        this.buttonhovercolor = newOptions.buttonHoverColor;
+        this.buttonactivecolor = newOptions.buttonActiveColor;
 
         this.fastClick = newOptions.fastClick;
 
@@ -353,7 +354,7 @@ export class VisualNovelDialog {
             });
             let choiceSummaryElementHTML = $(
                 `<div class="choice-plus-summary">
-          <div class="choice-plus-summary-text">${textHTML}</div>
+          <div class="choice-plus-summary-text" style="font-size:${this.textFontSize}">${textHTML}</div>
         </div>`,
             );
             this.containerHTML.append(choiceSummaryElementHTML);
