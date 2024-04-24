@@ -101,6 +101,7 @@ game.modules.get('choices-plus').api.showChoices(
     resolveGM: false,
     portraits: ["Arngrim Brakenbrik","Blue Dragon Wyrmling","Acolyte"],
     textColor: "#000000eb",
+    textFontSize: "large",
     backgroundColor: "#000000ff",
     buttonColor: "#ffffffd8",
     buttonHoverColor: "#c8c8c8d8",
@@ -124,54 +125,68 @@ game.modules.get('choices-plus').api.showChoices(
 
 ```
 
-### Choice child Model
 
-**NOTE:** Every choice options can be triggered with the name or the id or the uuid of the document (scene, actor, sound, ecc.)the priority for check is by default uuid -> id -> name.
-
-| Param | Type | Description | Note |
-| --- | --- | --- | --- |
-| options | `object` | | The options to pass to the function of the child choice
-| [options.title] | <code>string</code> | The big title for the choice | |
-| [options.text] | <code>string</code> | The text to show on the button | |
-| [options.key] | <code>string</code> | OPTIONAL: The explicit key identifier to associate to this choice it used on some chain event. If not key is given by default the 'title' is used instead. | |
-| [options.scene] | <code>string</code> | OPTIONAL: a scene name or id, or uuid, when the choice is resolved this scene will be viewed. | This choice option can be triggered with the name or the id or the uuid the priority for check is anyway uuid -> id -> name. |
-| [options.sound] | <code>string</code> | OPTIONAL: usually a sound file path, but i can be the PlaySound name or id or uuid, when the choice is resolved this sound will be played once | This choice option can be triggered with the name or the id or the uuid the priority for check is anyway uuid -> id -> name. |
-| [options.macro] | <code>string</code> | OPTIONAL: a macro name or id or uuid, when the choice is resolved this macro will be executed, if you have the advanced macros module you can provide a comma separated list of args to be passed to the macro (eg [macro=myMacro,arg0,arg1]). | This choice option can be triggered with the name or the id or the uuid the priority for check is anyway uuid -> id -> name. |
-| [options.chain] | <code>string</code> | OPTIONAL: Is the key identifier of the choice child to invoke | |
-| [options.backgroundColor] | <code>string</code> | OPTIONAL: This is the background color to apply to the choice button | This will override the options 'backgroundColor'|
-| [options.backgroundImage] | <code>string</code> | OPTIONAL: This is the background image to apply to the choice button | |
-| [options.disable] | <code>boolean</code> | OPTIONAL: For some reason you want to see to choice, but it cannot be selected (also a big red cross appear on this option just to make it clear) | |
-| [options.portraits] | <code>string or string[]</code> | OPTIONAL: a comma separated list on a string or just a array of strings of actor names, if not provided no portrait is show | NOTE: You can use actor name, or id or uuid associated to a actor |
 
 
 **Example of a simple choice option**
 
 ```javascript
+
 {
-    text: "Go to the scene"
-    key: null,
-    scene: "Scene.duidg9et345",  // OPTIONAL
-    sound: null // OPTIONAL
-    macro: null,  // OPTIONAL
-    chain: null,  // OPTIONAL
-    backgroundColor: null, // OPTIONAL
-    backgroundImage: null, // OPTIONAL
-    disable: false, // OPTIONAL
-    portraits: [], // OPTIONAL
-}
-
-```
-
-**Example of a choice option chained to other**
-
-
-```javascript
-{
-    text: "Go to the scene",
-    macro: "Macro.duidg9et345",
+    title: "Title of the choice",
+    text: "Summary text of the Choice"
+    multi: false,
+    time: null,
+    img: null,
+    show: true,
+    player: null,
+    democracy: false,
+    default: 0,
+    displayResult: true,
+    resolveGM: false,
+    portraits: ["Arngrim Brakenbrik","Blue Dragon Wyrmling","Acolyte"],
+    textColor: "#000000eb",
+    textFontSize: "large",
+    backgroundColor: "#000000ff",
+    buttonColor: "#ffffffd8",
+    buttonHoverColor: "#c8c8c8d8",
+    buttonActiveColor: "#838383d8",
+    alwaysOnTop: null,
     chain: true,
     choices: [
-        ...
+        {
+            text: "Go to the scene 1"
+            scene: "Scene.duidg9et345"
+            sound: null // OPTIONAL
+            macro: null,  // OPTIONAL
+            chain: null,  // OPTIONAL
+            backgroundColor: null, // OPTIONAL
+            backgroundImage: null, // OPTIONAL
+            disable: false, // OPTIONAL
+            portraits: [], // OPTIONAL
+        },
+        {
+            text: "Go to the scene 2"
+            scene: "Scene.duidg9et355"
+            sound: null // OPTIONAL
+            macro: null,  // OPTIONAL
+            chain: null,  // OPTIONAL
+            backgroundColor: null, // OPTIONAL
+            backgroundImage: null, // OPTIONAL
+            disable: false, // OPTIONAL
+            portraits: [], // OPTIONAL
+        },
+        {
+            text: "Go to the scene 3"
+            scene: "Scene.duidg9et365"
+            sound: null // OPTIONAL
+            macro: null,  // OPTIONAL
+            chain: null,  // OPTIONAL
+            backgroundColor: null, // OPTIONAL
+            backgroundImage: null, // OPTIONAL
+            disable: false, // OPTIONAL
+            portraits: [], // OPTIONAL
+        }
     ]
 }
 
