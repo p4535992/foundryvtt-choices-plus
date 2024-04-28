@@ -36,6 +36,15 @@ A special ty to [Forien](https://github.com/Foundry-Workshop) for the modue [Ite
 
 ![](./wiki/videos/video_example_2.gif)
 
+### From version 1.0.8 a lot of features are been added to set up the choices directly on the actor (like item macro do)
+
+A special ty to [Forien](https://github.com/Foundry-Workshop) for the module (https://github.com/Foundry-Workshop/Item-Macro/blob/master/LICENSE) and  [teroparvinen](https://github.com/teroparvinen/foundry-improved-macro-editor) for the module [Improved Macro Editor](https://github.com/teroparvinen/foundry-improved-macro-editor) for inspired me on how to implement the code.
+
+The result is pretty neat
+
+![](/wiki/videos/actor_flags.gif)
+
+
 ## Installation
 
 It's always easiest to install modules from the in game add-on browser.
