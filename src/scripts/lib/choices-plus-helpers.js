@@ -79,35 +79,33 @@ export default class ChoicesPlusHelpers {
         newOptions.portraits = options.portraits ? parseAsArray(options.portraits) : null;
 
         newOptions.textColor =
-            options.textColor ||
-            options.textcolor ||
-            game.settings.get(CONSTANTS.MODULE_ID, "textcolor") ||
-            "#000000eb";
+            options.textColor || options.textcolor || game.settings.get(CONSTANTS.MODULE_ID, "textcolor");
+        // "#000000eb";
 
         newOptions.backgroundColor =
             options.backgroundColor ||
             options.backgroundcolor ||
-            game.settings.get(CONSTANTS.MODULE_ID, "backgroundcolor") ||
-            "#000000ff";
+            game.settings.get(CONSTANTS.MODULE_ID, "backgroundcolor");
+        // "#000000ff";
 
         newOptions.buttonColor =
             options.buttonBackgroundColor ||
             options.buttonColor ||
             options.buttoncolor ||
-            game.settings.get(CONSTANTS.MODULE_ID, "buttoncolor") ||
-            "#ffffffd8";
+            game.settings.get(CONSTANTS.MODULE_ID, "buttoncolor");
+        // "#ffffffd8";
 
         newOptions.buttonHoverColor =
             options.buttonHoverColor ||
             options.buttonhovercolor ||
-            game.settings.get(CONSTANTS.MODULE_ID, "buttonhovercolor") ||
-            "#c8c8c8d8";
+            game.settings.get(CONSTANTS.MODULE_ID, "buttonhovercolor");
+        // "#c8c8c8d8";
 
         newOptions.buttonActiveColor =
             options.buttonActiveColor ||
             options.buttonactivecolor ||
-            game.settings.get(CONSTANTS.MODULE_ID, "buttonactivecolor") ||
-            "#838383d8";
+            game.settings.get(CONSTANTS.MODULE_ID, "buttonactivecolor");
+        // "#838383d8";
 
         newOptions.alwaysOnTop = isRealBooleanOrElseNull(options.alwaysOnTop)
             ? String(options.alwaysOnTop) === "true"

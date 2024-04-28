@@ -38,7 +38,7 @@ export class VisualNovelDialog {
 
         let root = document.documentElement;
         root.style.setProperty("--choices-plus-font-color", this.textColor);
-        root.style.setProperty("--choices-plus-background-color", this.backgroundColor);
+        // root.style.setProperty("--choices-plus-background-color", this.backgroundColor);
         // CHOICES STYLE
         root.style.setProperty("--choices-plus-button-color", this.buttonColor);
         root.style.setProperty("--choices-plus-button-hover-color", this.buttonHoverColor);
@@ -124,7 +124,7 @@ export class VisualNovelDialog {
         }
         // const img = user.character?.img || user.avatar;
         const img = getUserCharacter(user)?.img || user.avatar;
-        for (const [index, choiceChild] of choices.entries()) {
+        for (const [index, choiceChild] of this.choices.entries()) {
             const choiceChosen = choiceChild.element.find(".choice-plus-chosen");
 
             choiceChosen.find(`[data-userid=${userId}]`).remove();
@@ -204,7 +204,10 @@ export class VisualNovelDialog {
             let hasStyleBackgroundImage = false;
             let isDisable = choiceChild.disable;
             // Colored button
-            if (choiceChild.backgroundColor) {
+            if (
+                choiceChild.backgroundColor &&
+                choiceChild.backgroundColor !== game.settings.get(CONSTANTS.MODULE_ID, "backgroundcolor")
+            ) {
                 let styleForButtonChoice1 = `background-color: ${choiceChild.backgroundColor};`;
                 styleToAdd = styleToAdd + styleForButtonChoice1;
             } else if (this.buttonColor) {
@@ -281,8 +284,9 @@ export class VisualNovelDialog {
                 documents: true,
                 async: true,
             });
+            //  style="background-color: ${this.backgroundColor};"
             let choiceSummaryElementHTML = $(
-                `<div class="choice-plus-summary" style="background-color: ${this.backgroundColor};">
+                `<div class="choice-plus-summary">
           <div class="choice-plus-summary-text" style="font-size:${this.textFontSize}">${textHTML}</div>
         </div>`,
             );
