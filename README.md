@@ -44,6 +44,10 @@ The result is pretty neat
 
 ![](/wiki/videos/actor_flags.gif)
 
+**NOTE:**
+- GM can activate the hoice with the new token hud button
+- PLAYER can activate the choice with the double right click on the token
+
 
 ## Installation
 
