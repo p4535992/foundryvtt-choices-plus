@@ -1,3 +1,9 @@
+### 1.0.8
+
+- Add embedded editor macro to actor
+- Add token hud button for fast talk
+- Add a bunch of feature...
+
 ### 1.0.7
 
 - Update retrieve-helpers

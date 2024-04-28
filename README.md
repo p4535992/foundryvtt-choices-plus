@@ -23,7 +23,7 @@ If you want to support more modules of this kind, I invite you to go and support
 
 ### and if you feel generous you can to buy me a coffee [![alt-text](https://img.shields.io/badge/-Patreon-%23ff424d?style=for-the-badge)](https://www.patreon.com/p4535992)
 
-~~## NOTE: This module is **under maintenance**, I have no plans to update or add features. However, I will try to fix any bugs as possible. Any contribution is welcome.~~
+A special ty to [Forien](https://github.com/Foundry-Workshop) for the modue [Item Macro](https://github.com/Foundry-Workshop/Item-Macro), and to [teroparvinen](https://github.com/teroparvinen/foundry-improved-macro-editor) for module [Improved Macro Editor](https://github.com/teroparvinen/foundry-improved-macro-editor) from which I have taken some module functionality.
 
 ## Features
 
@@ -124,6 +124,30 @@ npm run-script lint
 npm run-script lint:fix
 ```
 
+### build:json
+
+`build:json` unpack LevelDB pack on `src/packs` to the json db sources in `src/packs/_source`very useful for backup your items and manually fix some hard issue with some text editor
+
+```bash
+npm run-script build:json
+```
+
+### build:clean
+
+`build:clean` clean packs json sources in `src/packs/_source`. NOTE: usually this command is launched after the command `build:json` and after make some modifications on the json source files with some text editor, but before the `build:db`
+
+```bash
+npm run-script build:clean
+```
+
+### build:db
+
+`build:db` packs the json db sources in `src/packs/_source` to LevelDB pack on `src/packs` with the new jsons. NOTE: usually this command is launched after the command `build:json` and after make some modifications on the json source files with some text editor
+
+```bash
+npm run-script build:db
+```
+
 ## [Changelog](./CHANGELOG.md)
 
 ## Issues
@@ -133,6 +157,9 @@ Any issues, bugs, or feature requests are always welcome to be reported directly
 ## License
 
 - **[choices](https://github.com/theripper93/choices)** : [MIT](https://github.com/theripper93/choices/blob/master/LICENSE)
+- **[Item Macro](https://github.com/Foundry-Workshop/Item-Macro)**: [MIT](https://github.com/Foundry-Workshop/Item-Macro/blob/master/LICENSE)
+- **[Improved Macro Editor](https://github.com/teroparvinen/foundry-improved-macro-editor)**: [???]()
+- **[CodeJar](https://github.com/antonmedv/codejar)** : [MIT](https://github.com/antonmedv/codejar/blob/master/LICENSE)
 
 All the images used in this module are generated with [bing create](https://www.bing.com/create) under these [term of use](https://www.bing.com/new/termsofuse?FORM=GENTOS)
 
@@ -143,3 +170,6 @@ This package is under an [MIT license](LICENSE) and the [Foundry Virtual Tableto
 A special ty to the original authors [theRipper93](https://theripper93.com/), for the idea , the inspiration and the initial template.
 
 - [theRipper93](https://theripper93.com/) and the module [choices](https://github.com/theripper93/choices)
+- [Forien](https://github.com/Foundry-Workshop) and the module (https://github.com/Foundry-Workshop/Item-Macro/blob/master/LICENSE)
+- [teroparvinen](https://github.com/teroparvinen/foundry-improved-macro-editor) and the module [Improved Macro Editor](https://github.com/teroparvinen/foundry-improved-macro-editor)
+- [antonmedv](https://github.com/antonmedv/codejar) and the project [CodeJar](https://github.com/antonmedv/codejar)

@@ -1,0 +1,29 @@
+{
+  "folder": "xniCyCkTVyebM3pv",
+  "name": "Choices 10 - with no democracy, choice portraits and sounds",
+  "type": "script",
+  "author": "oCwK7lMkd1S1suQj",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "game.modules.get(\"choices-plus\").api.showChoices({\n  title: \"Example 10 with no democracy, choice portraits and sounds\",\n  text: \"<p>This is a html code.</p>\",\n  democracy: false,\n  img: \"https://i.pinimg.com/564x/49/92/5e/49925e1c7ff5dae26836ec636b134a1e.jpg\",\n  choices: [\n    {\n        scene: \"Scene Choice 1\",\n        text: \"Go to the scene 'Scene Choice 1'\",\n        sound:\"moulinette/sounds/music/Ambience/jungle-night.ogg\",\n    },\n    {\n        scene: \"Scene Choice 2\",\n        text: \"Go to the scene 'Scene Choice 2'\",\n        sound:\"moulinette/sounds/music/Ambience/jungle-night.ogg\",\n        portraits: [\"Arngrim Brakenbrik\", \"Blue Dragon Wyrmling\", \"Acolyte\"],\n    },\n    {\n        scene: \"Scene Choice 3\",\n        text: \"Go to the scene 'Scene Choice 3'\",\n        sound:\"moulinette/sounds/music/Ambience/jungle-night.ogg\",\n    }\n  ],\n});",
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "0ade9066d1021d7b50cb7be8617b0440e3be6aed",
+      "sourceId": "Macro.6ySKpQHLyLqqAa4A"
+    }
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.2",
+    "coreVersion": "11.315",
+    "createdTime": 1701517218277,
+    "modifiedTime": 1713294509397,
+    "lastModifiedBy": "packsbuilder0000"
+  },
+  "_id": "tPAg2vgoJWOjQtbS",
+  "sort": 0,
+  "_key": "!macros!tPAg2vgoJWOjQtbS"
+}

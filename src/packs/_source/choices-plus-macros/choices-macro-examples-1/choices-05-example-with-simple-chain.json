@@ -1,0 +1,28 @@
+{
+  "name": "Choices 05 - Example with simple chain",
+  "type": "script",
+  "author": "oCwK7lMkd1S1suQj",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "game.modules.get(\"choices-plus\").api.showChoices(\n    {\n        title: \"Example 5 with simple chain\", \n        text: \"<p>This is a html code.</p>\",\n        img: \"https://i.pinimg.com/originals/f4/30/56/f43056ea6e34f2071621a736b6d6da36.jpg\",\n        democracy: true,\n        resolveGM: true,\n        choices: [\n            {\n                text: \"Go to the scene 'Scene Choice 1'\",\n                macro: \"Choices 01 - Example with time\",\n                chain: true\n            },\n            {\n                text: \"Go to the scene 'Scene Choice 2'\",\n                macro: \"Choices 02 - Example with multi\",\n                chain: true\n            },\n            {\n                text: \"Go to the scene 'Scene Choice 3'\",\n                macro: \"Choices 03 - Example with no democracy\",\n                chain: true\n            }\n        ]\n    }\n)",
+  "folder": "xniCyCkTVyebM3pv",
+  "sort": 137500,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "6bd1f6620d62824152151a77d38e48cb29e18ee2"
+    }
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.2",
+    "coreVersion": "11.315",
+    "createdTime": 1697378379335,
+    "modifiedTime": 1713294509397,
+    "lastModifiedBy": "packsbuilder0000"
+  },
+  "_id": "wZYY1uXCcXGgLuEt",
+  "_key": "!macros!wZYY1uXCcXGgLuEt"
+}

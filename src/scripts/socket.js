@@ -16,8 +16,7 @@ export function registerSocket() {
     ChoicesSocket.register("render", ChoicesSocketFunctions.render);
 
     // Set socket
-    const data = game.modules.get(CONSTANTS.MODULE_ID);
-    data.socket = ChoicesSocket;
+    game.modules.get(CONSTANTS.MODULE_ID).socket = ChoicesSocket;
 
     return ChoicesSocket;
 }

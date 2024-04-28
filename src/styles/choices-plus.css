@@ -45,6 +45,10 @@
     z-index: 1;
     text-transform: uppercase;
     background-color: rgba(0, 0, 0, 0.247);
+    text-shadow:
+        0px 0px 3px #000,
+        -1px -1px #000,
+        1px 1px #000;
 }
 #choices-plus-dialog .choices-plus-container .choices-plus-bg {
     width: 100%;
@@ -121,6 +125,10 @@
 #choices-plus-dialog .choice-plus-text {
     z-index: 1;
     text-transform: uppercase;
+    text-shadow:
+        0px 0px 3px #000,
+        -1px -1px #000,
+        1px 1px #000;
 }
 
 #choices-plus-dialog .choice-plus-summary {
@@ -141,6 +149,11 @@
 #choices-plus-dialog .choice-plus-summary-text {
     z-index: 1;
     overflow: auto;
+    text-align: center;
+    text-shadow:
+        0px 0px 3px #000,
+        -1px -1px #000,
+        1px 1px #000;
 }
 
 #choices-plus-dialog .gm-buttons,
@@ -336,4 +349,21 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.macro-sheet .form-group.command .choices-plus-improved-macro-editor {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px;
+}
+
+div.choices-plus-toggle-disposition .choices-plus-dispositions {
+    visibility: hidden;
+    position: absolute;
+    left: -40px;
+    top: 0px;
+    padding: 3px;
 }

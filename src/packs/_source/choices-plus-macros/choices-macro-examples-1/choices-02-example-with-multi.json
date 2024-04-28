@@ -1,0 +1,28 @@
+{
+  "name": "Choices 02 - Example with multi",
+  "type": "script",
+  "_id": "rQaYYet44sugwJvF",
+  "author": "oCwK7lMkd1S1suQj",
+  "img": "icons/svg/dice-target.svg",
+  "scope": "global",
+  "command": "game.modules.get(\"choices-plus\").api.showChoices(\n    {\n        title: \"Example 2 with multi\", \n        text: \"<p>This is a html code.</p>\",\n        multi: true,\n        img: \"https://i.pinimg.com/564x/49/92/5e/49925e1c7ff5dae26836ec636b134a1e.jpg\",\n        choices: [\n            {\n                scene: \"Scene Choice 1\",\n                text: \"Go to the scene 'Scene Choice 1'\"\n            },\n            {\n                scene: \"Scene Choice 2\",\n                text: \"Go to the scene 'Scene Choice 2'\"\n            },\n            {\n                scene: \"Scene Choice 3\",\n                text: \"Go to the scene 'Scene Choice 3'\"\n            }\n        ]\n    }\n)",
+  "folder": "xniCyCkTVyebM3pv",
+  "sort": 200000,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {
+    "scene-packer": {
+      "hash": "72acef9ad4f5ff25e73aa28f91a97a26a8d7de44"
+    }
+  },
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "3.1.2",
+    "coreVersion": "11.315",
+    "createdTime": 1697372138857,
+    "modifiedTime": 1713294509397,
+    "lastModifiedBy": "packsbuilder0000"
+  },
+  "_key": "!macros!rQaYYet44sugwJvF"
+}

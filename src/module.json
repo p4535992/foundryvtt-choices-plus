@@ -67,7 +67,7 @@
         }
     ],
     "scripts": [],
-    "styles": ["styles/choices-plus.css"],
+    "styles": ["styles/choices-plus.css", "styles/improved-macro-editor-highlight-syntax.css"],
     "esmodules": ["module.js"],
     "compatibility": {
         "minimum": 11,
