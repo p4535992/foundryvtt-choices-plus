@@ -48,9 +48,11 @@ So when you set up to run a macro with this module these arguments are already "
 | [options.buttonHoverColor] | <code>string</code> | OPTIONAL: apply a button color as css when hover on the choice (default  #c8c8c8d8)| |
 | [options.buttonActiveColor] | <code>string</code> | OPTIONAL: apply a button color as css when set active on the choice (default #838383d8) | |
 | [options.alwaysOnTop] | <code>boolean</code> | OPTIONAL: true or false, determine if the choice will be on top of all other UI elements, i set with a valid boolean value it will override the module setting 'Always on top' | |
-| [options.chain] | <code>boolean</code> |OPTIONAL: true or false, determine if the choice will call other choices. Default is false. |
+| [options.chain] | <code>boolean</code> | OPTIONAL: true or false, determine if the choice will call other choices. Default is false. |
 | [options.choices] | <code>Choice[]</code> | OPTIONAL: A array of choice child, every child is a button on the choice dialog | |
-| [options.textFontSize] | <code>string</code> | The text font size on the summary panel. Default is "large"
+| [options.textFontSize] | <code>string</code> | OPTIONAL: The text font size on the summary panel. Default is "large" ||
+| [options.displayChat] | <code>boolean</code> | OPTIONAL: Create a chat message when you click on a choice child. Default is true ||
+
 
 TODO
 
@@ -102,6 +104,7 @@ game.modules.get('choices-plus').api.showChoices(
     portraits: ["Arngrim Brakenbrik","Blue Dragon Wyrmling","Acolyte"],
     textColor: "#000000eb",
     textFontSize: "large",
+    displayChat: true,
     backgroundColor: "#000000ff",
     buttonColor: "#ffffffd8",
     buttonHoverColor: "#c8c8c8d8",
@@ -147,6 +150,7 @@ game.modules.get('choices-plus').api.showChoices(
     portraits: ["Arngrim Brakenbrik","Blue Dragon Wyrmling","Acolyte"],
     textColor: "#000000eb",
     textFontSize: "large",
+    displayChat: true,
     backgroundColor: "#000000ff",
     buttonColor: "#ffffffd8",
     buttonHoverColor: "#c8c8c8d8",

@@ -29,6 +29,7 @@ export class VisualNovelDialog {
         this.textColor = newOptions.textColor;
         this.backgroundColor = newOptions.backgroundColor;
         this.textFontSize = newOptions.textFontSize;
+        this.displayChat = newOptions.displayChat;
 
         this.buttonColor = newOptions.buttonColor;
         this.buttonHoverColor = newOptions.buttonHoverColor;
@@ -473,11 +474,13 @@ export class VisualNovelDialog {
         //sort the results by votes
         results.sort((a, b) => b.votes - a.votes);
         //create chat message string
-        let message = "<hr>";
-        for (const result of results) {
-            message += `${result.content}: ${result.votes}<hr>`;
+        if (this.displayChat) {
+            let message = "<hr>";
+            for (const result of results) {
+                message += `${result.content}: ${result.votes}<hr>`;
+            }
+            ChatMessage.create({ content: message });
         }
-        ChatMessage.create({ content: message });
     }
 
     outputResultSingle() {
@@ -506,15 +509,17 @@ export class VisualNovelDialog {
             });
         }
         //create chat message string
-        let message = "<hr>";
-        for (const result of results) {
-            let users = result.users.map((u) => {
-                return game.users.get(u)?.name;
-            });
-            let usersMsg = users?.length > 0 ? ": " + users.join(", ") : "";
-            message += `${result.content}${usersMsg}<hr>`;
+        if (this.displayChat) {
+            let message = "<hr>";
+            for (const result of results) {
+                let users = result.users.map((u) => {
+                    return game.users.get(u)?.name;
+                });
+                let usersMsg = users?.length > 0 ? ": " + users.join(", ") : "";
+                message += `${result.content}${usersMsg}<hr>`;
+            }
+            ChatMessage.create({ content: message });
         }
-        ChatMessage.create({ content: message });
     }
 
     close() {

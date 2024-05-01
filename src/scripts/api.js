@@ -34,6 +34,7 @@ const API = {
      * @param {boolean} [options.alwaysOnTop=false] OPTIONAL: true or false, determine if the choice will be on top of all other UI elements, i set with a valid boolean value it will override the module setting 'Always on top'.
      * @param {Choice[]} [options.choices=null] OPTIONAL: A array of choice child, every child is a button on the choice dialog.
      * @param {string} [options.textFontSize] The text font size on the summary panel. Default is "large"
+     * @param {boolean} [options.displayChat=true] OPTIONAL: Create a chat message when you click on a choice child. Default is true
      * @returns {Promise<void>} Nothing to return.
      */
     async showChoices(options) {
@@ -148,6 +149,7 @@ const API = {
      * @param {boolean} [inAttributes.alwaysOnTop=false] OPTIONAL: true or false, determine if the choice will be on top of all other UI elements, i set with a valid boolean value it will override the module setting 'Always on top'.
      * @param {Choice[]} [inAttributes.choices=null] OPTIONAL: A array of choice child, every child is a button on the choice dialog.
      * @param {string} [options.textFontSize] The text font size on the summary panel. Default is "large".
+     * @param {boolean} [options.displayChat=true] OPTIONAL: Create a chat message when you click on a choice child. Default is true
      * @returns {Promise<void>} Nothing to return.
      */
     async render(inAttributes) {
