@@ -263,13 +263,34 @@ export default class ChoicesPlusHelpers {
             //     return;
             // }
 
-            // build script execution
-            const command =
-                `game.modules.get("choices-plus").api.showChoices([` + (macro.command ?? macro?.data?.command) + `]);`;
+            let command = macro.command ?? macro?.data?.command;
+            if (command.trim().startsWith(`game.modules.get("choices-plus").api.showChoices`)) {
+                if (command.trim().startsWith(`[`)) {
+                    // DO NOTHING
+                } else {
+                    command = `[` + (macro.command ?? macro?.data?.command) + `]`;
+                }
+            } else {
+                command =
+                    `game.modules.get("choices-plus").api.showChoices([` +
+                    (macro.command ?? macro?.data?.command) +
+                    `])`;
+            }
+            // build script execution  method 1
             const scriptFunction = Object.getPrototypeOf(async function () {}).constructor;
             const body = command;
             const fn = new scriptFunction("speaker", "actor", "token", "character", "event", "args", body);
 
+            // build script execution method 2
+            /*
+            let body = ``;
+            if (command.trim().startsWith(`(async ()`)) {
+                body = command;
+            } else {
+                body = `(async ()=>{${command}})();`;
+            }
+            const fn = Function("speaker", "actor", "token", "character", "event", "args", body);
+            */
             Logger.debug("Actor | _choicesPlusExecuteScript | ", { body, fn });
 
             // attempt script execution

@@ -526,6 +526,9 @@ export class VisualNovelDialog {
         Logger.debug(`VisualNovelDialog | ${this.title} | close()`);
         this.choiceSound?.stop();
         this.element.remove();
+        // document.querySelectorAll("#choices-plus-dialog").forEach((e) => {
+        //     e.remove();
+        // });
     }
 
     cancelVote() {

@@ -1,3 +1,7 @@
+### 1.0.10
+
+- Little bug fixing and update module.json for v12
+
 ### 1.0.9
 
 - Add "displayChat" option
